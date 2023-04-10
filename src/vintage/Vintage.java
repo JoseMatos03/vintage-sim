@@ -1,4 +1,4 @@
-package main.vintage;
+package vintage;
 
 public class Vintage {
     

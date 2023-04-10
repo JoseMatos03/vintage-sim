@@ -9,7 +9,7 @@ To use this simulator, you will need to have Java installed on your computer. Yo
 To install the simulator, you can either download the source code from this repository or clone the repository using git:
 
 ```
-git clone https://github.com/<username>/<repository>.git
+git clone https://github.com/JoseMatos03/vintage-sim.git
 ```
 
 ## Usage
