@@ -10,7 +10,7 @@ public class Sapatilhas extends Artigo {
     private int tamanho;
     private int atacadores;
     private String cor;
-    private String dataLancamento;
+    private int anoColecao;
 
     @Override
     public int calcularPreco() {
@@ -22,13 +22,13 @@ public class Sapatilhas extends Artigo {
     }
 
     public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo,
-            int precoBase, int tamanho, int atacadores, String cor, String dataLancamento) {
+            int precoBase, int tamanho, int atacadores, String cor, int anoColecao) {
         super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
 
         this.tamanho = tamanho;
         this.atacadores = atacadores;
         this.cor = cor;
-        this.dataLancamento = dataLancamento;
+        this.anoColecao = anoColecao;
     }
 
     public int getTamanho() {
@@ -55,11 +55,11 @@ public class Sapatilhas extends Artigo {
         this.cor = cor;
     }
 
-    public String getDataLancamento() {
-        return dataLancamento;
+    public int getAnoColecao() {
+        return anoColecao;
     }
 
-    public void setDataLancamento(String dataLancamento) {
-        this.dataLancamento = dataLancamento;
+    public void setAnoColecao(int anoColecao) {
+        this.anoColecao = anoColecao;
     }
 }
