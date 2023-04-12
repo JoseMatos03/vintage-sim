@@ -13,16 +13,27 @@ public class Sapatilhas extends Artigo {
     private int anoColecao;
 
     @Override
-    public int calcularPreco() {
-        // TODO calcular os descontos
-        // RESTRIÇÕES:
-        // Usado
-        // Tamanho > 45
-        return this.getPrecoBase();
+    public float calcularPreco() {
+        float precoFinal = this.getPrecoBase() + this.calcularCorrecao();
+        return precoFinal;
+    }
+
+    @Override
+    public float calcularCorrecao() {
+        float correcao = 0;
+
+        if (this.getEstadoUtilizacao() != 1f) {
+            correcao -= this.getPrecoBase() - (this.getPrecoBase() * this.getEstadoUtilizacao());
+        }
+        if (this.tamanho > 45) {
+            correcao -= this.getPrecoBase() * 0.25;
+        }
+
+        return correcao;
     }
 
     public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo,
-            int precoBase, int tamanho, int atacadores, String cor, int anoColecao) {
+            float precoBase, int tamanho, int atacadores, String cor, int anoColecao) {
         super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
 
         this.tamanho = tamanho;
