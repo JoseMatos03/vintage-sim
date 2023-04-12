@@ -9,20 +9,42 @@ public class Mala extends Artigo {
     public static final int LONA = 2;
     public static final int VELUDO = 3;
 
-    private int[] dimensao = new int[2]; // [w, h]
+    // Dimensões
+    public static final int COMPRIMENTO = 0;
+    public static final int LARGURA = 1;
+    public static final int ALTURA = 2;
+
+    private final float CONSTANTECORRECAO = this.getPrecoBase() * 50;
+
+    private float[] dimensao; // [c, l, a]
     private int material;
     private int anoColecao;
 
     @Override
-    public int calcularPreco() {
-        // TODO calcular os descontos
-        // RESTRIÇÕES:
-        // Desproporcionalmente inverso às dimensões
-        return this.getPrecoBase();
+    public float calcularPreco() {
+        float precoFinal = this.getPrecoBase() + this.calcularCorrecao();
+        return precoFinal;
     }
 
-    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, int precoBase,
-            int[] dimensao, int material, int anoColecao) {
+    @Override
+    public float calcularCorrecao() {
+        float dimensao = this.calcularDimensao();
+        float correcao = 0;
+        correcao -= (1f/dimensao) * CONSTANTECORRECAO;
+        return correcao;
+    }
+
+    public float calcularDimensao() {
+        float comprimento = this.getDimensao()[COMPRIMENTO];
+        float largura = this.getDimensao()[LARGURA];
+        float altura = this.getDimensao()[ALTURA];
+
+        float dimensao = comprimento * largura * altura;
+        return dimensao;
+    }
+
+    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, float precoBase,
+            float[] dimensao, int material, int anoColecao) {
         super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
 
         this.dimensao = dimensao;
@@ -30,11 +52,11 @@ public class Mala extends Artigo {
         this.anoColecao = anoColecao;
     }
 
-    public int[] getDimensao() {
+    public float[] getDimensao() {
         return dimensao;
     }
 
-    public void setDimensao(int[] dimensao) {
+    public void setDimensao(float[] dimensao) {
         this.dimensao = dimensao;
     }
 

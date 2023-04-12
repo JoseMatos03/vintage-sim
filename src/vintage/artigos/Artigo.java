@@ -6,13 +6,14 @@ public abstract class Artigo {
     private String descricao;
     private String marca;
     private String codigo;
-    private int precoBase;
-    // TODO correção de preço (descontos)
+    private float precoBase;
     // TODO atribuir uma transportadora
 
-    public abstract int calcularPreco();
+    public abstract float calcularPreco();
 
-    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, int precoBase) {
+    public abstract float calcularCorrecao();
+
+    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, float precoBase) {
         this.estadoUtilizacao = estadoUtilizacao;
         this.numDonos = numDonos;
         this.descricao = descricao;
@@ -61,11 +62,11 @@ public abstract class Artigo {
         this.codigo = codigo;
     }
 
-    public int getPrecoBase() {
+    public float getPrecoBase() {
         return precoBase;
     }
 
-    public void setPrecoBase(int precoBase) {
+    public void setPrecoBase(float precoBase) {
         this.precoBase = precoBase;
     }
 }
