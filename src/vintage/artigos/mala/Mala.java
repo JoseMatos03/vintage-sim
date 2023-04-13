@@ -3,6 +3,7 @@ package vintage.artigos.mala;
 import vintage.artigos.Artigo;
 
 public class Mala extends Artigo {
+
     // Tipos de material
     public static final int TECIDO = 0;
     public static final int PELE = 1;
@@ -30,7 +31,7 @@ public class Mala extends Artigo {
     public float calcularCorrecao() {
         float dimensao = this.calcularDimensao();
         float correcao = 0;
-        correcao -= (1f/dimensao) * CONSTANTECORRECAO;
+        correcao -= (1f / dimensao) * CONSTANTECORRECAO;
         return correcao;
     }
 

@@ -3,6 +3,7 @@ package vintage.artigos.tshirt;
 import vintage.artigos.Artigo;
 
 public class TShirt extends Artigo {
+    
     // Tipos de padrão
     public static final int LISO = 0;
     public static final int RISCOS = 1;
