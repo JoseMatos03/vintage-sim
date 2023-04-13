@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import vintage.artigos.mala.Mala;
+import static vintage.artigos.mala.Mala.LONA;
+import static vintage.artigos.mala.Mala.TECIDO;
+import static vintage.artigos.mala.Mala.PELE;
+import static vintage.artigos.mala.Mala.VELUDO;
 
 public class MalaTest {
 
@@ -17,7 +21,7 @@ public class MalaTest {
             "ABCD",
             159.99f,
             new float[] { 15f, 10f, 10f },
-            Mala.LONA,
+            LONA,
             2022);
 
     private Mala malaTeste_dois = new Mala(
@@ -28,7 +32,7 @@ public class MalaTest {
             "ABCD",
             60.50f,
             new float[] { 10f, 7.5f, 7f },
-            Mala.TECIDO,
+            TECIDO,
             2019);
 
     private Mala malaTeste_tres = new Mala(
@@ -39,7 +43,7 @@ public class MalaTest {
             "ABCD",
             20.00f,
             new float[] { 12.5f, 5.5f, 10f },
-            Mala.TECIDO,
+            PELE,
             2021);
 
     private Mala malaTeste_quatro = new Mala(
@@ -50,7 +54,7 @@ public class MalaTest {
             "ABCD",
             10.50f,
             new float[] { 10.5f, 2f, 10f },
-            Mala.TECIDO,
+            VELUDO,
             2014);
 
     @Test
