@@ -14,13 +14,6 @@ git clone https://github.com/JoseMatos03/vintage-sim.git
 
 ## Usage
 
-Once you have the source code, you can compile the program using the makefile:
-
-```
-make
-```
-
-This will launch the command-line interface of the simulator.
 
 ## Features
 
