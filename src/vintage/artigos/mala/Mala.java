@@ -1,6 +1,7 @@
 package vintage.artigos.mala;
 
 import vintage.artigos.Artigo;
+import vintage.utils.artigos.Utils;
 
 public class Mala extends Artigo {
 
@@ -31,8 +32,10 @@ public class Mala extends Artigo {
     public float calcularCorrecao() {
         float dimensao = this.calcularDimensao();
         float correcao = 0;
+        
         correcao -= (1f / dimensao) * CONSTANTECORRECAO;
-        return correcao;
+
+        return Utils.arrondarCentesimas(correcao);
     }
 
     public float calcularDimensao() {
@@ -41,12 +44,12 @@ public class Mala extends Artigo {
         float altura = this.getDimensao()[ALTURA];
 
         float dimensao = comprimento * largura * altura;
-        return dimensao;
+        return Utils.arrondarDecimas(dimensao);
     }
 
-    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, float precoBase,
+    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, float precoBase,
             float[] dimensao, int material, int anoColecao) {
-        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
+        super(estadoUtilizacao, numDonos, descricao, marca, precoBase);
 
         this.dimensao = dimensao;
         this.material = material;
@@ -76,4 +79,5 @@ public class Mala extends Artigo {
     public void setAnoColecao(int anoColecao) {
         this.anoColecao = anoColecao;
     }
+    
 }
