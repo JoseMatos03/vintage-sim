@@ -36,9 +36,9 @@ public class TShirt extends Artigo {
         return correcao;
     }
 
-    public TShirt(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, int precoBase,
+    public TShirt(float estadoUtilizacao, int numDonos, String descricao, String marca, int precoBase,
             String tamanho, int padrao) {
-        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
+        super(estadoUtilizacao, numDonos, descricao, marca, precoBase);
 
         this.tamanho = tamanho;
         this.padrao = padrao;
