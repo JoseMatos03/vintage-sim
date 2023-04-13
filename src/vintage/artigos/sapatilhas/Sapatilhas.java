@@ -3,6 +3,7 @@ package vintage.artigos.sapatilhas;
 import vintage.artigos.Artigo;
 
 public class Sapatilhas extends Artigo {
+    
     // Tipos de atacadores
     public static final int ATACADORES = 0;
     public static final int ATILHOS = 1;

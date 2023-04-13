@@ -1,6 +1,7 @@
 package vintage.artigos;
 
 public abstract class Artigo {
+    
     private float estadoUtilizacao;
     private int numDonos;
     private String descricao;
