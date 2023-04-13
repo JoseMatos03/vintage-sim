@@ -1,6 +1,7 @@
 package vintage.artigos.tshirt;
 
 import vintage.artigos.Artigo;
+import vintage.transportadoras.Transportadora;
 
 public class TShirt extends Artigo {
     
@@ -37,8 +38,8 @@ public class TShirt extends Artigo {
     }
 
     public TShirt(float estadoUtilizacao, int numDonos, String descricao, String marca, int precoBase,
-            String tamanho, int padrao) {
-        super(estadoUtilizacao, numDonos, descricao, marca, precoBase);
+            String tamanho, int padrao, Transportadora transportadora) {
+        super(estadoUtilizacao, numDonos, descricao, marca, precoBase, transportadora);
 
         this.tamanho = tamanho;
         this.padrao = padrao;
