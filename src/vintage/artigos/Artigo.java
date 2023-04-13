@@ -6,7 +6,7 @@ public abstract class Artigo {
     private int numDonos;
     private String descricao;
     private String marca;
-    private String codigo;
+    private int codigo; // TODO Atribuir codigo de forma automática
     private float precoBase;
     // TODO atribuir uma transportadora
 
@@ -14,12 +14,11 @@ public abstract class Artigo {
 
     public abstract float calcularCorrecao();
 
-    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, float precoBase) {
+    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, float precoBase) {
         this.estadoUtilizacao = estadoUtilizacao;
         this.numDonos = numDonos;
         this.descricao = descricao;
         this.marca = marca;
-        this.codigo = codigo;
         this.precoBase = precoBase;
     }
 
@@ -55,11 +54,11 @@ public abstract class Artigo {
         this.marca = marca;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
