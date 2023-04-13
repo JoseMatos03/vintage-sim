@@ -14,6 +14,7 @@ git clone https://github.com/JoseMatos03/vintage-sim.git
 
 ## Usage
 
+Usas o IDE que te fodes
 
 ## Features
 
