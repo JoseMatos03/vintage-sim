@@ -47,9 +47,9 @@ public class Mala extends Artigo {
         return Utils.arrondarDecimas(dimensao);
     }
 
-    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo, float precoBase,
+    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, float precoBase,
             float[] dimensao, int material, int anoColecao) {
-        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
+        super(estadoUtilizacao, numDonos, descricao, marca, precoBase);
 
         this.dimensao = dimensao;
         this.material = material;

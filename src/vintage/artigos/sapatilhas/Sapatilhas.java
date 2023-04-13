@@ -33,9 +33,9 @@ public class Sapatilhas extends Artigo {
         return correcao;
     }
 
-    public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca, String codigo,
+    public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca,
             float precoBase, int tamanho, int atacadores, String cor, int anoColecao) {
-        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase);
+        super(estadoUtilizacao, numDonos, descricao, marca, precoBase);
 
         this.tamanho = tamanho;
         this.atacadores = atacadores;

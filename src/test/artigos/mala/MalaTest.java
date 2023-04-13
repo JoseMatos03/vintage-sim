@@ -18,7 +18,6 @@ public class MalaTest {
             0,
             "Esta mala da Louis Vuitton é a escolha perfeita para quem busca estilo, funcionalidade e qualidade em um único produto. Feita com materiais de alta qualidade e cuidadosamente projetada para atender às necessidades dos viajantes modernos, esta mala combina praticidade com um design elegante e sofisticado.",
             "Louis Vuitton",
-            "ABCD",
             159.99f,
             new float[] { 15f, 10f, 10f },
             LONA,
@@ -29,8 +28,7 @@ public class MalaTest {
             4,
             "Esta mala da Louis Vuitton é a escolha perfeita para quem busca estilo, funcionalidade e qualidade em um único produto. Feita com materiais de alta qualidade e cuidadosamente projetada para atender às necessidades dos viajantes modernos, esta mala combina praticidade com um design elegante e sofisticado.",
             "Louis Vuitton",
-            "ABCD",
-            60.50f,
+            59.99f,
             new float[] { 10f, 7.5f, 7f },
             TECIDO,
             2019);
