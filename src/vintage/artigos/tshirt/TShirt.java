@@ -28,12 +28,15 @@ public class TShirt extends Artigo {
     @Override
     public float calcularCorrecao() {
         float correcao = 0;
+
+        correcao += this.getTransportadora().getValorExpedicao();
         if (this.padrao == LISO) {
             return 0;
         }
         if (this.getEstadoUtilizacao() != 1f) {
             correcao -= this.getPrecoBase() * 0.5f;
         }
+
         return correcao;
     }
 
