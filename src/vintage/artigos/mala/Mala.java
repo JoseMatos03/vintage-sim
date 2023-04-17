@@ -17,7 +17,7 @@ public class Mala extends Artigo {
     public static final int LARGURA = 1;
     public static final int ALTURA = 2;
 
-    private final float CONSTANTECORRECAO = this.getPrecoBase() * 50;
+    private final float CONSTANTECORRECAO = this.getPrecoBase() * 50; // Controla a correção dada relativa à dimensão
 
     private float[] dimensao; // [c, l, a]
     private int material;
