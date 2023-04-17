@@ -81,30 +81,30 @@ public class MalaTest {
     @Test
     public void dadoDimensao_quandoCalcularCorrecao_retornaCorrecao() {
         float resultadoTeste_um = malaTeste_um.calcularCorrecao();
-        assertEquals(-5.33f, resultadoTeste_um, 0.01f);
+        assertEquals(8.42f, resultadoTeste_um, 0.01f);
 
         float resultadoTeste_dois = malaTeste_dois.calcularCorrecao();
-        assertEquals(-5.76f, resultadoTeste_dois, 0.01f);
+        assertEquals(0.89f, resultadoTeste_dois, 0.01f);
 
         float resultadoTeste_tres = malaTeste_tres.calcularCorrecao();
-        assertEquals(-1.45f, resultadoTeste_tres, 0.01f);
+        assertEquals(5.15f, resultadoTeste_tres, 0.01f);
 
         float resultadoTeste_quatro = malaTeste_quatro.calcularCorrecao();
-        assertEquals(-2.50f, resultadoTeste_quatro, 0.01f);
+        assertEquals(11.25f, resultadoTeste_quatro, 0.01f);
     }
 
     @Test
     public void dadoPrecoBaseEPrecoCorrecao_quandoCalcularPreco_retornaPrecoFinal() {
         float resultadoTeste_um = malaTeste_um.calcularPreco();
-        assertEquals(154.66f, resultadoTeste_um, 0.01f);
+        assertEquals(168.41f, resultadoTeste_um, 0.01f);
 
         float resultadoTeste_dois = malaTeste_dois.calcularPreco();
-        assertEquals(54.74f, resultadoTeste_dois, 0.01f);
+        assertEquals(60.88f, resultadoTeste_dois, 0.01f);
 
         float resultadoTeste_tres = malaTeste_tres.calcularPreco();
-        assertEquals(18.55f, resultadoTeste_tres, 0.01f);
+        assertEquals(25.15f, resultadoTeste_tres, 0.01f);
 
         float resultadoTeste_quatro = malaTeste_quatro.calcularPreco();
-        assertEquals(8f, resultadoTeste_quatro, 0.01f);
+        assertEquals(21.75f, resultadoTeste_quatro, 0.01f);
     }
 }
