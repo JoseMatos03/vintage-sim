@@ -5,12 +5,18 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import vintage.artigos.mala.Mala;
+import vintage.transportadoras.Transportadora;
+
 import static vintage.artigos.mala.Mala.LONA;
 import static vintage.artigos.mala.Mala.TECIDO;
 import static vintage.artigos.mala.Mala.PELE;
 import static vintage.artigos.mala.Mala.VELUDO;
 
 public class MalaTest {
+
+    // Transportadoras
+    Transportadora transportadoraTeste_um = new Transportadora(5.00f);
+    Transportadora transportadoraTeste_dois = new Transportadora(2.00f, 1.20f);
 
     // Malas-Tipo a testar
     private Mala malaTeste_um = new Mala(
@@ -21,7 +27,8 @@ public class MalaTest {
             159.99f,
             new float[] { 15f, 10f, 10f },
             LONA,
-            2022);
+            2022,
+            transportadoraTeste_um);
 
     private Mala malaTeste_dois = new Mala(
             0.7f,
@@ -31,29 +38,30 @@ public class MalaTest {
             59.99f,
             new float[] { 10f, 7.5f, 7f },
             TECIDO,
-            2019);
+            2019,
+            transportadoraTeste_dois);
 
     private Mala malaTeste_tres = new Mala(
             0.85f,
             2,
             "Esta mala da Louis Vuitton é a escolha perfeita para quem busca estilo, funcionalidade e qualidade em um único produto. Feita com materiais de alta qualidade e cuidadosamente projetada para atender às necessidades dos viajantes modernos, esta mala combina praticidade com um design elegante e sofisticado.",
             "Louis Vuitton",
-            "ABCD",
             20.00f,
             new float[] { 12.5f, 5.5f, 10f },
             PELE,
-            2021);
+            2021,
+            transportadoraTeste_dois);
 
     private Mala malaTeste_quatro = new Mala(
             0.5f,
             7,
             "Esta mala da Louis Vuitton é a escolha perfeita para quem busca estilo, funcionalidade e qualidade em um único produto. Feita com materiais de alta qualidade e cuidadosamente projetada para atender às necessidades dos viajantes modernos, esta mala combina praticidade com um design elegante e sofisticado.",
             "Louis Vuitton",
-            "ABCD",
             10.50f,
             new float[] { 10.5f, 2f, 10f },
             VELUDO,
-            2014);
+            2014,
+            transportadoraTeste_um);
 
     @Test
     public void dadasDimensoes_quandoCalcularDimensao_retornaDimensao() {

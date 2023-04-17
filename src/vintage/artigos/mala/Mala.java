@@ -1,6 +1,7 @@
 package vintage.artigos.mala;
 
 import vintage.artigos.Artigo;
+import vintage.transportadoras.Transportadora;
 import vintage.utils.artigos.Utils;
 
 public class Mala extends Artigo {
@@ -48,8 +49,8 @@ public class Mala extends Artigo {
     }
 
     public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, float precoBase,
-            float[] dimensao, int material, int anoColecao) {
-        super(estadoUtilizacao, numDonos, descricao, marca, precoBase);
+            float[] dimensao, int material, int anoColecao, Transportadora transportadora) {
+        super(estadoUtilizacao, numDonos, descricao, marca, precoBase, transportadora);
 
         this.dimensao = dimensao;
         this.material = material;
