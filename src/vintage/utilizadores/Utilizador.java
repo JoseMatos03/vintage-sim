@@ -125,4 +125,12 @@ public class Utilizador {
         this.valorEmVendas = valorEmVendas;
     }
 
+    public int getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(int atividade) {
+        this.atividade = atividade;
+    }
+    
 }
