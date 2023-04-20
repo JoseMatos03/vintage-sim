@@ -7,11 +7,16 @@ import java.util.List;
 
 public class Utilizador {
 
+    // Flags
+    public static final int ATIVA = 0;
+    public static final int INATIVA = 1;
+    
     private int codigo; // TODO Atribuir codigo de forma automática
     private String email;
     private String nome;
     private String morada;
     private int numeroFiscal;
+    private int atividade;
 
     // TODO adicionar e remover artigos nas listas
     // Listas de artigos associados ao utilizador
@@ -21,6 +26,20 @@ public class Utilizador {
 
     private float valorEmVendas;
 
+    public Utilizador(){
+        this.codigo = 0;
+        this.email = null;
+        this.nome = null;
+        this.morada = null;
+        this.numeroFiscal = 0;
+        this.atividade = ATIVA;
+
+        this.listados = new ArrayList<>();
+        this.vendidos = new ArrayList<>();
+        this.comprados = new ArrayList<>();
+        this.valorEmVendas = 0;
+    }
+
     public Utilizador(int codigo, String email, String nome, String morada, int numeroFiscal) {
         this.codigo = codigo;
         this.email = email;
@@ -28,9 +47,9 @@ public class Utilizador {
         this.morada = morada;
         this.numeroFiscal = numeroFiscal;
 
-        this.listados = new ArrayList<Artigo>();
-        this.vendidos = new ArrayList<Artigo>();
-        this.comprados = new ArrayList<Artigo>();
+        this.listados = new ArrayList<>();
+        this.vendidos = new ArrayList<>();
+        this.comprados = new ArrayList<>();
         this.valorEmVendas = 0;
     }
 
