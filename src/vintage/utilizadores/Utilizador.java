@@ -8,6 +8,7 @@ import java.util.List;
 public class Utilizador {
 
     // Flags
+    // TODO impedir de fazer ações caso esteja inativa
     public static final int ATIVA = 0;
     public static final int INATIVA = 1;
 
@@ -30,6 +31,14 @@ public class Utilizador {
         this.listados.add(artigo);
     }
 
+    public void removerListagem(Artigo artigo){
+        if (!this.listados.contains(artigo)) {
+            return;
+        }
+
+        this.listados.remove(artigo);
+    }
+
     public void venderArtigo(Artigo artigo) {
         if (!this.listados.contains(artigo))
             return;
@@ -45,20 +54,6 @@ public class Utilizador {
         
         utilizador.venderArtigo(artigo);
         this.comprados.add(artigo);
-    }
-
-    public Utilizador() {
-        this.codigo = 0;
-        this.email = null;
-        this.nome = null;
-        this.morada = null;
-        this.numeroFiscal = 0;
-        this.atividade = ATIVA;
-
-        this.listados = new ArrayList<>();
-        this.vendidos = new ArrayList<>();
-        this.comprados = new ArrayList<>();
-        this.valorEmVendas = 0;
     }
 
     public Utilizador(int codigo, String email, String nome, String morada, int numeroFiscal) {
