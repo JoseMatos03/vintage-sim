@@ -4,7 +4,7 @@ import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 
 public class TShirt extends Artigo {
-    
+
     // Tipos de padrão
     public static final int LISO = 0;
     public static final int RISCOS = 1;
@@ -40,9 +40,9 @@ public class TShirt extends Artigo {
         return correcao;
     }
 
-    public TShirt(float estadoUtilizacao, int numDonos, String descricao, String marca, int precoBase,
+    public TShirt(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, int precoBase,
             String tamanho, int padrao, Transportadora transportadora) {
-        super(estadoUtilizacao, numDonos, descricao, marca, precoBase, transportadora);
+        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, transportadora);
 
         this.tamanho = tamanho;
         this.padrao = padrao;
