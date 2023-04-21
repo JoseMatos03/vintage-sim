@@ -31,7 +31,7 @@ public class Vintage {
         String marca = info[5];
         int codigo = this.codigoProximoArtigo++;
         float precoBase = Float.parseFloat(info[6]);
-        Transportadora transportadora = getTransportadora(transportadoras, Integer.parseInt(info[7]));
+        Transportadora transportadora = getTransportadora(transportadoras, info[7]);
 
         switch (tipo) {
             case Artigo.MALA:
@@ -162,9 +162,24 @@ public class Vintage {
         utilizador.setAtividade(Utilizador.INATIVA);
     }
 
-    // TODO Criar transportadora
+    public void criaTransportadora(String[] info) {
+        String nome = info[0];
+        float margemLucro = Float.parseFloat(info[1]);
+        float margemExtra = Float.parseFloat(info[2]);
 
-    // TODO Apagar transportadora
+        Transportadora transportadora = new Transportadora(
+                nome,
+                margemLucro,
+                margemExtra);
+
+        this.transportadoras.add(transportadora);
+    }
+
+    public void apagaTransportadora(String nome)
+    {
+        Transportadora transportadora = getTransportadora(transportadoras, nome);
+        this.transportadoras.remove(transportadora);
+    }
 
     public Vintage() {
         this.artigos = new ArrayList<>();

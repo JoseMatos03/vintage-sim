@@ -26,9 +26,9 @@ public class Utils {
         return null;
     }
 
-    public static Transportadora getTransportadora(List<Transportadora> transportadoras, int codigo) {
+    public static Transportadora getTransportadora(List<Transportadora> transportadoras, String nome) {
         for (Transportadora transportadora : transportadoras) {
-            if (transportadora.getCodigo() == codigo) {
+            if (transportadora.getNome().equals(nome)) {
                 return transportadora;
             }
         }
