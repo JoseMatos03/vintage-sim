@@ -24,15 +24,15 @@ public class Encomenda {
     private LocalDateTime dataCriacao;
 
     public void adicionarArtigos(Artigo artigo) {
-        this.getArtigos().add(artigo);  
-        float novoPrecoEncomenda = this.getPrecoEncomenda() + artigo.calcularPreco();
+        this.artigos.add(artigo);  
+        float novoPrecoEncomenda = this.precoEncomenda + artigo.calcularPreco();
         this.setPrecoEncomenda(novoPrecoEncomenda);
         // TODO Analisar tamanho da encomenda
     }
 
     public void removerArtigo(Artigo artigo) {
-        this.getArtigos().remove(artigo);  
-        float novoPrecoEncomenda = this.getPrecoEncomenda() - artigo.calcularPreco();
+        this.artigos.remove(artigo);  
+        float novoPrecoEncomenda = this.precoEncomenda - artigo.calcularPreco();
         this.setPrecoEncomenda(novoPrecoEncomenda);
         // TODO Analisar tamanho da encomenda
     }
@@ -41,7 +41,7 @@ public class Encomenda {
         float precoEncomenda = 0;
 
         for (int i = 0; i < this.getArtigos().size(); i++) {
-            precoEncomenda += this.getArtigos().get(i).calcularPreco();
+            precoEncomenda += this.artigos.get(i).calcularPreco();
         }
 
         return precoEncomenda;
