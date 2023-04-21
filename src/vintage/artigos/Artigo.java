@@ -4,11 +4,16 @@ import vintage.transportadoras.Transportadora;
 
 public abstract class Artigo {
 
+    // Tipo de artigo
+    public static final int MALA = 0;
+    public static final int SAPATILHAS = 1;
+    public static final int TSHIRT = 2;
+
     private float estadoUtilizacao;
     private int numDonos;
     private String descricao;
     private String marca;
-    private int codigo; // TODO Atribuir codigo de forma automática
+    private int codigo;
     private float precoBase;
     private Transportadora transportadora;
 
@@ -16,12 +21,13 @@ public abstract class Artigo {
 
     public abstract float calcularCorrecao();
 
-    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, float precoBase,
+    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
             Transportadora transportadora) {
         this.estadoUtilizacao = estadoUtilizacao;
         this.numDonos = numDonos;
         this.descricao = descricao;
         this.marca = marca;
+        this.codigo = codigo;
         this.precoBase = precoBase;
         this.transportadora = transportadora;
     }

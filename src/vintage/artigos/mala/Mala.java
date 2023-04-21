@@ -33,7 +33,7 @@ public class Mala extends Artigo {
     public float calcularCorrecao() {
         float dimensao = this.calcularDimensao();
         float correcao = 0;
-        
+
         correcao += this.getTransportadora().getValorExpedicao();
         correcao -= (1f / dimensao) * CONSTANTECORRECAO;
 
@@ -49,9 +49,9 @@ public class Mala extends Artigo {
         return Utils.arrondarDecimas(dimensao);
     }
 
-    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, float precoBase,
+    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
             float[] dimensao, int material, int anoColecao, Transportadora transportadora) {
-        super(estadoUtilizacao, numDonos, descricao, marca, precoBase, transportadora);
+        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, transportadora);
 
         this.dimensao = dimensao;
         this.material = material;
@@ -81,5 +81,5 @@ public class Mala extends Artigo {
     public void setAnoColecao(int anoColecao) {
         this.anoColecao = anoColecao;
     }
-    
+
 }

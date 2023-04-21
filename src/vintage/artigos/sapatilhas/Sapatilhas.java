@@ -5,7 +5,7 @@ import vintage.transportadoras.Transportadora;
 import vintage.utils.artigos.Utils;
 
 public class Sapatilhas extends Artigo {
-    
+
     // Tipos de atacadores
     public static final int ATACADORES = 0;
     public static final int ATILHOS = 1;
@@ -33,12 +33,12 @@ public class Sapatilhas extends Artigo {
             correcao -= this.getPrecoBase() * 0.25;
         }
 
-        return  Utils.arrondarCentesimas(correcao);
+        return Utils.arrondarCentesimas(correcao);
     }
 
-    public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca,
+    public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
             float precoBase, int tamanho, int atacadores, String cor, int anoColecao, Transportadora transportadora) {
-        super(estadoUtilizacao, numDonos, descricao, marca, precoBase, transportadora);
+        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, transportadora);
 
         this.tamanho = tamanho;
         this.atacadores = atacadores;

@@ -10,23 +10,44 @@ public class Utilizador {
     // Flags
     public static final int ATIVA = 0;
     public static final int INATIVA = 1;
-    
-    private int codigo; // TODO Atribuir codigo de forma automática
+
+    private int codigo;
     private String email;
     private String nome;
     private String morada;
     private int numeroFiscal;
     private int atividade;
 
-    // TODO adicionar e remover artigos nas listas
-    // Listas de artigos associados ao utilizador
     private List<Artigo> listados;
     private List<Artigo> vendidos;
     private List<Artigo> comprados;
-
     private float valorEmVendas;
 
-    public Utilizador(){
+    public void criarListagem(Artigo artigo) {
+        if (this.listados.contains(artigo))
+            return;
+
+        this.listados.add(artigo);
+    }
+
+    public void venderArtigo(Artigo artigo) {
+        if (!this.listados.contains(artigo))
+            return;
+        
+        this.vendidos.add(artigo);
+        this.listados.remove(artigo);
+        this.valorEmVendas += artigo.calcularPreco();
+    }
+
+    public void comprarArtigo(Artigo artigo, Utilizador utilizador) {
+        if (!utilizador.getListados().contains(artigo))
+            return;
+        
+        utilizador.venderArtigo(artigo);
+        this.comprados.add(artigo);
+    }
+
+    public Utilizador() {
         this.codigo = 0;
         this.email = null;
         this.nome = null;
@@ -132,5 +153,5 @@ public class Utilizador {
     public void setAtividade(int atividade) {
         this.atividade = atividade;
     }
-    
+
 }
