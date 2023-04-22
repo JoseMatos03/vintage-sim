@@ -16,6 +16,7 @@ public class Encomenda {
     public static final int EXPEDIDA = 1;
     public static final int FINALIZADA = 2;
 
+    private int codigo;
     private List<Artigo> artigos;
     private int dimensaoEncomenda;
     private int estadoEncomenda;
@@ -52,11 +53,21 @@ public class Encomenda {
     }
 
     // TODO Reembolso após funcionalidade de tempo implementada
-    public float reembolso() {
-        return 0;
+    public void reembolsar() {
+        return;
     }
 
-    public Encomenda(List<Artigo> artigos, int dimensaoEncomenda) {
+    public Encomenda(int codigo, int dimensaoEncomenda) {
+        this.codigo = codigo;
+        this.artigos = null;
+        this.dimensaoEncomenda = dimensaoEncomenda;
+        this.estadoEncomenda = PENDENTE;
+        this.precoEncomenda = 0;
+        this.dataCriacao = LocalDateTime.now();
+    }
+
+    public Encomenda(int codigo, List<Artigo> artigos, int dimensaoEncomenda) {
+        this.codigo = codigo;
         this.artigos = artigos;
         this.dimensaoEncomenda = dimensaoEncomenda;
         this.estadoEncomenda = PENDENTE; // TODO Atualizar estado da encomenda conforme passagem de tempo
@@ -103,4 +114,13 @@ public class Encomenda {
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
 }

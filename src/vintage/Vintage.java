@@ -11,9 +11,10 @@ import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
 
+import static vintage.utils.Utils.getArtigo;
+import static vintage.utils.Utils.getEncomenda;
 import static vintage.utils.Utils.getUtilizador;
 import static vintage.utils.Utils.getTransportadora;
-import static vintage.utils.Utils.getArtigo;
 
 public class Vintage {
     private List<Artigo> artigos;
@@ -129,7 +130,19 @@ public class Vintage {
         this.artigos.remove(artigo);
     }
 
-    // TODO Criar encomendas
+    public void criaEncomenda(String[] info) {
+        int codigo = encomendas.size();
+        int dimensaoEncomenda = Integer.parseInt(info[0]);
+
+        Encomenda encomenda = new Encomenda(codigo, dimensaoEncomenda);
+        this.encomendas.add(encomenda);
+    }
+
+    public void cancelaEncomenda(String info) {
+        int codigo = Integer.parseInt(info);
+        Encomenda encomenda = getEncomenda(encomendas, codigo);
+        encomenda.reembolsar();
+    }
 
     public void criaUtilizador(String[] info) {
         int codigo = utilizadores.size();
@@ -144,7 +157,6 @@ public class Vintage {
                 nome,
                 morada,
                 numeroFiscal);
-
         this.utilizadores.add(utilizador);
     }
 
@@ -175,8 +187,7 @@ public class Vintage {
         this.transportadoras.add(transportadora);
     }
 
-    public void apagaTransportadora(String nome)
-    {
+    public void apagaTransportadora(String nome) {
         Transportadora transportadora = getTransportadora(transportadoras, nome);
         this.transportadoras.remove(transportadora);
     }

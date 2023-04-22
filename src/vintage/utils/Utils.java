@@ -3,6 +3,7 @@ package vintage.utils;
 import java.util.List;
 
 import vintage.artigos.Artigo;
+import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
 
@@ -12,6 +13,15 @@ public class Utils {
         for (Artigo artigo : artigos) {
             if (artigo.getCodigo() == codigo) {
                 return artigo;
+            }
+        }
+        return null;
+    }
+
+    public static Encomenda getEncomenda(List<Encomenda> encomendas, int codigo) {
+        for (Encomenda encomenda : encomendas) {
+            if (encomenda.getCodigo() == codigo) {
+                return encomenda;
             }
         }
         return null;
