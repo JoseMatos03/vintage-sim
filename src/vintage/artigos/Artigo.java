@@ -1,6 +1,7 @@
 package vintage.artigos;
 
 import vintage.transportadoras.Transportadora;
+import vintage.utilizadores.Utilizador;
 
 public abstract class Artigo {
 
@@ -15,6 +16,7 @@ public abstract class Artigo {
     private String marca;
     private int codigo;
     private float precoBase;
+    private Utilizador vendedor;
     private Transportadora transportadora;
 
     public abstract float calcularPreco();
@@ -22,13 +24,14 @@ public abstract class Artigo {
     public abstract float calcularCorrecao();
 
     public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
-            Transportadora transportadora) {
+            Utilizador vendedor, Transportadora transportadora) {
         this.estadoUtilizacao = estadoUtilizacao;
         this.numDonos = numDonos;
         this.descricao = descricao;
         this.marca = marca;
         this.codigo = codigo;
         this.precoBase = precoBase;
+        this.vendedor = vendedor;
         this.transportadora = transportadora;
     }
 
@@ -86,6 +89,14 @@ public abstract class Artigo {
 
     public void setTransportadora(Transportadora transportadora) {
         this.transportadora = transportadora;
+    }
+
+    public Utilizador getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Utilizador vendedor) {
+        this.vendedor = vendedor;
     }
 
 }

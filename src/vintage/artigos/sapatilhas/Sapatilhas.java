@@ -2,6 +2,7 @@ package vintage.artigos.sapatilhas;
 
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
+import vintage.utilizadores.Utilizador;
 import vintage.utils.artigos.Utils;
 
 public class Sapatilhas extends Artigo {
@@ -37,8 +38,9 @@ public class Sapatilhas extends Artigo {
     }
 
     public Sapatilhas(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
-            float precoBase, int tamanho, int atacadores, String cor, int anoColecao, Transportadora transportadora) {
-        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, transportadora);
+            float precoBase, int tamanho, int atacadores, String cor, int anoColecao, Utilizador vendedor,
+            Transportadora transportadora) {
+        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, vendedor, transportadora);
 
         this.tamanho = tamanho;
         this.atacadores = atacadores;
