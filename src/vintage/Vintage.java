@@ -1,5 +1,10 @@
 package vintage;
 
+import static vintage.utils.vintage.Utils.getArtigo;
+import static vintage.utils.vintage.Utils.getEncomenda;
+import static vintage.utils.vintage.Utils.getTransportadora;
+import static vintage.utils.vintage.Utils.getUtilizador;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +15,6 @@ import vintage.artigos.tshirt.TShirt;
 import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
-
-import static vintage.utils.Utils.getArtigo;
-import static vintage.utils.Utils.getEncomenda;
-import static vintage.utils.Utils.getUtilizador;
-import static vintage.utils.Utils.getTransportadora;
 
 public class Vintage {
     private List<Artigo> artigos;
