@@ -1,5 +1,6 @@
 package vintage;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -13,11 +14,13 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
+import vintage.ui.UI;
+
 import static vintage.utils.SaveLoad.save;
 import static vintage.utils.SaveLoad.load;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
             @Override
@@ -39,8 +42,9 @@ public class Main {
         // String[] artigoNovo = scanner.nextLine().split(" ");
         // loja.criaArtigo(artigoNovo);
 
-        save(gson, loja);
+        UI.listaUtilizadores(loja, loja.getUtilizadores());
 
+        // save(gson, loja);
         scanner.close();
     }
 }
