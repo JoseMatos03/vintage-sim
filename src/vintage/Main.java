@@ -1,30 +1,45 @@
 package vintage;
 
+import java.lang.reflect.Type;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import static vintage.utils.SaveLoad.save;
+import static vintage.utils.SaveLoad.load;
 
 public class Main {
     public static void main(String[] args) {
-        Vintage loja = new Vintage();
         Scanner scanner = new Scanner(System.in);
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
+            @Override
+            public LocalDateTime deserialize(JsonElement json, Type type,
+                    JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                Instant instant = Instant.ofEpochMilli(json.getAsJsonPrimitive().getAsLong());
+                return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+            }
+        }).create();
 
-        // String teste = scanner.nextLine();
-        // String[] teste2 = teste.split(" ");
-        // System.out.println(teste2[0]);
+        Vintage loja = load(gson);
 
-        String[] utilizadorNovo = scanner.nextLine().split(",");
-        for (String string : utilizadorNovo) {
-            System.out.println(string.trim());
-        }
+        // String[] utilizadorNovo = scanner.nextLine().split(",");
         // loja.criaUtilizador(utilizadorNovo);
-        // System.out.println(loja.getUtilizadores().toString());
 
         // String[] transporatodaNova = scanner.nextLine().split(" ");
         // loja.criaTransportadora(transporatodaNova);
-        // System.out.println(loja.getTransportadoras().toString());
 
         // String[] artigoNovo = scanner.nextLine().split(" ");
         // loja.criaArtigo(artigoNovo);
-        // System.out.println(loja.getArtigos().toString());
+
+        save(gson, loja);
 
         scanner.close();
     }
