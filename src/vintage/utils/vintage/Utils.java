@@ -1,4 +1,4 @@
-package vintage.utils;
+package vintage.utils.vintage;
 
 import java.util.List;
 
