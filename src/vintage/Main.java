@@ -14,6 +14,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.DefaultWindowManager;
 import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
@@ -77,11 +78,13 @@ public class Main {
         Screen screen = new TerminalScreen(terminal);
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(),
                 new EmptySpace(TextColor.ANSI.BLUE));
+        BasicWindow window = new BasicWindow();
 
         screen.startScreen();
 
+        UI.menu(gui, window, loja);
         // UI.listaUtilizadores(gui, loja.getUtilizadores());
-        UI.listaArtigos(gui, loja.getArtigos());
+        // UI.listaArtigos(gui, loja.getArtigos());
 
         scanner.close();
         screen.close();
