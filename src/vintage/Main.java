@@ -41,17 +41,35 @@ public class Main {
                 Instant instant = Instant.ofEpochMilli(json.getAsJsonPrimitive().getAsLong());
                 return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
             }
-        }).create();
+        }).registerTypeAdapter(Artigo.class, new JsonDeserializer<Artigo>() {
+            @Override
+            public Artigo deserialize(JsonElement json, Type type,
+                    JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                int tipo = json.getAsJsonObject().get("tipo").getAsInt();
+
+                switch (tipo) {
+                    case 0:
+                        return jsonDeserializationContext.deserialize(json, Mala.class);
+                    case 1:
+                        return jsonDeserializationContext.deserialize(json, Sapatilhas.class);
+                    case 2:
+                        return jsonDeserializationContext.deserialize(json, TShirt.class);
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }).setPrettyPrinting().create();
 
         Vintage loja = load(gson);
 
         // String[] utilizadorNovo = scanner.nextLine().split(",");
         // loja.criaUtilizador(utilizadorNovo);
 
-        // String[] transporatodaNova = scanner.nextLine().split(" ");
+        // String[] transporatodaNova = scanner.nextLine().split(",");
         // loja.criaTransportadora(transporatodaNova);
 
-        // String[] artigoNovo = scanner.nextLine().split(" ");
+        // String[] artigoNovo = scanner.nextLine().split(",");
         // loja.criaArtigo(artigoNovo);
 
         // UI
