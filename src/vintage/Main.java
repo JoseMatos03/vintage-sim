@@ -14,7 +14,10 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-import vintage.ui.UI;
+import vintage.artigos.Artigo;
+import vintage.artigos.mala.Mala;
+import vintage.artigos.sapatilhas.Sapatilhas;
+import vintage.artigos.tshirt.TShirt;
 
 import static vintage.utils.SaveLoad.save;
 import static vintage.utils.SaveLoad.load;
@@ -59,8 +62,6 @@ public class Main {
 
         // String[] artigoNovo = scanner.nextLine().split(",");
         // loja.criaArtigo(artigoNovo);
-
-        UI.listaUtilizadores(loja, loja.getUtilizadores());
 
         // save(gson, loja);
         scanner.close();
