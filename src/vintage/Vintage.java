@@ -25,7 +25,7 @@ public class Vintage {
 
     public void criaArtigo(String[] info) {
         int tipo = Integer.parseInt(info[0]);
-        Utilizador vendedor = getUtilizador(utilizadores, Integer.parseInt(info[1]));
+        int codigoVendedor = Integer.parseInt(info[1]);
         float estadoUtilizacao = Float.parseFloat(info[2]);
         int numDonos = Integer.parseInt(info[3]);
         String descricao = info[4];
@@ -43,6 +43,7 @@ public class Vintage {
                 int material = Integer.parseInt(info[11]);
                 int anoColecaoMala = Integer.parseInt(info[12]);
                 Artigo mala = new Mala(
+                        tipo,
                         estadoUtilizacao,
                         numDonos,
                         descricao,
@@ -52,11 +53,11 @@ public class Vintage {
                         dimensao,
                         material,
                         anoColecaoMala,
-                        vendedor,
+                        codigoVendedor,
                         transportadora);
 
                 this.artigos.add(mala);
-                vendedor.criarListagem(mala);
+                getUtilizador(utilizadores, codigoVendedor).criarListagem(mala);
                 break;
 
             case Artigo.SAPATILHAS:
@@ -65,6 +66,7 @@ public class Vintage {
                 String cor = info[10];
                 int anoColecaoSapatilhas = Integer.parseInt(info[11]);
                 Artigo sapatilhas = new Sapatilhas(
+                        tipo,
                         estadoUtilizacao,
                         numDonos,
                         descricao,
@@ -75,17 +77,18 @@ public class Vintage {
                         atacadores,
                         cor,
                         anoColecaoSapatilhas,
-                        vendedor,
+                        codigoVendedor,
                         transportadora);
 
                 this.artigos.add(sapatilhas);
-                vendedor.criarListagem(sapatilhas);
+                getUtilizador(utilizadores, codigoVendedor).criarListagem(sapatilhas);
                 break;
 
             case Artigo.TSHIRT:
                 String tamanhoTShirt = info[8];
                 int padrao = Integer.parseInt(info[9]);
                 Artigo tshirt = new TShirt(
+                        tipo,
                         estadoUtilizacao,
                         numDonos,
                         descricao,
@@ -94,11 +97,11 @@ public class Vintage {
                         precoBase,
                         tamanhoTShirt,
                         padrao,
-                        vendedor,
+                        codigoVendedor,
                         transportadora);
 
                 this.artigos.add(tshirt);
-                vendedor.criarListagem(tshirt);
+                getUtilizador(utilizadores, codigoVendedor).criarListagem(tshirt);
                 break;
 
             default:
@@ -111,7 +114,7 @@ public class Vintage {
         int codigoComprador = Integer.parseInt(info[1]);
         Artigo artigo = getArtigo(artigos, codigoArtigo);
         Utilizador comprador = getUtilizador(utilizadores, codigoComprador);
-        Utilizador vendedor = artigo.getVendedor();
+        Utilizador vendedor = getUtilizador(utilizadores, artigo.getCodigoVendedor());
 
         comprador.comprarArtigo(artigo, vendedor);
         this.artigos.remove(artigo);
@@ -121,12 +124,12 @@ public class Vintage {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
 
-        artigo.getVendedor().removerListagem(artigo);
+        getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
         this.artigos.remove(artigo);
     }
 
     public void removeArtigo(Artigo artigo) {
-        artigo.getVendedor().removerListagem(artigo);
+        getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
         this.artigos.remove(artigo);
     }
 
@@ -198,6 +201,14 @@ public class Vintage {
         this.utilizadores = new ArrayList<>();
         this.transportadoras = new ArrayList<>();
         this.codigoProximoArtigo = 0;
+    }
+
+    public Vintage(Vintage loja) {
+        this.artigos = loja.getArtigos();
+        this.encomendas = loja.getEncomendas();
+        this.utilizadores = loja.getUtilizadores();
+        this.transportadoras = loja.getTransportadoras();
+        this.codigoProximoArtigo = loja.getCodigoProximoArtigo();
     }
 
     public List<Artigo> getArtigos() {

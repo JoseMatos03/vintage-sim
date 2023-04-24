@@ -28,7 +28,8 @@ public class SaveLoad {
 
     public static Vintage load(Gson gson) {
         try (Reader reader = new FileReader(FILEPATH)) {
-            return gson.fromJson(reader, Vintage.class);
+            
+            return new Vintage(gson.fromJson(reader, Vintage.class));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -36,5 +37,4 @@ public class SaveLoad {
         }
         return new Vintage();
     }
-
 }

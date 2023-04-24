@@ -1,5 +1,6 @@
 package vintage;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -13,11 +14,16 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
+import vintage.artigos.Artigo;
+import vintage.artigos.mala.Mala;
+import vintage.artigos.sapatilhas.Sapatilhas;
+import vintage.artigos.tshirt.TShirt;
+
 import static vintage.utils.SaveLoad.save;
 import static vintage.utils.SaveLoad.load;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
             @Override
@@ -26,21 +32,39 @@ public class Main {
                 Instant instant = Instant.ofEpochMilli(json.getAsJsonPrimitive().getAsLong());
                 return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
             }
-        }).create();
+        }).registerTypeAdapter(Artigo.class, new JsonDeserializer<Artigo>() {
+            @Override
+            public Artigo deserialize(JsonElement json, Type type,
+                    JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                int tipo = json.getAsJsonObject().get("tipo").getAsInt();
+
+                switch (tipo) {
+                    case 0:
+                        return jsonDeserializationContext.deserialize(json, Mala.class);
+                    case 1:
+                        return jsonDeserializationContext.deserialize(json, Sapatilhas.class);
+                    case 2:
+                        return jsonDeserializationContext.deserialize(json, TShirt.class);
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }).setPrettyPrinting().create();
 
         Vintage loja = load(gson);
 
         // String[] utilizadorNovo = scanner.nextLine().split(",");
         // loja.criaUtilizador(utilizadorNovo);
 
-        // String[] transporatodaNova = scanner.nextLine().split(" ");
+        // String[] transporatodaNova = scanner.nextLine().split(",");
         // loja.criaTransportadora(transporatodaNova);
 
-        // String[] artigoNovo = scanner.nextLine().split(" ");
+        // String[] artigoNovo = scanner.nextLine().split(",");
         // loja.criaArtigo(artigoNovo);
 
-        save(gson, loja);
-
+        // save(gson, loja);
         scanner.close();
+        save(gson, loja);
     }
 }
