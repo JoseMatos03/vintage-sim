@@ -2,7 +2,6 @@ package vintage.artigos.mala;
 
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
-import vintage.utilizadores.Utilizador;
 import vintage.utils.artigos.Utils;
 
 public class Mala extends Artigo {
@@ -50,9 +49,9 @@ public class Mala extends Artigo {
         return Utils.arrondarDecimas(dimensao);
     }
 
-    public Mala(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
-            float[] dimensao, int material, int anoColecao, Utilizador vendedor, Transportadora transportadora) {
-        super(estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, vendedor, transportadora);
+    public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
+            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora);
 
         this.dimensao = dimensao;
         this.material = material;

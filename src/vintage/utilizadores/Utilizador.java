@@ -24,6 +24,7 @@ public class Utilizador {
     private List<Artigo> comprados;
     private float valorEmVendas;
 
+    // TODO Guardar apenas o codigo do artigo
     public void criarListagem(Artigo artigo) {
         if (this.listados.contains(artigo))
             return;

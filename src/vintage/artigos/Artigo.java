@@ -1,7 +1,6 @@
 package vintage.artigos;
 
 import vintage.transportadoras.Transportadora;
-import vintage.utilizadores.Utilizador;
 
 public abstract class Artigo {
 
@@ -10,28 +9,30 @@ public abstract class Artigo {
     public static final int SAPATILHAS = 1;
     public static final int TSHIRT = 2;
 
+    private int tipo;
     private float estadoUtilizacao;
     private int numDonos;
     private String descricao;
     private String marca;
     private int codigo;
     private float precoBase;
-    private Utilizador vendedor;
+    private int codigoVendedor;
     private Transportadora transportadora;
 
     public abstract float calcularPreco();
 
     public abstract float calcularCorrecao();
 
-    public Artigo(float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
-            Utilizador vendedor, Transportadora transportadora) {
+    public Artigo(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
+            int codigoVendedor, Transportadora transportadora) {
+        this.tipo = tipo;
         this.estadoUtilizacao = estadoUtilizacao;
         this.numDonos = numDonos;
         this.descricao = descricao;
         this.marca = marca;
         this.codigo = codigo;
         this.precoBase = precoBase;
-        this.vendedor = vendedor;
+        this.codigoVendedor = codigoVendedor;
         this.transportadora = transportadora;
     }
 
@@ -91,12 +92,20 @@ public abstract class Artigo {
         this.transportadora = transportadora;
     }
 
-    public Utilizador getVendedor() {
-        return vendedor;
+    public int getCodigoVendedor() {
+        return codigoVendedor;
     }
 
-    public void setVendedor(Utilizador vendedor) {
-        this.vendedor = vendedor;
+    public void setCodigoVendedor(int codigoVendedor) {
+        this.codigoVendedor = codigoVendedor;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
 }
