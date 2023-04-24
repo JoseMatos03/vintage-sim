@@ -1,52 +1,37 @@
 package vintage.ui;
 
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.BasicWindow;
-import com.googlecode.lanterna.gui2.Button;
-import com.googlecode.lanterna.gui2.DefaultWindowManager;
-import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.table.Table;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 
-import vintage.Vintage;
+import vintage.artigos.Artigo;
 import vintage.utilizadores.Utilizador;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class UI {
-    public static void listaUtilizadores(Vintage loja, List<Utilizador> utilizadores) throws IOException {
-        // Setup terminal and screen layers
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        Screen screen = new TerminalScreen(terminal);
-        screen.startScreen();
 
+    public static void listaUtilizadores(MultiWindowTextGUI gui, List<Utilizador> utilizadores) {
         // Create panel to hold components
         Panel panel = new Panel();
 
-        Table<String> table = new Table<String>("Código", "Nome", "Email", "NIF");
+        Table<String> table = new Table<String>("Código", "Nome", "Email", "Morada", "NIF", "Vendas");
         for (Utilizador utilizador : utilizadores) {
             if (utilizador.getAtividade() == Utilizador.INATIVA) {
                 continue;
             }
-            table.getTableModel().addRow(Integer.toString(utilizador.getCodigo()), utilizador.getNome(),
-                    utilizador.getEmail(), Integer.toString(utilizador.getNumeroFiscal()));
+            
+            String codigo = Integer.toString(utilizador.getCodigo());
+            String nome = utilizador.getNome();
+            String email = utilizador.getEmail();
+            String morada = utilizador.getMorada();
+            String nif = Integer.toString(utilizador.getNumeroFiscal());
+            String vendas = Float.toString(utilizador.getValorEmVendas());
+            table.getTableModel().addRow(codigo, nome, email, morada, nif, vendas);
         }
-        table.setSelectAction(new Runnable() {
-            @Override
-            public void run() {
-                List<String> data = table.getTableModel().getRow(table.getSelectedRow());
-                loja.apagaUtilizador(data.get(0));
-                table.getTableModel().removeRow(table.getSelectedRow());
-            }
-        });
         table.addTo(panel);
 
         // Create window to hold the panel
@@ -55,9 +40,32 @@ public class UI {
         window.setCloseWindowWithEscape(true);
         window.setComponent(panel);
 
-        // Create gui and start gui
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(),
-                new EmptySpace(TextColor.ANSI.BLUE));
+        gui.addWindowAndWait(window);
+    }
+
+    public static void listaArtigos(MultiWindowTextGUI gui, List<Artigo> artigos){
+        // Create panel to hold components
+        Panel panel = new Panel();
+
+        Table<String> table = new Table<String>("Código", "Tipo", "Marca", "Descrição", "Preço", "Nº Donos", "Estado");
+        for (Artigo artigo : artigos) {
+            String codigo = Integer.toString(artigo.getCodigo());
+            String tipo = Integer.toString(artigo.getTipo());
+            String marca = artigo.getMarca();
+            String descricao = artigo.getDescricao();
+            String preco = Float.toString(artigo.calcularPreco());
+            String numDonos = Integer.toString(artigo.getNumDonos());
+            String estadoDeUtilizacao = Float.toString(artigo.getEstadoUtilizacao());
+            table.getTableModel().addRow(codigo, tipo, marca, descricao, preco, numDonos, estadoDeUtilizacao);
+        }
+        table.addTo(panel);
+
+        // Create window to hold the panel
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+        window.setComponent(panel);
+
         gui.addWindowAndWait(window);
     }
 
