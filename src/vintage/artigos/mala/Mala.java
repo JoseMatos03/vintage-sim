@@ -1,8 +1,11 @@
 package vintage.artigos.mala;
 
+import java.util.Arrays;
+
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.artigos.Utils;
+import vintage.utils.ui.InfoUtils;
 
 public class Mala extends Artigo {
 
@@ -49,7 +52,8 @@ public class Mala extends Artigo {
         return Utils.arrondarDecimas(dimensao);
     }
 
-    public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
+    public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
+            float precoBase,
             float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora) {
         super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora);
 
@@ -80,6 +84,24 @@ public class Mala extends Artigo {
 
     public void setAnoColecao(int anoColecao) {
         this.anoColecao = anoColecao;
+    }
+
+    @Override
+    public String toString() {
+        String tipo = InfoUtils.parseTipoArtigo(this.getTipo());
+        String estado = InfoUtils.parseEstadoUtilizacao(this.getEstadoUtilizacao());
+
+        return "Código: " + this.getCodigo() + "\n" +
+                "Código Vendedor: " + this.getCodigoVendedor() + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Marca: " + this.getMarca() + "\n" +
+                "Descrição: " + this.getDescricao() + "\n" +
+                "Ano coleção: " + anoColecao + "\n" +
+                "Nº Donos: " + this.getNumDonos() + "\n" +
+                "Estado: " + estado + "\n" +
+                "Preço Base: " + this.getPrecoBase() + "\n" +
+                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Transportadora: " + this.getTransportadora().getNome() + "\n";
     }
 
 }
