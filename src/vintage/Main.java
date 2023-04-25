@@ -83,8 +83,6 @@ public class Main {
         screen.startScreen();
 
         UI.menu(gui, window, loja);
-        // UI.listaUtilizadores(gui, loja.getUtilizadores());
-        // UI.listaArtigos(gui, loja.getArtigos());
 
         scanner.close();
         screen.close();
