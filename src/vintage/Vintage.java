@@ -33,7 +33,7 @@ public class Vintage {
         int codigo = this.codigoProximoArtigo++;
         float precoBase = Float.parseFloat(info[6]);
         Transportadora transportadora = getTransportadora(transportadoras, info[7]);
-
+        System.out.println(tipo);
         switch (tipo) {
             case Artigo.MALA:
                 float comprimento = Float.parseFloat(info[8]);
