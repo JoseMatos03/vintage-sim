@@ -1,13 +1,18 @@
 package vintage.ui.info;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.menu.Menu;
+import com.googlecode.lanterna.gui2.menu.MenuItem;
 import com.googlecode.lanterna.gui2.table.Table;
 
 import vintage.Vintage;
@@ -26,7 +31,7 @@ public class Info {
         Button artigosButton = new Button("Ver artigos", new Runnable() {
             @Override
             public void run() {
-                listaArtigos(gui, loja.getArtigos());
+                listaArtigos(gui, loja, loja.getArtigos());
             }
         });
         artigosButton.addTo(panel);
@@ -67,7 +72,12 @@ public class Info {
         gui.addWindowAndWait(window);
     }
 
-    public static void listaArtigos(MultiWindowTextGUI gui, List<Artigo> artigos) {
+    public static void listaArtigos(MultiWindowTextGUI gui, Vintage loja, List<Artigo> artigos) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+        
         Panel panel = new Panel();
 
         Table<String> table = new Table<String>("Código", "Tipo", "Marca", "Descrição", "Preço", "Nº Donos", "Estado");
@@ -81,13 +91,31 @@ public class Info {
             String estadoDeUtilizacao = Float.toString(artigo.getEstadoUtilizacao());
             table.getTableModel().addRow(codigo, tipo, marca, descricao, preco, numDonos, estadoDeUtilizacao);
         }
+        table.setSelectAction(new Runnable() {
+            @Override
+            public void run() {
+                BasicWindow actionWindow = new BasicWindow();
+                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                actionWindow.setCloseWindowWithEscape(true);
+    
+                ActionListBox actionListBox = new ActionListBox();
+                actionListBox.addItem("Remover...", new Runnable() {
+                    @Override
+                    public void run() {
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        loja.removeArtigo(codigo);
+                        actionWindow.close();
+                        window.close();
+                    }
+                });
+
+                actionWindow.setComponent(actionListBox);
+                gui.addWindowAndWait(actionWindow);
+            }
+        });
         table.addTo(panel);
 
-        BasicWindow window = new BasicWindow();
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
-        window.setCloseWindowWithEscape(true);
         window.setComponent(panel);
-
         gui.addWindowAndWait(window);
     }
 

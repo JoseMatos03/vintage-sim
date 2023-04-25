@@ -19,38 +19,41 @@ public class Utilizador {
     private int numeroFiscal;
     private int atividade;
 
-    private List<Artigo> listados;
+    private List<Integer> listados;
     private List<Artigo> vendidos;
     private List<Artigo> comprados;
     private float valorEmVendas;
 
-    // TODO Guardar apenas o codigo do artigo
     public void criarListagem(Artigo artigo) {
-        if (this.listados.contains(artigo))
+        int codigo = artigo.getCodigo();
+        if (this.listados.contains(codigo))
             return;
 
-        this.listados.add(artigo);
+        this.listados.add(artigo.getCodigo());
     }
 
     public void removerListagem(Artigo artigo){
-        if (!this.listados.contains(artigo)) {
+        int codigo = artigo.getCodigo();
+        if (!this.listados.contains(codigo)) {
             return;
         }
 
-        this.listados.remove(artigo);
+        this.listados.remove(codigo);
     }
 
     public void venderArtigo(Artigo artigo) {
-        if (!this.listados.contains(artigo))
+        int codigo = artigo.getCodigo();
+        if (!this.listados.contains(codigo))
             return;
         
         this.vendidos.add(artigo);
-        this.listados.remove(artigo);
+        this.listados.remove(codigo);
         this.valorEmVendas += artigo.calcularPreco();
     }
 
     public void comprarArtigo(Artigo artigo, Utilizador utilizador) {
-        if (!utilizador.getListados().contains(artigo))
+        int codigo = artigo.getCodigo();
+        if (!utilizador.getListados().contains(codigo))
             return;
         
         utilizador.venderArtigo(artigo);
@@ -110,11 +113,11 @@ public class Utilizador {
         this.numeroFiscal = numeroFiscal;
     }
 
-    public List<Artigo> getListados() {
+    public List<Integer> getListados() {
         return listados;
     }
 
-    public void setListados(List<Artigo> listados) {
+    public void setListados(List<Integer> listados) {
         this.listados = listados;
     }
 
