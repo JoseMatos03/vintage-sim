@@ -1,7 +1,5 @@
 package vintage.artigos.mala;
 
-import java.util.Arrays;
-
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.artigos.Utils;
