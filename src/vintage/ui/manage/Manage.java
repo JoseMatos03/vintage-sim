@@ -16,6 +16,7 @@ import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 
 import vintage.Vintage;
+import vintage.artigos.Artigo;
 import vintage.ui.UI;
 import vintage.utils.ui.ManageUtils;
 
@@ -35,7 +36,7 @@ public class Manage {
         Button utilizadoresButton = new Button("Criar utilizadores", new Runnable() {
             @Override
             public void run() {
-
+                criarUtilizador(gui, loja);
             }
         });
         utilizadoresButton.addTo(panel);
@@ -63,6 +64,7 @@ public class Manage {
     }
 
     public static void criarArtigo(MultiWindowTextGUI gui, Vintage loja) {
+
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
@@ -142,6 +144,9 @@ public class Manage {
         final ComboBox<String> atacadores = new ComboBox<String>();
         atacadores.addItem("Atacadores");
         atacadores.addItem("Atilhos");
+        // COR
+        final Label corLabel = new Label("Cor");
+        final TextBox cor = new TextBox();
 
         // --- TSHIRT ---
         // TAMANHO
@@ -161,9 +166,10 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
+                // TODO criar os outros tipos
                 if (tipo.getSelectedItem().equals("Mala")) {
                     loja.criaArtigo(new String[] {
-                            "0",
+                            Integer.toString(Artigo.MALA),
                             codigoVendedor.getText(),
                             ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
                             numDonos.getText(),
@@ -176,6 +182,34 @@ public class Manage {
                             altura.getText(),
                             ManageUtils.parseMaterialMala(material.getText()),
                             anoColecao.getText()
+                    });
+                } else if (tipo.getSelectedItem().equals("Sapatilhas")) {
+                    loja.criaArtigo(new String[] {
+                            Integer.toString(Artigo.SAPATILHAS),
+                            codigoVendedor.getText(),
+                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                            numDonos.getText(),
+                            descricao.getText(),
+                            marca.getText(),
+                            precoBase.getText(),
+                            transportadora.getText(),
+                            tamanho.getText(),
+                            Integer.toString(atacadores.getSelectedIndex()),
+                            cor.getText(),
+                            anoColecao.getText()
+                    });
+                } else if (tipo.getSelectedItem().equals("T-Shirt")) {
+                    loja.criaArtigo(new String[] {
+                            Integer.toString(Artigo.TSHIRT),
+                            codigoVendedor.getText(),
+                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                            numDonos.getText(),
+                            descricao.getText(),
+                            marca.getText(),
+                            precoBase.getText(),
+                            transportadora.getText(),
+                            tamanhoTShirt.getSelectedItem(),
+                            Integer.toString(padrao.getSelectedIndex())
                     });
                 }
             }
@@ -218,6 +252,10 @@ public class Manage {
                     tamanho.addTo(panel);
                     atacadoresLabel.addTo(panel);
                     atacadores.addTo(panel);
+                    corLabel.addTo(panel);
+                    cor.addTo(panel);
+                    anoColecaoLabel.addTo(panel);
+                    anoColecao.addTo(panel);
                 } else if (selectedIndex == 2) {
                     tamanhoTShirtLabel.addTo(panel);
                     tamanhoTShirt.addTo(panel);
@@ -228,7 +266,46 @@ public class Manage {
             }
         });
 
-        // Criar window
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+        window.setComponent(panel);
+
+        gui.addWindowAndWait(window);
+
+    }
+
+    public static void criarUtilizador(MultiWindowTextGUI gui, Vintage loja) {
+
+        Panel panel = new Panel();
+        panel.setLayoutManager(new GridLayout(2));
+
+        new Label("Email").addTo(panel);
+        final TextBox email = new TextBox().setPreferredSize(new TerminalSize(50, 1)).addTo(panel);
+
+        new Label("Nome").addTo(panel);
+        final TextBox nome = new TextBox().setPreferredSize(new TerminalSize(50, 1)).addTo(panel);
+
+        new Label("Morada").addTo(panel);
+        final TextBox morada = new TextBox().setPreferredSize(new TerminalSize(50, 1)).addTo(panel);
+
+        new Label("NIF").addTo(panel);
+        final TextBox nif = new TextBox().setValidationPattern(Pattern.compile("^[0-9]{0,9}?$"))
+                .setPreferredSize(new TerminalSize(50, 1)).addTo(panel);
+
+        Button confirmButton = new Button("Confirmar", new Runnable() {
+            @Override
+            public void run() {
+                loja.criaUtilizador(new String[] {
+                        email.getText(),
+                        nome.getText(),
+                        morada.getText(),
+                        nif.getText()
+                });
+            }
+        });
+        confirmButton.addTo(panel);
+
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         window.setCloseWindowWithEscape(true);

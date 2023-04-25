@@ -25,7 +25,9 @@ import static vintage.utils.vintage.Utils.getArtigo;
 
 // TODO ao clicar artigo/utilizador/encomenda/transportadora, mostrar opções.
 public class Info {
+
     public static void menuInformacao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
+
         Panel panel = new Panel();
 
         Button artigosButton = new Button("Ver artigos", new Runnable() {
@@ -39,7 +41,7 @@ public class Info {
         Button utilizadoresButton = new Button("Ver utilizadores", new Runnable() {
             @Override
             public void run() {
-                listaUtilizadores(gui, loja.getUtilizadores());
+                listaUtilizadores(gui, loja, loja.getUtilizadores());
             }
         });
         utilizadoresButton.addTo(panel);
@@ -134,7 +136,12 @@ public class Info {
         gui.addWindowAndWait(window);
     }
 
-    public static void listaUtilizadores(MultiWindowTextGUI gui, List<Utilizador> utilizadores) {
+    public static void listaUtilizadores(MultiWindowTextGUI gui, Vintage loja, List<Utilizador> utilizadores) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+
         Panel panel = new Panel();
 
         Table<String> table = new Table<String>("Código", "Nome", "Email", "Morada", "NIF", "Vendas");
@@ -151,13 +158,33 @@ public class Info {
             String vendas = Float.toString(utilizador.getValorEmVendas());
             table.getTableModel().addRow(codigo, nome, email, morada, nif, vendas);
         }
+        table.setSelectAction(new Runnable() {
+            // Opções para cada item
+            @Override
+            public void run() {
+                BasicWindow actionWindow = new BasicWindow();
+                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                actionWindow.setCloseWindowWithEscape(true);
+
+                ActionListBox actionListBox = new ActionListBox();
+                // Apagar utilizador
+                actionListBox.addItem("Apagar...", new Runnable() {
+                    @Override
+                    public void run() {
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        loja.apagaUtilizador(codigo);
+                        actionWindow.close();
+                        window.close();
+                    }
+                });
+
+                actionWindow.setComponent(actionListBox);
+                gui.addWindowAndWait(actionWindow);
+            }
+        });
         table.addTo(panel);
 
-        BasicWindow window = new BasicWindow();
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
-        window.setCloseWindowWithEscape(true);
         window.setComponent(panel);
-
         gui.addWindowAndWait(window);
     }
 
