@@ -128,11 +128,6 @@ public class Vintage {
         this.artigos.remove(artigo);
     }
 
-    public void removeArtigo(Artigo artigo) {
-        getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
-        this.artigos.remove(artigo);
-    }
-
     public void criaEncomenda(String[] info) {
         int codigo = encomendas.size();
         int dimensaoEncomenda = Integer.parseInt(info[0]);
@@ -171,8 +166,8 @@ public class Vintage {
         utilizador.setNome(null);
         utilizador.setMorada(null);
         utilizador.setNumeroFiscal(0);
-        for (Artigo artigo : utilizador.getListados())
-            this.removeArtigo(artigo);
+        for (int codigoArtigo : utilizador.getListados())
+            this.removeArtigo(Integer.toString(codigoArtigo));
         utilizador.setListados(null);
         utilizador.setAtividade(Utilizador.INATIVA);
     }
