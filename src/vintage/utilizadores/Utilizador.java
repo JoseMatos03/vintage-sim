@@ -38,7 +38,7 @@ public class Utilizador {
             return;
         }
 
-        this.listados.remove(codigo);
+        this.listados.remove(Integer.valueOf(codigo));
     }
 
     public void venderArtigo(Artigo artigo) {
