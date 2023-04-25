@@ -1,18 +1,16 @@
 package vintage.ui.info;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
-import com.googlecode.lanterna.gui2.menu.Menu;
-import com.googlecode.lanterna.gui2.menu.MenuItem;
 import com.googlecode.lanterna.gui2.table.Table;
 
 import vintage.Vintage;
@@ -22,6 +20,8 @@ import vintage.transportadoras.Transportadora;
 import vintage.ui.UI;
 import vintage.utilizadores.Utilizador;
 import vintage.utils.ui.InfoUtils;
+
+import static vintage.utils.vintage.Utils.getArtigo;
 
 // TODO ao clicar artigo/utilizador/encomenda/transportadora, mostrar opções.
 public class Info {
@@ -77,28 +77,43 @@ public class Info {
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         window.setCloseWindowWithEscape(true);
-        
+
         Panel panel = new Panel();
 
-        Table<String> table = new Table<String>("Código", "Tipo", "Marca", "Descrição", "Preço", "Nº Donos", "Estado");
+        Table<String> table = new Table<String>("Código", "Tipo", "Marca", "Preço", "Nº Donos", "Estado");
         for (Artigo artigo : artigos) {
             String codigo = Integer.toString(artigo.getCodigo());
-            String tipo = Integer.toString(artigo.getTipo());
+            String tipo = InfoUtils.parseTipoArtigo(artigo.getTipo());
             String marca = artigo.getMarca();
-            String descricao = artigo.getDescricao();
             String preco = Float.toString(artigo.calcularPreco());
             String numDonos = Integer.toString(artigo.getNumDonos());
             String estadoDeUtilizacao = Float.toString(artigo.getEstadoUtilizacao());
-            table.getTableModel().addRow(codigo, tipo, marca, descricao, preco, numDonos, estadoDeUtilizacao);
+            table.getTableModel().addRow(codigo, tipo, marca, preco, numDonos, estadoDeUtilizacao);
         }
         table.setSelectAction(new Runnable() {
+            // Opções para cada item
             @Override
             public void run() {
                 BasicWindow actionWindow = new BasicWindow();
                 actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
                 actionWindow.setCloseWindowWithEscape(true);
-    
+
                 ActionListBox actionListBox = new ActionListBox();
+                // Mais informação sobre o artigo
+                actionListBox.addItem("Mais informação...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Panel actionPanel = new Panel();
+
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Artigo artigo = getArtigo(artigos, Integer.parseInt(codigo));
+
+                        new Label(artigo.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+
+                        actionWindow.setComponent(actionPanel);
+                    }
+                });
+                // Remover artigo
                 actionListBox.addItem("Remover...", new Runnable() {
                     @Override
                     public void run() {
