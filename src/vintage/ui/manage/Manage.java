@@ -20,50 +20,57 @@ import vintage.artigos.Artigo;
 import vintage.ui.UI;
 import vintage.utils.ui.ManageUtils;
 
+// TODO corrigir bugs
+// Se preencher com um campo vazio, o programa crasha
 public class Manage {
 
     public static void menuManutencao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
         Panel panel = new Panel();
 
-        Button artigosButton = new Button("Criar artigo", new Runnable() {
+        new Button("Criar artigo", new Runnable() {
             @Override
             public void run() {
                 criarArtigo(gui, loja);
             }
-        });
-        artigosButton.addTo(panel);
+        }).addTo(panel);
 
-        Button utilizadoresButton = new Button("Criar utilizadores", new Runnable() {
+        new Button("Criar utilizadores", new Runnable() {
             @Override
             public void run() {
                 criarUtilizador(gui, loja);
             }
-        });
-        utilizadoresButton.addTo(panel);
+        }).addTo(panel);
 
-        // TODO Criar encomenda
-
-        Button transportadorasButton = new Button("Criar transportadoras", new Runnable() {
+        new Button("Criar encomendas", new Runnable() {
             @Override
             public void run() {
-
+                criarEncomenda(gui, loja);
             }
-        });
-        transportadorasButton.addTo(panel);
+        }).addTo(panel);
 
-        Button goBackButton = new Button("Voltar", new Runnable() {
+        new Button("Criar transportadoras", new Runnable() {
+            @Override
+            public void run() {
+                criarTransportadora(gui, loja);
+            }
+        }).addTo(panel);
+
+        new Button("Voltar", new Runnable() {
             @Override
             public void run() {
                 UI.menu(gui, window, loja);
             }
-        });
-        goBackButton.addTo(panel);
+        }).addTo(panel);
 
         window.setComponent(panel);
         gui.addWindowAndWait(window);
     }
 
     public static void criarArtigo(MultiWindowTextGUI gui, Vintage loja) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
 
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
@@ -166,7 +173,6 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                // TODO criar os outros tipos
                 if (tipo.getSelectedItem().equals("Mala")) {
                     loja.criaArtigo(new String[] {
                             Integer.toString(Artigo.MALA),
@@ -183,7 +189,8 @@ public class Manage {
                             ManageUtils.parseMaterialMala(material.getText()),
                             anoColecao.getText()
                     });
-                } else if (tipo.getSelectedItem().equals("Sapatilhas")) {
+                }
+                if (tipo.getSelectedItem().equals("Sapatilhas")) {
                     loja.criaArtigo(new String[] {
                             Integer.toString(Artigo.SAPATILHAS),
                             codigoVendedor.getText(),
@@ -198,7 +205,8 @@ public class Manage {
                             cor.getText(),
                             anoColecao.getText()
                     });
-                } else if (tipo.getSelectedItem().equals("T-Shirt")) {
+                }
+                if (tipo.getSelectedItem().equals("T-Shirt")) {
                     loja.criaArtigo(new String[] {
                             Integer.toString(Artigo.TSHIRT),
                             codigoVendedor.getText(),
@@ -212,6 +220,7 @@ public class Manage {
                             Integer.toString(padrao.getSelectedIndex())
                     });
                 }
+                window.close();
             }
         });
         confirmButton.addTo(panel);
@@ -266,16 +275,16 @@ public class Manage {
             }
         });
 
-        BasicWindow window = new BasicWindow();
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
-        window.setCloseWindowWithEscape(true);
         window.setComponent(panel);
-
         gui.addWindowAndWait(window);
 
     }
 
     public static void criarUtilizador(MultiWindowTextGUI gui, Vintage loja) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
 
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
@@ -302,15 +311,80 @@ public class Manage {
                         morada.getText(),
                         nif.getText()
                 });
+                window.close();
             }
         });
         confirmButton.addTo(panel);
 
+        window.setComponent(panel);
+        gui.addWindowAndWait(window);
+    }
+
+    public static void criarEncomenda(MultiWindowTextGUI gui, Vintage loja) {
+
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         window.setCloseWindowWithEscape(true);
-        window.setComponent(panel);
 
+        Panel panel = new Panel();
+        panel.setLayoutManager(new GridLayout(2));
+
+        new Label("Tamanho").addTo(panel);
+        final ComboBox<String> material = new ComboBox<String>();
+        material.addItem("Grande");
+        material.addItem("Médio");
+        material.addItem("Pequeno");
+        material.addTo(panel);
+
+        Button confirmButton = new Button("Confirmar", new Runnable() {
+            @Override
+            public void run() {
+                loja.criaEncomenda(new String[] {
+                        ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
+                });
+                window.close();
+            }
+        });
+        confirmButton.addTo(panel);
+
+        window.setComponent(panel);
+        gui.addWindowAndWait(window);
+    }
+
+    public static void criarTransportadora(MultiWindowTextGUI gui, Vintage loja) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+
+        Panel panel = new Panel();
+        panel.setLayoutManager(new GridLayout(2));
+
+        new Label("Nome").addTo(panel);
+        final TextBox nome = new TextBox().setPreferredSize(new TerminalSize(35, 1)).addTo(panel);
+
+        new Label("Margem Lucro").addTo(panel);
+        final TextBox margemLucro = new TextBox().setPreferredSize(new TerminalSize(35, 1)).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                .addTo(panel);
+
+        new Label("Margem Extra").addTo(panel);
+        final TextBox margemExtra = new TextBox().setPreferredSize(new TerminalSize(35, 1)).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                .addTo(panel);
+
+        Button confirmButton = new Button("Confirmar", new Runnable() {
+            @Override
+            public void run() {
+                loja.criaTransportadora(new String[] {
+                        nome.getText(),
+                        margemLucro.getText(),
+                        margemExtra.getText()
+                });
+                window.close();
+            }
+        });
+        confirmButton.addTo(panel);
+
+        window.setComponent(panel);
         gui.addWindowAndWait(window);
     }
 

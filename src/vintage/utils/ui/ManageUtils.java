@@ -32,4 +32,17 @@ public class ManageUtils {
         }
     }
 
+    public static String parseTamanhoEncomenda(String tamanho) {
+        switch (tamanho) {
+            case "Grande":
+                return "0";
+            case "Medio":
+                return "1";
+            case "Pequeno":
+                return "2";
+            default:
+                return null;
+        }
+    }
+
 }

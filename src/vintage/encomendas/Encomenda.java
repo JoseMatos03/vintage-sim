@@ -1,6 +1,7 @@
 package vintage.encomendas;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import vintage.artigos.Artigo;
 
@@ -52,14 +53,13 @@ public class Encomenda {
         return precoEncomenda;
     }
 
-    // TODO Reembolso após funcionalidade de tempo implementada
     public void reembolsar() {
         return;
     }
 
     public Encomenda(int codigo, int dimensaoEncomenda) {
         this.codigo = codigo;
-        this.artigos = null;
+        this.artigos = new ArrayList<>();
         this.dimensaoEncomenda = dimensaoEncomenda;
         this.estadoEncomenda = PENDENTE;
         this.precoEncomenda = 0;
