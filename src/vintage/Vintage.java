@@ -167,7 +167,7 @@ public class Vintage {
         utilizador.setMorada(null);
         utilizador.setNumeroFiscal(0);
         for (int codigoArtigo : utilizador.getListados())
-            this.removeArtigo(Integer.toString(codigoArtigo));
+            this.artigos.remove(getArtigo(artigos, codigoArtigo));
         utilizador.setListados(null);
         utilizador.setAtividade(Utilizador.INATIVA);
     }

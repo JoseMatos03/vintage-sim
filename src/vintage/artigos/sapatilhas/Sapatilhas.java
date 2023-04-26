@@ -3,6 +3,7 @@ package vintage.artigos.sapatilhas;
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.artigos.Utils;
+import vintage.utils.ui.InfoUtils;
 
 public class Sapatilhas extends Artigo {
 
@@ -78,4 +79,26 @@ public class Sapatilhas extends Artigo {
     public void setAnoColecao(int anoColecao) {
         this.anoColecao = anoColecao;
     }
+
+    @Override
+    public String toString() {
+        String tipo = InfoUtils.parseTipoArtigo(this.getTipo());
+        String estado = InfoUtils.parseEstadoUtilizacao(this.getEstadoUtilizacao());
+
+        return "Código: " + this.getCodigo() + "\n" +
+                "Código Vendedor: " + this.getCodigoVendedor() + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Marca: " + this.getMarca() + "\n" +
+                "Descrição: " + this.getDescricao() + "\n" +
+                "Ano coleção: " + this.getAnoColecao() + "\n" +
+                "Nº Donos: " + this.getNumDonos() + "\n" +
+                "Estado: " + estado + "\n" +
+                "Preço Base: " + this.getPrecoBase() + "\n" +
+                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Tamanho: " + this.getTamanho() + "\n" +
+                "Tipo Atacadores: " + InfoUtils.parseTipoAtacadores(this.getAtacadores()) + "\n" +
+                "Cor: " + this.getCor() + "\n" +
+                "Transportadora: " + this.getTransportadora().getNome();
+    }
+
 }

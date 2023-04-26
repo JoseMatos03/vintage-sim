@@ -1,6 +1,7 @@
 package vintage.utilizadores;
 
 import vintage.artigos.Artigo;
+import vintage.utils.ui.InfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Utilizador {
         if (!this.listados.contains(codigo))
             return;
 
-        this.listados.remove(codigo);
+        this.listados.remove(Integer.valueOf(codigo));
     }
 
     public void venderArtigo(Artigo artigo) {
@@ -161,6 +162,27 @@ public class Utilizador {
 
     public void setAtividade(int atividade) {
         this.atividade = atividade;
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "Utilizador [codigo=" + codigo + ", email=" + email + ", nome=" + nome + ", morada=" + morada
+    //             + ", numeroFiscal=" + numeroFiscal + ", atividade=" + atividade + ", listados=" + listados
+    //             + ", vendidos=" + vendidos + ", comprados=" + comprados + ", valorEmVendas=" + valorEmVendas + "]";
+    // }
+
+    @Override
+    public String toString() {
+        return "Código: " + codigo + "\n" +
+                "Nome: " + nome + "\n" +
+                "Email: " + email + "\n" +
+                "Morada: " + morada + "\n" +
+                "NIF: " + numeroFiscal + "\n" +
+                "Estado Atividade: " + InfoUtils.parseEstadoAtividade(atividade) + "\n" +
+                "Artigos Listados: " + listados.toString() + "\n" +
+                // TODO comprados
+                // TODO vendidos
+                "Valor Vendas: " + valorEmVendas;
     }
 
 }
