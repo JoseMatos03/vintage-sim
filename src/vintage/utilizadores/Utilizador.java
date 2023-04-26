@@ -25,6 +25,8 @@ public class Utilizador {
     private float valorEmVendas;
 
     public void criarListagem(Artigo artigo) {
+        if(this.atividade == INATIVA)
+            return;
         int codigo = artigo.getCodigo();
         if (this.listados.contains(codigo))
             return;
@@ -33,6 +35,8 @@ public class Utilizador {
     }
 
     public void removerListagem(Artigo artigo){
+        if(this.atividade == INATIVA)
+            return;
         int codigo = artigo.getCodigo();
         if (!this.listados.contains(codigo)) {
             return;
@@ -42,6 +46,8 @@ public class Utilizador {
     }
 
     public void venderArtigo(Artigo artigo) {
+        if(this.atividade == INATIVA)
+            return;
         int codigo = artigo.getCodigo();
         if (!this.listados.contains(codigo))
             return;
@@ -52,6 +58,8 @@ public class Utilizador {
     }
 
     public void comprarArtigo(Artigo artigo, Utilizador utilizador) {
+        if(this.atividade == INATIVA)
+            return;
         int codigo = artigo.getCodigo();
         if (!utilizador.getListados().contains(codigo))
             return;
