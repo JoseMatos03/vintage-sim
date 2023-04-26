@@ -1,5 +1,6 @@
 package vintage.utils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,7 +14,7 @@ import vintage.Vintage;
 
 public class SaveLoad {
 
-    public static final String FILEPATH = "out/save.json";
+    public static final String FILEPATH = System.getProperty("user.dir") + File.separator + "out" + File.separator + "save.json";
 
     public static void save(Gson gson, Vintage loja) {
         try {
