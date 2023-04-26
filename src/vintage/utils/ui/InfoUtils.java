@@ -15,6 +15,30 @@ public class InfoUtils {
         }
     }
 
+    public static String parseTipoAtacadores(int tipoAtacadores) {
+        switch (tipoAtacadores) {
+            case 0:
+                return "Atacadores";
+            case 1:
+                return "Atilhos";
+            default:
+                return null;
+        }
+    }
+
+    public static String parsePadrao(int padrao) {
+        switch (padrao) {
+            case 0:
+                return "Liso";
+            case 1:
+                return "Riscos";
+            case 2:
+                return "Palmeiras";
+            default:
+                return null;
+        }
+    }
+
     public static String parseEstadoUtilizacao(float estadoUtilizacao) {
         if (estadoUtilizacao == 1.00f)
             return "Sem uso";
@@ -35,6 +59,17 @@ public class InfoUtils {
                 return "Medio";
             case 2:
                 return "Pequeno";
+            default:
+                return null;
+        }
+    }
+
+    public static String parseEstadoAtividade(int estadoAtividade) {
+        switch (estadoAtividade) {
+            case 0:
+                return "Ativa";
+            case 1:
+                return "Inativa";
             default:
                 return null;
         }

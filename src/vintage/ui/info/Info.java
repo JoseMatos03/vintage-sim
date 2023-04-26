@@ -22,6 +22,7 @@ import vintage.utilizadores.Utilizador;
 import vintage.utils.ui.InfoUtils;
 
 import static vintage.utils.vintage.Utils.getArtigo;
+import static vintage.utils.vintage.Utils.getUtilizador;;
 
 // TODO ao clicar artigo/utilizador/encomenda/transportadora, mostrar opções.
 public class Info {
@@ -167,6 +168,20 @@ public class Info {
                 actionWindow.setCloseWindowWithEscape(true);
 
                 ActionListBox actionListBox = new ActionListBox();
+                // Mais informação
+                actionListBox.addItem("Mais informação...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Panel actionPanel = new Panel();
+
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Utilizador utilizador = getUtilizador(utilizadores, Integer.parseInt(codigo));
+
+                        new Label(utilizador.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+
+                        actionWindow.setComponent(actionPanel);
+                    }
+                });
                 // Apagar utilizador
                 actionListBox.addItem("Apagar...", new Runnable() {
                     @Override

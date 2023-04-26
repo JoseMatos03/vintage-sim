@@ -2,6 +2,7 @@ package vintage.artigos.tshirt;
 
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
+import vintage.utils.ui.InfoUtils;
 
 public class TShirt extends Artigo {
 
@@ -40,7 +41,8 @@ public class TShirt extends Artigo {
         return correcao;
     }
 
-    public TShirt(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
+    public TShirt(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
+            float precoBase,
             String tamanho, int padrao, int codigoVendedor, Transportadora transportadora) {
         super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora);
 
@@ -63,4 +65,24 @@ public class TShirt extends Artigo {
     public void setPadrao(int padrao) {
         this.padrao = padrao;
     }
+
+    @Override
+    public String toString() {
+        String tipo = InfoUtils.parseTipoArtigo(this.getTipo());
+        String estado = InfoUtils.parseEstadoUtilizacao(this.getEstadoUtilizacao());
+
+        return "Código: " + this.getCodigo() + "\n" +
+                "Código Vendedor: " + this.getCodigoVendedor() + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Marca: " + this.getMarca() + "\n" +
+                "Descrição: " + this.getDescricao() + "\n" +
+                "Nº Donos: " + this.getNumDonos() + "\n" +
+                "Estado: " + estado + "\n" +
+                "Preço Base: " + this.getPrecoBase() + "\n" +
+                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Tamanho: " + this.getTamanho() + "\n" +
+                "Padrão: " + InfoUtils.parsePadrao(this.getPadrao()) + "\n" +
+                "Transportadora: " + this.getTransportadora().getNome();
+    }
+
 }
