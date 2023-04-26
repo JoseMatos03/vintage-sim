@@ -7,6 +7,7 @@ import com.googlecode.lanterna.gui2.Panel;
 import vintage.Vintage;
 import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
+import vintage.ui.stats.Stats;
 
 public class UI {
 
@@ -32,7 +33,7 @@ public class UI {
         Button statsButton = new Button("Estatísticas", new Runnable() {
             @Override
             public void run() {
-                // TODO Go to Estatísticas
+                Stats.menuStats(gui, window, loja);
             }
         });
         statsButton.addTo(panel);
