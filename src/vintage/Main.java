@@ -57,15 +57,6 @@ public class Main {
 
         Vintage loja = load(gson);
 
-        // String[] utilizadorNovo = scanner.nextLine().split(",");
-        // loja.criaUtilizador(utilizadorNovo);
-
-        // String[] transporatodaNova = scanner.nextLine().split(",");
-        // loja.criaTransportadora(transporatodaNova);
-
-        // String[] artigoNovo = scanner.nextLine().split(",");
-        // loja.criaArtigo(artigoNovo);
-
         // UI
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
         Screen screen = new TerminalScreen(terminal);

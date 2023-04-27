@@ -1,0 +1,311 @@
+{
+  "artigos": [
+    {
+      "CONSTANTECORRECAO": 32500.0,
+      "dimensao": [
+        10.0,
+        10.0,
+        7.5
+      ],
+      "material": 3,
+      "anoColecao": 2023,
+      "tipo": 0,
+      "estadoUtilizacao": 1.0,
+      "numDonos": 0,
+      "descricao": "Feita em couro liso, esta bolsa tiracolo da Gucci ostenta o icônico efeito matelassê GG da marca. Enquanto uma pequena placa de logotipo reforça o estilo da marca, uma alça de ombro ajustável oferece conforto para um visual atraente.",
+      "marca": "Gucci",
+      "codigo": 0,
+      "precoBase": 1300.0,
+      "codigoVendedor": 0,
+      "transportadora": {
+        "nome": "DHL",
+        "margemLucro": 1.25,
+        "margemExtra": 0.9,
+        "valorExpedicao": 3.09375
+      }
+    },
+    {
+      "CONSTANTECORRECAO": 1750.0,
+      "dimensao": [
+        12.0,
+        8.0,
+        7.5
+      ],
+      "material": 1,
+      "anoColecao": 2020,
+      "tipo": 0,
+      "estadoUtilizacao": 0.5,
+      "numDonos": 3,
+      "descricao": "Handmade. Leather",
+      "marca": "Shein",
+      "codigo": 1,
+      "precoBase": 5.0,
+      "codigoVendedor": 2,
+      "transportadora": {
+        "nome": "Transnós",
+        "margemLucro": 1.25,
+        "margemExtra": 0.9,
+        "valorExpedicao": 3.09375
+      }
+    },
+    {
+      "CONSTANTECORRECAO": 1250.0,
+      "dimensao": [
+        12.0,
+        6.0,
+        8.0
+      ],
+      "material": 1,
+      "anoColecao": 2022,
+      "tipo": 0,
+      "estadoUtilizacao": 0.75,
+      "numDonos": 1,
+      "descricao": "Mala de mão em pele cinza e preto, longchamp. Está ótima, usada meia duzia de vezes.",
+      "marca": "Longchamp",
+      "codigo": 2,
+      "precoBase": 25.0,
+      "codigoVendedor": 1,
+      "transportadora": {
+        "nome": "Transauto",
+        "margemLucro": 1.05,
+        "margemExtra": 0.98,
+        "valorExpedicao": 2.82975
+      }
+    },
+    {
+      "tamanho": 42,
+      "atacadores": 0,
+      "cor": "Cinzento",
+      "anoColecao": 2021,
+      "tipo": 1,
+      "estadoUtilizacao": 1.0,
+      "numDonos": 1,
+      "descricao": "Sapatilhas tamanho 42 mas este modelo calça pouco, pelo que serve a quem costuma usar 41 de sapatilhas e 40 em calçado de dia a dia.",
+      "marca": "Adidas",
+      "codigo": 3,
+      "precoBase": 35.0,
+      "codigoVendedor": 3,
+      "transportadora": {
+        "nome": "Fedex",
+        "margemLucro": 1.24,
+        "margemExtra": 1.01,
+        "valorExpedicao": 3.4441001
+      }
+    },
+    {
+      "tamanho": "L",
+      "padrao": 0,
+      "tipo": 2,
+      "estadoUtilizacao": 0.5,
+      "numDonos": 3,
+      "descricao": "63 cm de axila a axila. T4",
+      "marca": "Calvin Klein",
+      "codigo": 4,
+      "precoBase": 26.0,
+      "codigoVendedor": 4,
+      "transportadora": {
+        "nome": "DHL",
+        "margemLucro": 1.55,
+        "margemExtra": 0.9,
+        "valorExpedicao": 3.83625
+      }
+    },
+    {
+      "tamanho": "M",
+      "padrao": 2,
+      "tipo": 2,
+      "estadoUtilizacao": 0.75,
+      "numDonos": 2,
+      "descricao": "Camisa manga curta, tamanho M, com pouco uso.",
+      "marca": "Pull \u0026 Bear",
+      "codigo": 5,
+      "precoBase": 4.0,
+      "codigoVendedor": 5,
+      "transportadora": {
+        "nome": "UPS",
+        "margemLucro": 1.4,
+        "margemExtra": 1.0,
+        "valorExpedicao": 3.8500001
+      }
+    },
+    {
+      "tamanho": 47,
+      "atacadores": 0,
+      "cor": "Castanho",
+      "anoColecao": 2020,
+      "tipo": 1,
+      "estadoUtilizacao": 0.25,
+      "numDonos": 4,
+      "descricao": "Adidas Ultra Boost ST",
+      "marca": "Adidas",
+      "codigo": 6,
+      "precoBase": 21.0,
+      "codigoVendedor": 6,
+      "transportadora": {
+        "nome": "Fedex",
+        "margemLucro": 1.24,
+        "margemExtra": 1.01,
+        "valorExpedicao": 3.4441001
+      }
+    }
+  ],
+  "encomendas": [
+    {
+      "codigo": 0,
+      "artigos": [],
+      "dimensaoEncomenda": 0,
+      "estadoEncomenda": 0,
+      "precoEncomenda": 0.0,
+      "dataCriacao": "27-04-2023 12:40:49"
+    },
+    {
+      "codigo": 1,
+      "artigos": [],
+      "dimensaoEncomenda": 1,
+      "estadoEncomenda": 0,
+      "precoEncomenda": 0.0,
+      "dataCriacao": "27-04-2023 12:42:30"
+    },
+    {
+      "codigo": 2,
+      "artigos": [],
+      "dimensaoEncomenda": 2,
+      "estadoEncomenda": 0,
+      "precoEncomenda": 0.0,
+      "dataCriacao": "27-04-2023 12:42:32"
+    }
+  ],
+  "utilizadores": [
+    {
+      "codigo": 0,
+      "email": "jose.matos@gmail.com",
+      "nome": "José Matos",
+      "morada": "Rua Monte de Aldão, Guimarães",
+      "numeroFiscal": 255372442,
+      "atividade": 0,
+      "listados": [
+        0
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    },
+    {
+      "codigo": 1,
+      "email": "pedro.silva@email.com",
+      "nome": "Pedro Silva",
+      "morada": "Rua da Coutada, Braga",
+      "numeroFiscal": 255392232,
+      "atividade": 0,
+      "listados": [
+        2
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    },
+    {
+      "codigo": 2,
+      "email": "antonio.silva@email.com",
+      "nome": "António Silva",
+      "morada": "Rua de São Brás, Braga",
+      "numeroFiscal": 255212295,
+      "atividade": 0,
+      "listados": [
+        1
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    },
+    {
+      "codigo": 3,
+      "email": "albano.matos@email.com",
+      "nome": "Albano Matos",
+      "morada": "Rua Monte de Aldão, Guimarães",
+      "numeroFiscal": 232756986,
+      "atividade": 0,
+      "listados": [
+        3
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    },
+    {
+      "codigo": 4,
+      "email": "alberta.ferreira@email.com",
+      "nome": "Alberta Ferreira",
+      "morada": "Rua Monte de Aldão, Guimarães",
+      "numeroFiscal": 241482102,
+      "atividade": 0,
+      "listados": [
+        4
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    },
+    {
+      "codigo": 5,
+      "email": "sofia.matos@email.com",
+      "nome": "Sofia Matos",
+      "morada": "Rua da Preguiça, Guimarães",
+      "numeroFiscal": 240291382,
+      "atividade": 0,
+      "listados": [
+        5
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    },
+    {
+      "codigo": 6,
+      "email": "miguel.matos@email.com",
+      "nome": "Miguel Matos",
+      "morada": "Rua da Preguiça, Guimarães",
+      "numeroFiscal": 248201293,
+      "atividade": 0,
+      "listados": [
+        6
+      ],
+      "vendidos": [],
+      "comprados": [],
+      "valorEmVendas": 0.0
+    }
+  ],
+  "transportadoras": [
+    {
+      "nome": "Transnós",
+      "margemLucro": 1.25,
+      "margemExtra": 0.9,
+      "valorExpedicao": 3.09375
+    },
+    {
+      "nome": "Transauto",
+      "margemLucro": 1.05,
+      "margemExtra": 0.98,
+      "valorExpedicao": 2.82975
+    },
+    {
+      "nome": "DHL",
+      "margemLucro": 1.55,
+      "margemExtra": 0.9,
+      "valorExpedicao": 3.83625
+    },
+    {
+      "nome": "Fedex",
+      "margemLucro": 1.24,
+      "margemExtra": 1.01,
+      "valorExpedicao": 3.4441001
+    },
+    {
+      "nome": "UPS",
+      "margemLucro": 1.4,
+      "margemExtra": 1.0,
+      "valorExpedicao": 3.8500001
+    }
+  ],
+  "codigoProximoArtigo": 7
+}
