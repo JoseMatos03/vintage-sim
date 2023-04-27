@@ -15,6 +15,7 @@ import vintage.artigos.tshirt.TShirt;
 import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
+import vintage.utils.ui.StatsUtils;
 
 public class Vintage {
     private List<Artigo> artigos;
@@ -22,6 +23,8 @@ public class Vintage {
     private List<Utilizador> utilizadores;
     private List<Transportadora> transportadoras;
     private int codigoProximoArtigo;
+    private int numVendas;
+    private float totalFaturado;
 
     public void criaArtigo(String[] info) {
         int tipo = Integer.parseInt(info[0]);
@@ -117,6 +120,7 @@ public class Vintage {
         Utilizador vendedor = getUtilizador(utilizadores, artigo.getCodigoVendedor());
 
         comprador.comprarArtigo(artigo, vendedor);
+        this.totalFaturado += artigo.calcularPreco();
         this.artigos.remove(artigo);
     }
 
@@ -197,6 +201,8 @@ public class Vintage {
         this.utilizadores = new ArrayList<>();
         this.transportadoras = new ArrayList<>();
         this.codigoProximoArtigo = 0;
+        this.numVendas = 0;
+        this.totalFaturado = 0;
     }
 
     public Vintage(Vintage loja) {
@@ -205,6 +211,8 @@ public class Vintage {
         this.utilizadores = loja.getUtilizadores();
         this.transportadoras = loja.getTransportadoras();
         this.codigoProximoArtigo = loja.getCodigoProximoArtigo();
+        this.numVendas = loja.getNumVendas();
+        this.totalFaturado = loja.getTotalFaturado();
     }
 
     public List<Artigo> getArtigos() {
@@ -245,6 +253,47 @@ public class Vintage {
 
     public void setCodigoProximoArtigo(int codigoProximoArtigo) {
         this.codigoProximoArtigo = codigoProximoArtigo;
+    }
+
+    public float getTotalFaturado() {
+        return totalFaturado;
+    }
+
+    public void setTotalFaturado(float totalFaturado) {
+        this.totalFaturado = totalFaturado;
+    }
+
+    public int getNumVendas() {
+        return numVendas;
+    }
+
+    public void setNumVendas(int numVendas) {
+        this.numVendas = numVendas;
+    }
+
+    // TODO
+    // Transportadora maior valor expediçao
+    @Override
+    public String toString() {
+
+        return "--- GERAIS ---" + "\n" +
+                "Nº Total Artigos: " + (artigos.size() + numVendas) + "\n" +
+                "Nº Total Utilizadores: " + utilizadores.size() + "\n" +
+                "Nº Total Encomendas: " + encomendas.size() + "\n" +
+                "Nº Total Transportadoras: " + transportadoras.size() + "\n" +
+                "Total Faturado: " + totalFaturado + "\n" +
+                "--- ARTIGOS ---" + "\n" +
+                "Nº Listagens: " + artigos.size() + "\n" +
+                "Nº Vendas: " + numVendas + "\n" +
+                "--- UTILIZADORES ---" + "\n" +
+                "Nº Ativos: " + StatsUtils.numUtilizadoresAtivos(utilizadores) + "\n" +
+                "Nº Inativos: " + StatsUtils.numUtilizadoresInativos(utilizadores) + "\n" +
+                "Código Maior Faturação: " + StatsUtils.utilizadorComMaiorFaturacao(utilizadores) + "\n" +
+                "--- ENCOMENDAS ---" + "\n" +
+                "Nº Pendentes: " + StatsUtils.numEncomendasPendentes(encomendas) + "\n" +
+                "Nº Expedidas: " + StatsUtils.numEncomendasExpedidas(encomendas) + "\n" +
+                "Nº Finalizadas: " + StatsUtils.numEncomendasFinalizadas(encomendas) + "\n" +
+                "--- TRANSPORTADORAS ---" + "\n";
     }
 
 }

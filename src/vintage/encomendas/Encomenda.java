@@ -1,9 +1,11 @@
 package vintage.encomendas;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import vintage.artigos.Artigo;
+import vintage.utils.ui.InfoUtils;
 
 public class Encomenda {
 
@@ -121,6 +123,16 @@ public class Encomenda {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "Código: " + codigo + "\n" +
+        // artigos
+                "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
+                "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
+                "Preço: " + precoEncomenda + "\n" +
+                "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
 }

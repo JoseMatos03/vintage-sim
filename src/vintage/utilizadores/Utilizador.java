@@ -164,13 +164,6 @@ public class Utilizador {
         this.atividade = atividade;
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Utilizador [codigo=" + codigo + ", email=" + email + ", nome=" + nome + ", morada=" + morada
-    //             + ", numeroFiscal=" + numeroFiscal + ", atividade=" + atividade + ", listados=" + listados
-    //             + ", vendidos=" + vendidos + ", comprados=" + comprados + ", valorEmVendas=" + valorEmVendas + "]";
-    // }
-
     @Override
     public String toString() {
         return "Código: " + codigo + "\n" +
