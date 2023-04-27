@@ -31,6 +31,19 @@ public class Stats {
         });
         vendedorButton.addTo(panel);
 
+        Button transportadoraMaisGanhos = new Button("Transportadora com maior volume", new Runnable() {
+            @Override
+            public void run() {
+                Transportadora transportadora = transportadoraMaiorFaturacao(loja);
+                displayTransportadora(gui, transportadora);
+            }
+        });
+        transportadoraMaisGanhos.addTo(panel);
+
+        // TODO Botão para o ponto 3 das estatísticas do enunciado
+
+        // TODO Botão para o ponto 4 das estatísticas do enunciado
+
         Button ganhosLoja = new Button("Ganhos Totais", new Runnable() {
             @Override
             public void run() {
@@ -89,24 +102,45 @@ public class Stats {
         gui.addWindowAndWait(window);
     }
     
-    public static String transportadoraMaiorFaturacao(Vintage vintage)
+    public static Transportadora transportadoraMaiorFaturacao(Vintage vintage)
     {
-        String transportadoraMaior = "";
         float maiorFaturacao = 0;
         List<Transportadora> transportadoras = vintage.getTransportadoras();
+        Transportadora transportadoraMaior = transportadoras.get(0);
         for(Transportadora transportadora : transportadoras)
         {
             float valorExpedicao = transportadora.getValorExpedicao();
             if (valorExpedicao > maiorFaturacao) {
                 maiorFaturacao = valorExpedicao;
-                transportadoraMaior = transportadora.getNome();
+                transportadoraMaior = transportadora;
             }
         }
         return transportadoraMaior;
     }
 
+    public static void displayTransportadora(MultiWindowTextGUI gui, Transportadora transportadora)
+    {
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
 
-    // TODO Listar encomendas emitidas por um vendedor
+        Panel panel = new Panel();
+
+        Table<String> table = new Table<String>("Nome da Transportadora", "Valor");
+        String nome = transportadora.getNome();
+        String valor = Float.toString(transportadora.getValorExpedicao());
+
+        table.getTableModel().addRow(nome, valor);
+
+        table.addTo(panel);
+
+        window.setComponent(panel);
+        gui.addWindowAndWait(window);
+    }
+
+    // TODO Ponto 3 das estatísticas do enunciado
+
+    // TODO Ponto 4 das estatísticas do enunciado
 
 
     public static float totalGanho(Vintage vintage)
