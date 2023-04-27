@@ -359,6 +359,10 @@ public class Manage {
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
+        new Label("Código Comprador").addTo(panel);
+        final TextBox codigoVendedor = new TextBox(new TerminalSize(20, 1))
+                .setValidationPattern(Pattern.compile("[0-9]*")).addTo(panel);
+
         new Label("Tamanho").addTo(panel);
         final ComboBox<String> material = new ComboBox<String>();
         material.addItem("Grande");
@@ -370,6 +374,7 @@ public class Manage {
             @Override
             public void run() {
                 loja.criaEncomenda(new String[] {
+                        codigoVendedor.getText(),
                         ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
                 });
                 window.close();

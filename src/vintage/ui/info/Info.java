@@ -265,11 +265,23 @@ public class Info {
                         new Button("Confirmar", new Runnable() {
                             @Override
                             public void run() {
-                                Artigo artigo = getArtigo(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
-                                encomenda.adicionarArtigos(artigo);
+                                encomenda.adicionarArtigos(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
                                 actionWindow.close();
                             }
                         }).addTo(actionPanel);
+
+                        actionWindow.setComponent(actionPanel);
+                    }
+                });
+                // TODO Expedir encomenda
+                actionListBox.addItem("Expedir...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Panel actionPanel = new Panel(new GridLayout(2));
+
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
+
 
                         actionWindow.setComponent(actionPanel);
                     }
@@ -295,7 +307,8 @@ public class Info {
         gui.addWindowAndWait(window);
     }
 
-    public static void listaTransportadoras(MultiWindowTextGUI gui, Vintage loja, List<Transportadora> transportadoras) {
+    public static void listaTransportadoras(MultiWindowTextGUI gui, Vintage loja,
+            List<Transportadora> transportadoras) {
 
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
@@ -329,7 +342,8 @@ public class Info {
                         String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Transportadora transportadora = getTransportadora(transportadoras, nome);
 
-                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 7)).addTo(actionPanel);
+                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 7))
+                                .addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }

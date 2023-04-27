@@ -112,18 +112,6 @@ public class Vintage {
         }
     }
 
-    public void compraArtigo(String[] info) {
-        int codigoArtigo = Integer.parseInt(info[0]);
-        int codigoComprador = Integer.parseInt(info[1]);
-        Artigo artigo = getArtigo(artigos, codigoArtigo);
-        Utilizador comprador = getUtilizador(utilizadores, codigoComprador);
-        Utilizador vendedor = getUtilizador(utilizadores, artigo.getCodigoVendedor());
-
-        comprador.comprarArtigo(artigo, vendedor);
-        this.totalFaturado += artigo.calcularPreco();
-        this.artigos.remove(artigo);
-    }
-
     public void removeArtigo(String info) {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
@@ -134,10 +122,23 @@ public class Vintage {
 
     public void criaEncomenda(String[] info) {
         int codigo = encomendas.size();
-        int dimensaoEncomenda = Integer.parseInt(info[0]);
+        int codigoComprador = Integer.parseInt(info[0]);
+        int dimensaoEncomenda = Integer.parseInt(info[1]);
 
-        Encomenda encomenda = new Encomenda(codigo, dimensaoEncomenda);
+        Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda);
         this.encomendas.add(encomenda);
+    }
+
+    public void entregarEncomenda(String[] info) {
+        int codigoEncomenda = Integer.parseInt(info[0]);
+        int codigoComprador = Integer.parseInt(info[1]);
+
+        Utilizador comprador = getUtilizador(utilizadores, codigoComprador);
+        Encomenda encomenda = getEncomenda(encomendas, codigoEncomenda);
+
+        for (Integer codigoArtigo : encomenda.getArtigos()) {
+            comprador.comprarArtigo(utilizadores, getArtigo(artigos, codigoArtigo));
+        }
     }
 
     // TODO checkar se esta dentro do tempo de cancelamento
