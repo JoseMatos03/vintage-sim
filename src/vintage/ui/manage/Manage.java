@@ -20,44 +20,47 @@ import vintage.artigos.Artigo;
 import vintage.ui.UI;
 import vintage.utils.ui.ManageUtils;
 
+// TODO corrigir bugs
+// Se preencher com um campo vazio, o programa crasha
 public class Manage {
 
     public static void menuManutencao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
         Panel panel = new Panel();
 
-        Button artigosButton = new Button("Criar artigo", new Runnable() {
+        new Button("Criar artigo", new Runnable() {
             @Override
             public void run() {
                 criarArtigo(gui, loja);
             }
-        });
-        artigosButton.addTo(panel);
+        }).addTo(panel);
 
-        Button utilizadoresButton = new Button("Criar utilizadores", new Runnable() {
+        new Button("Criar utilizadores", new Runnable() {
             @Override
             public void run() {
                 criarUtilizador(gui, loja);
             }
-        });
-        utilizadoresButton.addTo(panel);
+        }).addTo(panel);
 
-        // TODO Criar encomenda
-
-        Button transportadorasButton = new Button("Criar transportadoras", new Runnable() {
+        new Button("Criar encomendas", new Runnable() {
             @Override
             public void run() {
-
+                criarEncomenda(gui, loja);
             }
-        });
-        transportadorasButton.addTo(panel);
+        }).addTo(panel);
 
-        Button goBackButton = new Button("Voltar", new Runnable() {
+        new Button("Criar transportadoras", new Runnable() {
+            @Override
+            public void run() {
+                criarTransportadora(gui, loja);
+            }
+        }).addTo(panel);
+
+        new Button("Voltar", new Runnable() {
             @Override
             public void run() {
                 UI.menu(gui, window, loja);
             }
-        });
-        goBackButton.addTo(panel);
+        }).addTo(panel);
 
         window.setComponent(panel);
         gui.addWindowAndWait(window);
@@ -65,88 +68,90 @@ public class Manage {
 
     public static void criarArtigo(MultiWindowTextGUI gui, Vintage loja) {
 
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
+        final TerminalSize size = new TerminalSize(20, 1);
+
         // TIPO
-        final Label tipoLabel = new Label("Tipo").addTo(panel);
+        final Label tipoLabel = new Label("Tipo");
         final ComboBox<String> tipo = new ComboBox<String>();
         tipo.addItem("Mala");
         tipo.addItem("Sapatilhas");
         tipo.addItem("T-Shirt");
-        tipo.setPreferredSize(new TerminalSize(20, 1));
-        panel.addComponent(tipo);
+        tipo.setPreferredSize(size);
 
         // CÓDIGO VENDEDOR
-        final Label codigoVendedorLabel = new Label("Código Vendedor").addTo(panel);
-        final TextBox codigoVendedor = new TextBox(new TerminalSize(20, 1))
-                .setValidationPattern(Pattern.compile("[0-9]*")).addTo(panel);
+        final Label codigoVendedorLabel = new Label("Código Vendedor");
+        final TextBox codigoVendedor = new TextBox(size).setValidationPattern(Pattern.compile("[0-9]*"));
 
         // ESTADO
-        final Label estadoUtilizacaoLabel = new Label("Estado").addTo(panel);
+        final Label estadoUtilizacaoLabel = new Label("Estado");
         final ComboBox<String> estadoUtilizacao = new ComboBox<String>();
         estadoUtilizacao.addItem("Sem uso");
         estadoUtilizacao.addItem("Pouco uso");
         estadoUtilizacao.addItem("Muito uso");
         estadoUtilizacao.addItem("Estragado");
-        panel.addComponent(estadoUtilizacao);
+        estadoUtilizacao.setPreferredSize(size);
 
         // Nº DONOS
-        final Label numDonosLabel = new Label("Nº Donos").addTo(panel);
-        final TextBox numDonos = new TextBox().setValidationPattern(Pattern.compile("[0-9]*")).addTo(panel);
+        final Label numDonosLabel = new Label("Nº Donos");
+        final TextBox numDonos = new TextBox(size).setValidationPattern(Pattern.compile("[0-9]*"));
 
         // DESCRIÇÃO
-        final Label descricaoLabel = new Label("Descrição").addTo(panel);
-        final TextBox descricao = new TextBox().addTo(panel);
+        final Label descricaoLabel = new Label("Descrição");
+        final TextBox descricao = new TextBox(size);
 
         // MARCA
-        final Label marcaLabel = new Label("Marca").addTo(panel);
-        final TextBox marca = new TextBox().addTo(panel);
+        final Label marcaLabel = new Label("Marca");
+        final TextBox marca = new TextBox(size);
 
         // PREÇO BASE
-        final Label precoBaseLabel = new Label("Preço Base").addTo(panel);
-        final TextBox precoBase = new TextBox().setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
-                .addTo(panel);
+        final Label precoBaseLabel = new Label("Preço Base");
+        final TextBox precoBase = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
 
         // TRANSPORTADORA
-        final Label transportadoraLabel = new Label("Transportadora").addTo(panel);
-        final TextBox transportadora = new TextBox().addTo(panel);
+        final Label transportadoraLabel = new Label("Transportadora");
+        final TextBox transportadora = new TextBox(size);
 
         // --- MALA ---
         // DIMENSÕES
-        final Label comprimentoLabel = new Label("Comprimento").addTo(panel);
-        final TextBox comprimento = new TextBox().setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
-                .addTo(panel);
-        final Label larguraLabel = new Label("Largura").addTo(panel);
-        final TextBox largura = new TextBox().setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
-                .addTo(panel);
-        final Label alturaLabel = new Label("Altura").addTo(panel);
-        final TextBox altura = new TextBox().setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
-                .addTo(panel);
+        final Label comprimentoLabel = new Label("Comprimento");
+        final TextBox comprimento = new TextBox(size)
+                .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
+        final Label larguraLabel = new Label("Largura");
+        final TextBox largura = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
+        final Label alturaLabel = new Label("Altura");
+        final TextBox altura = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
         // MATERIAL
-        final Label materialLabel = new Label("Material").addTo(panel);
+        final Label materialLabel = new Label("Material");
         final ComboBox<String> material = new ComboBox<String>();
         material.addItem("Tecido");
         material.addItem("Pele");
         material.addItem("Lona");
         material.addItem("Veludo");
-        material.addTo(panel);
+        material.setPreferredSize(size);
         // ANO COLEÇÃO
-        final Label anoColecaoLabel = new Label("Ano Coleção").addTo(panel);
-        final TextBox anoColecao = new TextBox().setValidationPattern(Pattern.compile("^[0-9]{0,4}?$")).addTo(panel);
+        final Label anoColecaoLabel = new Label("Ano Coleção");
+        final TextBox anoColecao = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]{0,4}?$"));
 
         // --- SAPATILHAS ---
         // TAMANHO
         final Label tamanhoLabel = new Label("Tamanho");
-        final TextBox tamanho = new TextBox().setValidationPattern(Pattern.compile("^[0-9]{0,2}?$"));
+        final TextBox tamanho = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]{0,2}?$"));
         // ATACADORES
         final Label atacadoresLabel = new Label("Material");
         final ComboBox<String> atacadores = new ComboBox<String>();
         atacadores.addItem("Atacadores");
         atacadores.addItem("Atilhos");
+        atacadores.setPreferredSize(size);
         // COR
         final Label corLabel = new Label("Cor");
-        final TextBox cor = new TextBox();
+        final TextBox cor = new TextBox(size);
 
         // --- TSHIRT ---
         // TAMANHO
@@ -156,17 +161,18 @@ public class Manage {
         tamanhoTShirt.addItem("M");
         tamanhoTShirt.addItem("L");
         tamanhoTShirt.addItem("XL");
+        tamanhoTShirt.setPreferredSize(size);
         // PADRÃO
         final Label padraoLabel = new Label("Padrão");
         final ComboBox<String> padrao = new ComboBox<String>();
         padrao.addItem("Liso");
         padrao.addItem("Riscos");
         padrao.addItem("Palmeira");
+        padrao.setPreferredSize(size);
 
-        Button confirmButton = new Button("Confirmar", new Runnable() {
+        final Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                // TODO criar os outros tipos
                 if (tipo.getSelectedItem().equals("Mala")) {
                     loja.criaArtigo(new String[] {
                             Integer.toString(Artigo.MALA),
@@ -183,7 +189,8 @@ public class Manage {
                             ManageUtils.parseMaterialMala(material.getText()),
                             anoColecao.getText()
                     });
-                } else if (tipo.getSelectedItem().equals("Sapatilhas")) {
+                }
+                if (tipo.getSelectedItem().equals("Sapatilhas")) {
                     loja.criaArtigo(new String[] {
                             Integer.toString(Artigo.SAPATILHAS),
                             codigoVendedor.getText(),
@@ -198,7 +205,8 @@ public class Manage {
                             cor.getText(),
                             anoColecao.getText()
                     });
-                } else if (tipo.getSelectedItem().equals("T-Shirt")) {
+                }
+                if (tipo.getSelectedItem().equals("T-Shirt")) {
                     loja.criaArtigo(new String[] {
                             Integer.toString(Artigo.TSHIRT),
                             codigoVendedor.getText(),
@@ -212,9 +220,9 @@ public class Manage {
                             Integer.toString(padrao.getSelectedIndex())
                     });
                 }
+                window.close();
             }
         });
-        confirmButton.addTo(panel);
 
         tipo.addListener(new Listener() {
             @Override
@@ -222,20 +230,16 @@ public class Manage {
                 panel.removeAllComponents();
                 panel.addComponent(tipoLabel);
                 panel.addComponent(tipo);
-                panel.addComponent(codigoVendedorLabel);
-                panel.addComponent(codigoVendedor);
-                panel.addComponent(estadoUtilizacaoLabel);
-                panel.addComponent(estadoUtilizacao);
-                panel.addComponent(numDonosLabel);
-                panel.addComponent(numDonos);
-                panel.addComponent(descricaoLabel);
-                panel.addComponent(descricao);
                 panel.addComponent(marcaLabel);
                 panel.addComponent(marca);
+                panel.addComponent(descricaoLabel);
+                panel.addComponent(descricao);
+                panel.addComponent(numDonosLabel);
+                panel.addComponent(numDonos);
+                panel.addComponent(estadoUtilizacaoLabel);
+                panel.addComponent(estadoUtilizacao);
                 panel.addComponent(precoBaseLabel);
                 panel.addComponent(precoBase);
-                panel.addComponent(transportadoraLabel);
-                panel.addComponent(transportadora);
                 if (selectedIndex == 0) {
                     comprimentoLabel.addTo(panel);
                     comprimento.addTo(panel);
@@ -247,7 +251,8 @@ public class Manage {
                     material.addTo(panel);
                     anoColecaoLabel.addTo(panel);
                     anoColecao.addTo(panel);
-                } else if (selectedIndex == 1) {
+                }
+                if (selectedIndex == 1) {
                     tamanhoLabel.addTo(panel);
                     tamanho.addTo(panel);
                     atacadoresLabel.addTo(panel);
@@ -256,26 +261,60 @@ public class Manage {
                     cor.addTo(panel);
                     anoColecaoLabel.addTo(panel);
                     anoColecao.addTo(panel);
-                } else if (selectedIndex == 2) {
+                }
+                if (selectedIndex == 2) {
                     tamanhoTShirtLabel.addTo(panel);
                     tamanhoTShirt.addTo(panel);
                     padraoLabel.addTo(panel);
                     padrao.addTo(panel);
                 }
+                panel.addComponent(codigoVendedorLabel);
+                panel.addComponent(codigoVendedor);
+                panel.addComponent(transportadoraLabel);
+                panel.addComponent(transportadora);
                 panel.addComponent(confirmButton);
             }
         });
 
-        BasicWindow window = new BasicWindow();
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
-        window.setCloseWindowWithEscape(true);
-        window.setComponent(panel);
+        // Mala
+        panel.addComponent(tipoLabel);
+        panel.addComponent(tipo);
+        panel.addComponent(marcaLabel);
+        panel.addComponent(marca);
+        panel.addComponent(descricaoLabel);
+        panel.addComponent(descricao);
+        panel.addComponent(numDonosLabel);
+        panel.addComponent(numDonos);
+        panel.addComponent(estadoUtilizacaoLabel);
+        panel.addComponent(estadoUtilizacao);
+        panel.addComponent(precoBaseLabel);
+        panel.addComponent(precoBase);
+        panel.addComponent(comprimentoLabel);
+        panel.addComponent(comprimento);
+        panel.addComponent(larguraLabel);
+        panel.addComponent(largura);
+        panel.addComponent(alturaLabel);
+        panel.addComponent(altura);
+        panel.addComponent(materialLabel);
+        panel.addComponent(material);
+        panel.addComponent(anoColecaoLabel);
+        panel.addComponent(anoColecao);
+        panel.addComponent(codigoVendedorLabel);
+        panel.addComponent(codigoVendedor);
+        panel.addComponent(transportadoraLabel);
+        panel.addComponent(transportadora);
+        panel.addComponent(confirmButton);
 
+        window.setComponent(panel);
         gui.addWindowAndWait(window);
 
     }
 
     public static void criarUtilizador(MultiWindowTextGUI gui, Vintage loja) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
 
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
@@ -302,15 +341,82 @@ public class Manage {
                         morada.getText(),
                         nif.getText()
                 });
+                window.close();
             }
         });
         confirmButton.addTo(panel);
 
+        window.setComponent(panel);
+        gui.addWindowAndWait(window);
+    }
+
+    public static void criarEncomenda(MultiWindowTextGUI gui, Vintage loja) {
+
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         window.setCloseWindowWithEscape(true);
-        window.setComponent(panel);
 
+        Panel panel = new Panel();
+        panel.setLayoutManager(new GridLayout(2));
+
+        new Label("Tamanho").addTo(panel);
+        final ComboBox<String> material = new ComboBox<String>();
+        material.addItem("Grande");
+        material.addItem("Médio");
+        material.addItem("Pequeno");
+        material.addTo(panel);
+
+        Button confirmButton = new Button("Confirmar", new Runnable() {
+            @Override
+            public void run() {
+                loja.criaEncomenda(new String[] {
+                        ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
+                });
+                window.close();
+            }
+        });
+        confirmButton.addTo(panel);
+
+        window.setComponent(panel);
+        gui.addWindowAndWait(window);
+    }
+
+    public static void criarTransportadora(MultiWindowTextGUI gui, Vintage loja) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+
+        Panel panel = new Panel();
+        panel.setLayoutManager(new GridLayout(2));
+
+        new Label("Nome").addTo(panel);
+        final TextBox nome = new TextBox().setPreferredSize(new TerminalSize(35, 1)).addTo(panel);
+
+        new Label("Margem Lucro").addTo(panel);
+        final TextBox margemLucro = new TextBox().setPreferredSize(new TerminalSize(35, 1))
+                .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                .addTo(panel);
+
+        new Label("Margem Extra").addTo(panel);
+        final TextBox margemExtra = new TextBox().setPreferredSize(new TerminalSize(35, 1))
+                .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                .addTo(panel);
+
+        Button confirmButton = new Button("Confirmar", new Runnable() {
+            @Override
+            public void run() {
+                loja.criaTransportadora(new String[] {
+                        nome.getText(),
+                        margemLucro.getText(),
+                        margemExtra.getText()
+                });
+                window.close();
+            }
+        });
+        confirmButton.addTo(panel);
+
+        window.setComponent(panel);
         gui.addWindowAndWait(window);
     }
 

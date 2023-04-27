@@ -2,9 +2,7 @@ package vintage;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -28,6 +26,7 @@ import vintage.artigos.mala.Mala;
 import vintage.artigos.sapatilhas.Sapatilhas;
 import vintage.artigos.tshirt.TShirt;
 import vintage.ui.UI;
+import vintage.utils.LocalDateTimeTypeAdapter;
 
 import static vintage.utils.SaveLoad.save;
 import static vintage.utils.SaveLoad.load;
@@ -35,32 +34,26 @@ import static vintage.utils.SaveLoad.load;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
-            @Override
-            public LocalDateTime deserialize(JsonElement json, Type type,
-                    JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                Instant instant = Instant.ofEpochMilli(json.getAsJsonPrimitive().getAsLong());
-                return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-            }
-        }).registerTypeAdapter(Artigo.class, new JsonDeserializer<Artigo>() {
-            @Override
-            public Artigo deserialize(JsonElement json, Type type,
-                    JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                int tipo = json.getAsJsonObject().get("tipo").getAsInt();
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+                .registerTypeAdapter(Artigo.class, new JsonDeserializer<Artigo>() {
+                    @Override
+                    public Artigo deserialize(JsonElement json, Type type,
+                            JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                        int tipo = json.getAsJsonObject().get("tipo").getAsInt();
 
-                switch (tipo) {
-                    case 0:
-                        return jsonDeserializationContext.deserialize(json, Mala.class);
-                    case 1:
-                        return jsonDeserializationContext.deserialize(json, Sapatilhas.class);
-                    case 2:
-                        return jsonDeserializationContext.deserialize(json, TShirt.class);
-                    default:
-                        break;
-                }
-                return null;
-            }
-        }).setPrettyPrinting().create();
+                        switch (tipo) {
+                            case 0:
+                                return jsonDeserializationContext.deserialize(json, Mala.class);
+                            case 1:
+                                return jsonDeserializationContext.deserialize(json, Sapatilhas.class);
+                            case 2:
+                                return jsonDeserializationContext.deserialize(json, TShirt.class);
+                            default:
+                                break;
+                        }
+                        return null;
+                    }
+                }).setPrettyPrinting().create();
 
         Vintage loja = load(gson);
 
@@ -87,6 +80,6 @@ public class Main {
         scanner.close();
         screen.close();
 
-        // save(gson, loja);
+        save(gson, loja);
     }
 }

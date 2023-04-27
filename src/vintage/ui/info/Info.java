@@ -1,15 +1,19 @@
 package vintage.ui.info;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
+import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.table.Table;
 
@@ -22,7 +26,9 @@ import vintage.utilizadores.Utilizador;
 import vintage.utils.ui.InfoUtils;
 
 import static vintage.utils.vintage.Utils.getArtigo;
-import static vintage.utils.vintage.Utils.getUtilizador;;
+import static vintage.utils.vintage.Utils.getUtilizador;
+import static vintage.utils.vintage.Utils.getEncomenda;
+import static vintage.utils.vintage.Utils.getTransportadora;
 
 // TODO ao clicar artigo/utilizador/encomenda/transportadora, mostrar opções.
 public class Info {
@@ -50,7 +56,7 @@ public class Info {
         Button encomendasButton = new Button("Ver encomendas", new Runnable() {
             @Override
             public void run() {
-                listaEncomendas(gui, loja.getEncomendas());
+                listaEncomendas(gui, loja, loja.getEncomendas());
             }
         });
         encomendasButton.addTo(panel);
@@ -58,7 +64,7 @@ public class Info {
         Button transportadorasButton = new Button("Ver transportadoras", new Runnable() {
             @Override
             public void run() {
-                listaTransportadoras(gui, loja.getTransportadoras());
+                listaTransportadoras(gui, loja, loja.getTransportadoras());
             }
         });
         transportadorasButton.addTo(panel);
@@ -203,7 +209,12 @@ public class Info {
         gui.addWindowAndWait(window);
     }
 
-    public static void listaEncomendas(MultiWindowTextGUI gui, List<Encomenda> encomendas) {
+    public static void listaEncomendas(MultiWindowTextGUI gui, Vintage loja, List<Encomenda> encomendas) {
+
+        BasicWindow window = new BasicWindow();
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setCloseWindowWithEscape(true);
+
         Panel panel = new Panel();
 
         Table<String> table = new Table<String>("Código", "Dimensão", "Estado", "Preço", "Data Criação");
@@ -212,20 +223,84 @@ public class Info {
             String dimensaoEncomenda = InfoUtils.parseDimensao(encomenda.getDimensaoEncomenda());
             String estadoEncomenda = InfoUtils.parseEstadoEncomenda(encomenda.getEstadoEncomenda());
             String precoEncomenda = Float.toString(encomenda.getPrecoEncomenda());
-            String dataCriacao = encomenda.getDataCriacao().toString();
+            String dataCriacao = encomenda.getDataCriacao().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
             table.getTableModel().addRow(codigo, dimensaoEncomenda, estadoEncomenda, precoEncomenda, dataCriacao);
         }
+        table.setSelectAction(new Runnable() {
+            // Opções para cada item
+            @Override
+            public void run() {
+                BasicWindow actionWindow = new BasicWindow();
+                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                actionWindow.setCloseWindowWithEscape(true);
+
+                ActionListBox actionListBox = new ActionListBox();
+                // Mais informação
+                actionListBox.addItem("Mais informação...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Panel actionPanel = new Panel();
+
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
+
+                        new Label(encomenda.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+
+                        actionWindow.setComponent(actionPanel);
+                    }
+                });
+                // Adicionar artigo
+                actionListBox.addItem("Adicionar artigo...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Panel actionPanel = new Panel(new GridLayout(2));
+
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
+
+                        new Label("Código Artigo").addTo(actionPanel);
+                        final TextBox codigoArtigo = new TextBox().setValidationPattern(Pattern.compile("[0-9]*"))
+                                .addTo(actionPanel);
+
+                        new Button("Confirmar", new Runnable() {
+                            @Override
+                            public void run() {
+                                Artigo artigo = getArtigo(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
+                                encomenda.adicionarArtigos(artigo);
+                                actionWindow.close();
+                            }
+                        }).addTo(actionPanel);
+
+                        actionWindow.setComponent(actionPanel);
+                    }
+                });
+                // Cancelar encomenda
+                actionListBox.addItem("Cancelar...", new Runnable() {
+                    @Override
+                    public void run() {
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        loja.cancelaEncomenda(codigo);
+                        actionWindow.close();
+                        window.close();
+                    }
+                });
+
+                actionWindow.setComponent(actionListBox);
+                gui.addWindowAndWait(actionWindow);
+            }
+        });
         table.addTo(panel);
+
+        window.setComponent(panel);
+        gui.addWindowAndWait(window);
+    }
+
+    public static void listaTransportadoras(MultiWindowTextGUI gui, Vintage loja, List<Transportadora> transportadoras) {
 
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         window.setCloseWindowWithEscape(true);
-        window.setComponent(panel);
 
-        gui.addWindowAndWait(window);
-    }
-
-    public static void listaTransportadoras(MultiWindowTextGUI gui, List<Transportadora> transportadoras) {
         Panel panel = new Panel();
 
         Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição");
@@ -236,13 +311,47 @@ public class Info {
             String valorExpedicao = Float.toString(transportadora.getValorExpedicao());
             table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao);
         }
+        table.setSelectAction(new Runnable() {
+            // Opções para cada item
+            @Override
+            public void run() {
+                BasicWindow actionWindow = new BasicWindow();
+                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                actionWindow.setCloseWindowWithEscape(true);
+
+                ActionListBox actionListBox = new ActionListBox();
+                // Mais informação
+                actionListBox.addItem("Mais informação...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Panel actionPanel = new Panel();
+
+                        String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Transportadora transportadora = getTransportadora(transportadoras, nome);
+
+                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+
+                        actionWindow.setComponent(actionPanel);
+                    }
+                });
+                // Apagar transportadora
+                actionListBox.addItem("Apagar...", new Runnable() {
+                    @Override
+                    public void run() {
+                        String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        loja.apagaTransportadora(nome);
+                        actionWindow.close();
+                        window.close();
+                    }
+                });
+
+                actionWindow.setComponent(actionListBox);
+                gui.addWindowAndWait(actionWindow);
+            }
+        });
         table.addTo(panel);
 
-        BasicWindow window = new BasicWindow();
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
-        window.setCloseWindowWithEscape(true);
         window.setComponent(panel);
-
         gui.addWindowAndWait(window);
     }
 }
