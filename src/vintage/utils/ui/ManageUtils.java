@@ -36,7 +36,7 @@ public class ManageUtils {
         switch (tamanho) {
             case "Grande":
                 return "0";
-            case "Medio":
+            case "Médio":
                 return "1";
             case "Pequeno":
                 return "2";
