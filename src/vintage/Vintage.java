@@ -136,6 +136,7 @@ public class Vintage {
         this.encomendas.add(encomenda);
     }
 
+    // TODO checkar se esta dentro do tempo de cancelamento
     public void cancelaEncomenda(String info) {
         int codigo = Integer.parseInt(info);
         Encomenda encomenda = getEncomenda(encomendas, codigo);
