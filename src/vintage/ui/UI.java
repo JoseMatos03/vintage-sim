@@ -33,7 +33,7 @@ public class UI {
         Button statsButton = new Button("Estatísticas", new Runnable() {
             @Override
             public void run() {
-                Stats.menuStats(gui, window, loja);
+                Stats.menuEstatisticas(gui, loja);
             }
         });
         statsButton.addTo(panel);
