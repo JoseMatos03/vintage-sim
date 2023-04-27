@@ -272,10 +272,7 @@ public class Vintage {
     }
 
     // TODO
-    // num encomendas pendentes
-    // num encomendas expedidas
-    // num encomendas finalizadas
-
+    // Transportadora maior valor expediçao
     @Override
     public String toString() {
 
@@ -292,7 +289,11 @@ public class Vintage {
                 "Nº Ativos: " + StatsUtils.numUtilizadoresAtivos(utilizadores) + "\n" +
                 "Nº Inativos: " + StatsUtils.numUtilizadoresInativos(utilizadores) + "\n" +
                 "Código Maior Faturação: " + StatsUtils.utilizadorComMaiorFaturacao(utilizadores) + "\n" +
-                "--- ENCOMENDAS ---" + "\n";
+                "--- ENCOMENDAS ---" + "\n" +
+                "Nº Pendentes: " + StatsUtils.numEncomendasPendentes(encomendas) + "\n" +
+                "Nº Expedidas: " + StatsUtils.numEncomendasExpedidas(encomendas) + "\n" +
+                "Nº Finalizadas: " + StatsUtils.numEncomendasFinalizadas(encomendas) + "\n" +
+                "--- TRANSPORTADORAS ---" + "\n";
     }
 
 }

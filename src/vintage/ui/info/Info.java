@@ -117,7 +117,7 @@ public class Info {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Artigo artigo = getArtigo(artigos, Integer.parseInt(codigo));
 
-                        new Label(artigo.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+                        new Label(artigo.toString()).setPreferredSize(new TerminalSize(70, 18)).addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }
@@ -183,7 +183,7 @@ public class Info {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Utilizador utilizador = getUtilizador(utilizadores, Integer.parseInt(codigo));
 
-                        new Label(utilizador.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+                        new Label(utilizador.toString()).setPreferredSize(new TerminalSize(70, 10)).addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }
@@ -244,7 +244,7 @@ public class Info {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
 
-                        new Label(encomenda.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+                        new Label(encomenda.toString()).setPreferredSize(new TerminalSize(70, 7)).addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }
@@ -329,7 +329,7 @@ public class Info {
                         String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Transportadora transportadora = getTransportadora(transportadoras, nome);
 
-                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(75, 15)).addTo(actionPanel);
+                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 7)).addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }

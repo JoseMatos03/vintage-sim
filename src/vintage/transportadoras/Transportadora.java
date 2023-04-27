@@ -52,4 +52,13 @@ public class Transportadora {
     public void setMargemExtra(float margemExtra) {
         this.margemExtra = margemExtra;
     }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + "\n" +
+                "Margem Lucro: " + margemLucro + "\n" +
+                "Margem Extra: " + margemExtra + "\n" +
+                "Valor Expedição: " + valorExpedicao;
+    }
+
 }
