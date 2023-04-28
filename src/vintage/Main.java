@@ -11,7 +11,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.DefaultWindowManager;
@@ -57,6 +56,7 @@ public class Main {
                 }).setPrettyPrinting().create();
 
         Vintage loja = load(gson);
+        loja.entregarEncomendas();
 
         // UI
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -72,6 +72,6 @@ public class Main {
         scanner.close();
         screen.close();
 
-        save(gson, loja);
+        // save(gson, loja);
     }
 }

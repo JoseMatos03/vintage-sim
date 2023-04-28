@@ -1,5 +1,6 @@
 package vintage.ui.info;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.table.Table;
 
 import vintage.Vintage;
@@ -273,17 +275,20 @@ public class Info {
                         actionWindow.setComponent(actionPanel);
                     }
                 });
-                // TODO Expedir encomenda
                 actionListBox.addItem("Expedir...", new Runnable() {
                     @Override
                     public void run() {
-                        Panel actionPanel = new Panel(new GridLayout(2));
-
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
 
-
-                        actionWindow.setComponent(actionPanel);
+                        if (encomenda.getEstadoEncomenda() != Encomenda.PENDENTE) {
+                            MessageDialog.showMessageDialog(gui, "Erro", "Encomenda já foi expedida");
+                            return;
+                        }
+                        encomenda.setEstadoEncomenda(Encomenda.EXPEDIDA);
+                        encomenda.setDataEntrega(LocalDateTime.now().plusDays(7));
+                        actionWindow.close();
+                        window.close();
                     }
                 });
                 // Cancelar encomenda

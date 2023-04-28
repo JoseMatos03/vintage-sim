@@ -23,6 +23,7 @@ public class Encomenda {
 
     private float precoEncomenda;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataEntrega;
 
     public void adicionarArtigos(List<Artigo> artigos, int codigoArtigo) {
         if (this.artigos.size() >= this.dimensaoEncomenda)
@@ -64,6 +65,7 @@ public class Encomenda {
         this.estadoEncomenda = PENDENTE;
         this.precoEncomenda = 0;
         this.dataCriacao = LocalDateTime.now();
+        this.dataEntrega = null;
     }
 
     public List<Integer> getArtigos() {
@@ -120,6 +122,14 @@ public class Encomenda {
 
     public void setCodigoComprador(int codigoComprador) {
         this.codigoComprador = codigoComprador;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 
     @Override

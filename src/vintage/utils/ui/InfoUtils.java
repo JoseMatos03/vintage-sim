@@ -53,11 +53,11 @@ public class InfoUtils {
 
     public static String parseDimensao(int dimensaoEncomenda) {
         switch (dimensaoEncomenda) {
-            case 0:
+            case 10:
                 return "Grande";
-            case 1:
+            case 5:
                 return "Medio";
-            case 2:
+            case 1:
                 return "Pequeno";
             default:
                 return null;
