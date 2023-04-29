@@ -7,6 +7,7 @@ import java.util.List;
 import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
 import static vintage.utils.vintage.Utils.getArtigo;
+import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;;
 
 public class Encomenda {
 
@@ -27,8 +28,12 @@ public class Encomenda {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataEntrega;
 
-    public void adicionarArtigos(List<Artigo> artigos, int codigoArtigo) {
+    public void adicionarArtigo(List<Artigo> artigos, List<Encomenda> encomendas, int codigoArtigo) {
         if (this.artigos.size() >= this.dimensaoEncomenda)
+            return;
+
+        Artigo artigo = getArtigo(artigos, codigoArtigo);
+        if (getEncomendaOfArtigo(encomendas, artigo) != -1)
             return;
 
         this.artigos.add(codigoArtigo);

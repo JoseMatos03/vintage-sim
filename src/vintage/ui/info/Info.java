@@ -266,7 +266,7 @@ public class Info {
                         new Button("Confirmar", new Runnable() {
                             @Override
                             public void run() {
-                                encomenda.adicionarArtigos(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
+                                encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(), Integer.parseInt(codigoArtigo.getText()));
                                 actionWindow.close();
                             }
                         }).addTo(actionPanel);
