@@ -35,11 +35,11 @@ public class ManageUtils {
     public static String parseTamanhoEncomenda(String tamanho) {
         switch (tamanho) {
             case "Grande":
-                return "0";
+                return "10";
             case "Médio":
-                return "1";
+                return "5";
             case "Pequeno":
-                return "2";
+                return "1";
             default:
                 return null;
         }

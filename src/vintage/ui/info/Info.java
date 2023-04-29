@@ -1,5 +1,6 @@
 package vintage.ui.info;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.table.Table;
 
 import vintage.Vintage;
@@ -30,7 +32,6 @@ import static vintage.utils.vintage.Utils.getUtilizador;
 import static vintage.utils.vintage.Utils.getEncomenda;
 import static vintage.utils.vintage.Utils.getTransportadora;
 
-// TODO ao clicar artigo/utilizador/encomenda/transportadora, mostrar opções.
 public class Info {
 
     public static void menuInformacao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
@@ -265,13 +266,28 @@ public class Info {
                         new Button("Confirmar", new Runnable() {
                             @Override
                             public void run() {
-                                Artigo artigo = getArtigo(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
-                                encomenda.adicionarArtigos(artigo);
+                                encomenda.adicionarArtigos(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
                                 actionWindow.close();
                             }
                         }).addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
+                    }
+                });
+                actionListBox.addItem("Expedir...", new Runnable() {
+                    @Override
+                    public void run() {
+                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
+
+                        if (encomenda.getEstadoEncomenda() != Encomenda.PENDENTE) {
+                            MessageDialog.showMessageDialog(gui, "Erro", "Encomenda já foi expedida");
+                            return;
+                        }
+                        encomenda.setEstadoEncomenda(Encomenda.EXPEDIDA);
+                        encomenda.setDataEntrega(LocalDateTime.now().plusDays(7));
+                        actionWindow.close();
+                        window.close();
                     }
                 });
                 // Cancelar encomenda
@@ -295,7 +311,8 @@ public class Info {
         gui.addWindowAndWait(window);
     }
 
-    public static void listaTransportadoras(MultiWindowTextGUI gui, Vintage loja, List<Transportadora> transportadoras) {
+    public static void listaTransportadoras(MultiWindowTextGUI gui, Vintage loja,
+            List<Transportadora> transportadoras) {
 
         BasicWindow window = new BasicWindow();
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
@@ -329,7 +346,8 @@ public class Info {
                         String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Transportadora transportadora = getTransportadora(transportadoras, nome);
 
-                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 7)).addTo(actionPanel);
+                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 7))
+                                .addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }

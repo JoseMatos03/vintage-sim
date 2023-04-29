@@ -5,6 +5,7 @@ import static vintage.utils.vintage.Utils.getEncomenda;
 import static vintage.utils.vintage.Utils.getTransportadora;
 import static vintage.utils.vintage.Utils.getUtilizador;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,12 @@ public class Vintage {
     private List<Encomenda> encomendas;
     private List<Utilizador> utilizadores;
     private List<Transportadora> transportadoras;
+
     private int codigoProximoArtigo;
     private int numVendas;
     private float totalFaturado;
+
+    private LocalDateTime tempoAtual;
 
     public void criaArtigo(String[] info) {
         int tipo = Integer.parseInt(info[0]);
@@ -112,18 +116,6 @@ public class Vintage {
         }
     }
 
-    public void compraArtigo(String[] info) {
-        int codigoArtigo = Integer.parseInt(info[0]);
-        int codigoComprador = Integer.parseInt(info[1]);
-        Artigo artigo = getArtigo(artigos, codigoArtigo);
-        Utilizador comprador = getUtilizador(utilizadores, codigoComprador);
-        Utilizador vendedor = getUtilizador(utilizadores, artigo.getCodigoVendedor());
-
-        comprador.comprarArtigo(artigo, vendedor);
-        this.totalFaturado += artigo.calcularPreco();
-        this.artigos.remove(artigo);
-    }
-
     public void removeArtigo(String info) {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
@@ -134,17 +126,39 @@ public class Vintage {
 
     public void criaEncomenda(String[] info) {
         int codigo = encomendas.size();
-        int dimensaoEncomenda = Integer.parseInt(info[0]);
+        int codigoComprador = Integer.parseInt(info[0]);
+        int dimensaoEncomenda = Integer.parseInt(info[1]);
 
-        Encomenda encomenda = new Encomenda(codigo, dimensaoEncomenda);
+        Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda);
         this.encomendas.add(encomenda);
     }
 
-    // TODO checkar se esta dentro do tempo de cancelamento
+    public void entregarEncomendas() {
+        for (Encomenda encomenda : encomendas) {
+            if (tempoAtual.isBefore(encomenda.getDataEntrega()))
+                continue;
+            if (encomenda.getEstadoEncomenda() != Encomenda.EXPEDIDA)
+                continue;
+
+            Utilizador comprador = getUtilizador(utilizadores, encomenda.getCodigoComprador());
+            for (Integer codigoArtigo : encomenda.getArtigos()) {
+                Artigo artigo = getArtigo(artigos, codigoArtigo);
+                comprador.comprarArtigo(utilizadores, artigo);
+                totalFaturado += artigo.calcularPreco();
+                artigos.remove(artigo);
+            }
+            encomenda.setEstadoEncomenda(Encomenda.FINALIZADA);
+        }
+    }
+
     public void cancelaEncomenda(String info) {
         int codigo = Integer.parseInt(info);
         Encomenda encomenda = getEncomenda(encomendas, codigo);
-        encomenda.reembolsar();
+        LocalDateTime dataCriacao = encomenda.getDataCriacao();
+
+        if (dataCriacao.isAfter(dataCriacao.plusDays(Encomenda.DIAS_REEMBOLSO)))
+            return;
+        encomendas.remove(encomenda);
     }
 
     public void criaUtilizador(String[] info) {
@@ -203,6 +217,7 @@ public class Vintage {
         this.codigoProximoArtigo = 0;
         this.numVendas = 0;
         this.totalFaturado = 0;
+        this.tempoAtual = LocalDateTime.now();
     }
 
     public Vintage(Vintage loja) {
@@ -213,6 +228,7 @@ public class Vintage {
         this.codigoProximoArtigo = loja.getCodigoProximoArtigo();
         this.numVendas = loja.getNumVendas();
         this.totalFaturado = loja.getTotalFaturado();
+        this.tempoAtual = LocalDateTime.now();
     }
 
     public List<Artigo> getArtigos() {

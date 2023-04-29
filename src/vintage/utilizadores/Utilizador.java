@@ -2,6 +2,7 @@ package vintage.utilizadores;
 
 import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
+import static vintage.utils.vintage.Utils.getUtilizador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,25 +50,19 @@ public class Utilizador {
     public void venderArtigo(Artigo artigo) {
         if(this.atividade == INATIVA)
             return;
-
-        int codigo = artigo.getCodigo();
-        if (!this.listados.contains(codigo))
-            return;
         
         this.vendidos.add(artigo);
         this.listados.remove(codigo);
         this.valorEmVendas += artigo.calcularPreco();
     }
 
-    public void comprarArtigo(Artigo artigo, Utilizador utilizador) {
+    public void comprarArtigo(List<Utilizador> utilizadores, Artigo artigo) {
         if(this.atividade == INATIVA)
             return;
             
-        int codigo = artigo.getCodigo();
-        if (!utilizador.getListados().contains(codigo))
-            return;
+        Utilizador vendedor = getUtilizador(utilizadores, artigo.getCodigoVendedor());
         
-        utilizador.venderArtigo(artigo);
+        vendedor.venderArtigo(artigo);
         this.comprados.add(artigo);
     }
 

@@ -23,7 +23,8 @@ public abstract class Artigo {
 
     public abstract float calcularCorrecao();
 
-    public Artigo(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo, float precoBase,
+    public Artigo(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
+            float precoBase,
             int codigoVendedor, Transportadora transportadora) {
         this.tipo = tipo;
         this.estadoUtilizacao = estadoUtilizacao;

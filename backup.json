@@ -152,27 +152,15 @@
   "encomendas": [
     {
       "codigo": 0,
-      "artigos": [],
-      "dimensaoEncomenda": 0,
+      "codigoComprador": 0,
+      "artigos": [
+        0
+      ],
+      "dimensaoEncomenda": 10,
       "estadoEncomenda": 0,
-      "precoEncomenda": 0.0,
-      "dataCriacao": "27-04-2023 12:40:49"
-    },
-    {
-      "codigo": 1,
-      "artigos": [],
-      "dimensaoEncomenda": 1,
-      "estadoEncomenda": 0,
-      "precoEncomenda": 0.0,
-      "dataCriacao": "27-04-2023 12:42:30"
-    },
-    {
-      "codigo": 2,
-      "artigos": [],
-      "dimensaoEncomenda": 2,
-      "estadoEncomenda": 0,
-      "precoEncomenda": 0.0,
-      "dataCriacao": "27-04-2023 12:42:32"
+      "precoEncomenda": 1259.76,
+      "dataCriacao": "27-04-2023 21:18:10",
+      "dataEntrega": "28-04-2023 16:38:22"
     }
   ],
   "utilizadores": [
@@ -307,5 +295,8 @@
       "valorExpedicao": 3.8500001
     }
   ],
-  "codigoProximoArtigo": 7
+  "codigoProximoArtigo": 7,
+  "numVendas": 0,
+  "totalFaturado": 0.0,
+  "tempoAtual": "28-04-2023 16:39:27"
 }
