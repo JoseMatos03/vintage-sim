@@ -318,11 +318,8 @@ public class Vintage {
         this.numVendas = numVendas;
     }
 
-    // TODO
-    // Transportadora maior valor expediçao
     @Override
     public String toString() {
-
         return "--- GERAIS ---" + "\n" +
                 "Nº Total Artigos: " + (artigos.size() + numVendas) + "\n" +
                 "Nº Total Utilizadores: " + utilizadores.size() + "\n" +
@@ -340,7 +337,8 @@ public class Vintage {
                 "Nº Pendentes: " + StatsUtils.numEncomendasPendentes(encomendas) + "\n" +
                 "Nº Expedidas: " + StatsUtils.numEncomendasExpedidas(encomendas) + "\n" +
                 "Nº Finalizadas: " + StatsUtils.numEncomendasFinalizadas(encomendas) + "\n" +
-                "--- TRANSPORTADORAS ---" + "\n";
+                "--- TRANSPORTADORAS ---" + "\n" +
+                "Maior Valor Expedição: " + StatsUtils.transportadoraMaiorValorExpedicao(transportadoras);
     }
 
 }

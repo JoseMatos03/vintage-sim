@@ -148,12 +148,11 @@ public class Encomenda {
         this.dataEntrega = dataEntrega;
     }
 
-    // TODO Listar os artigos
     @Override
     public String toString() {
         if (dataEntrega == null) {
             return "Código: " + codigo + "\n" +
-            // artigos
+                    "Artigos: " + artigos.toString() + "\n" +
                     "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                     "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
                     "Preço: " + precoEncomenda + "\n" +
@@ -161,7 +160,7 @@ public class Encomenda {
                     "Data Entrega: " + "Por expedir.";
         }
         return "Código: " + codigo + "\n" +
-        // artigos
+                "Artigos: " + artigos.toString() + "\n" +
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                 "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
                 "Preço: " + precoEncomenda + "\n" +

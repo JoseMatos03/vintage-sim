@@ -168,8 +168,8 @@ public class Utilizador {
                 "NIF: " + numeroFiscal + "\n" +
                 "Estado Atividade: " + InfoUtils.parseEstadoAtividade(atividade) + "\n" +
                 "Artigos Listados: " + listados.toString() + "\n" +
-                // TODO comprados
-                // TODO vendidos
+                "Artigos Comprados: " + InfoUtils.parseListaArtigos(comprados)+ "\n" +
+                "Artigos Vendidos: " + InfoUtils.parseListaArtigos(vendidos)+ "\n" +
                 "Valor Vendas: " + valorEmVendas;
     }
 

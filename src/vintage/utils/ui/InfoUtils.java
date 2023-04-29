@@ -1,5 +1,9 @@
 package vintage.utils.ui;
 
+import java.util.List;
+
+import vintage.artigos.Artigo;
+
 public class InfoUtils {
 
     public static String parseTipoArtigo(int tipoArtigo) {
@@ -88,4 +92,15 @@ public class InfoUtils {
         }
     }
 
+    public static String parseListaArtigos(List<Artigo> artigos) {
+        String string = "[";
+        for (Artigo artigo : artigos) {
+            int codigo = artigo.getCodigo();
+            string += codigo + ",";
+        }
+        if (string.endsWith(",")) {
+            return string.substring(0, string.length() - 1) + "]";
+        }
+        return string + "]";
+    }
 }
