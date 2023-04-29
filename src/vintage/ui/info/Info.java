@@ -32,7 +32,6 @@ import static vintage.utils.vintage.Utils.getUtilizador;
 import static vintage.utils.vintage.Utils.getEncomenda;
 import static vintage.utils.vintage.Utils.getTransportadora;
 
-// TODO ao clicar artigo/utilizador/encomenda/transportadora, mostrar opções.
 public class Info {
 
     public static void menuInformacao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {

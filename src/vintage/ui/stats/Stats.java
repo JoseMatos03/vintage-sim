@@ -25,5 +25,5 @@ public class Stats {
         gui.addWindowAndWait(window);
 
     }
-    
+
 }

@@ -12,6 +12,7 @@ import vintage.ui.stats.Stats;
 public class UI {
 
     public static void menu(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
+
         Panel panel = new Panel();
 
         Button infoButton = new Button("Informação", new Runnable() {
@@ -48,6 +49,7 @@ public class UI {
 
         window.setComponent(panel);
         gui.addWindowAndWait(window);
+
     }
 
 }

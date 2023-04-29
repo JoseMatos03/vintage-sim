@@ -13,6 +13,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     @Override
@@ -26,4 +27,5 @@ public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, 
             final JsonDeserializationContext context) throws JsonParseException {
         return LocalDateTime.parse(json.getAsString(), formatter);
     }
+
 }

@@ -139,7 +139,8 @@ public class Encomenda {
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                 "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
                 "Preço: " + precoEncomenda + "\n" +
-                "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+                "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
+                "Data Entrega: " + dataEntrega.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
 }
