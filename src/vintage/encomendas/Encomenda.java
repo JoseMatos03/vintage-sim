@@ -15,6 +15,8 @@ public class Encomenda {
     public static final int EXPEDIDA = 1;
     public static final int FINALIZADA = 2;
 
+    public static final int DIAS_REEMBOLSO = 3;
+
     private int codigo;
     private int codigoComprador;
     private List<Integer> artigos;
@@ -54,7 +56,7 @@ public class Encomenda {
     }
 
     public void reembolsar() {
-        return;
+   
     }
 
     public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda) {

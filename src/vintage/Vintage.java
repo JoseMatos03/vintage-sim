@@ -151,11 +151,14 @@ public class Vintage {
         }
     }
 
-    // TODO checkar se esta dentro do tempo de cancelamento
     public void cancelaEncomenda(String info) {
         int codigo = Integer.parseInt(info);
         Encomenda encomenda = getEncomenda(encomendas, codigo);
-        encomenda.reembolsar();
+        LocalDateTime dataCriacao = encomenda.getDataCriacao();
+
+        if (dataCriacao.isAfter(dataCriacao.plusDays(Encomenda.DIAS_REEMBOLSO)))
+            return;
+        encomendas.remove(encomenda);
     }
 
     public void criaUtilizador(String[] info) {
