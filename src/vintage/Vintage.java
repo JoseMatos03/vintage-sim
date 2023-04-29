@@ -4,6 +4,8 @@ import static vintage.utils.vintage.Utils.getArtigo;
 import static vintage.utils.vintage.Utils.getEncomenda;
 import static vintage.utils.vintage.Utils.getTransportadora;
 import static vintage.utils.vintage.Utils.getUtilizador;
+import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
+import static vintage.utils.vintage.Utils.isArtigoInEncomendaExpedida;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -119,6 +121,15 @@ public class Vintage {
     public void removeArtigo(String info) {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
+
+        if (isArtigoInEncomendaExpedida(encomendas, artigo))
+            return;
+
+        if (getEncomendaOfArtigo(encomendas, artigo) == -1)
+            return;
+
+        Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas, artigo));
+        encomenda.removerArtigo(artigos, codigo);
 
         getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
         this.artigos.remove(artigo);

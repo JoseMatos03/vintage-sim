@@ -56,7 +56,7 @@ public class Encomenda {
     }
 
     public void reembolsar() {
-   
+
     }
 
     public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda) {
@@ -134,8 +134,18 @@ public class Encomenda {
         this.dataEntrega = dataEntrega;
     }
 
+    // TODO Listar os artigos
     @Override
     public String toString() {
+        if (dataEntrega == null) {
+            return "Código: " + codigo + "\n" +
+            // artigos
+                    "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
+                    "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
+                    "Preço: " + precoEncomenda + "\n" +
+                    "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
+                    "Data Entrega: " + "Por expedir.";
+        }
         return "Código: " + codigo + "\n" +
         // artigos
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
