@@ -11,5 +11,7 @@ public enum ErrorCode {
     ENCOMENDA_VAZIA,
     EM_ENCOMENDA,
     EM_EXPEDICAO,
-    SEM_REEMBOLSO
+    SEM_REEMBOLSO,
+    SEM_TEXTO,
+    SEM_PARAMETRO
 }

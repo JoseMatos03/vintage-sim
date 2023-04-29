@@ -26,6 +26,12 @@ public class ErrorHandler {
             case SEM_REEMBOLSO:
                 MessageDialog.showMessageDialog(gui, "Erro", "O prazo de reembolso já ultrapassou.");
                 break;
+            case SEM_TEXTO:
+                MessageDialog.showMessageDialog(gui, "Erro", "O código de artigo não foi introduzido.");
+                break;
+            case SEM_PARAMETRO:
+                MessageDialog.showMessageDialog(gui, "Erro", "Pelo menos um dos parâmetros não foi introduzido.");
+                break;
             case NO_ERRORS:
                 break;
             default:

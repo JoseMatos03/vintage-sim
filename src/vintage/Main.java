@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.DefaultWindowManager;
@@ -28,7 +29,7 @@ public class Main {
         loja.entregarEncomendas();
 
         // UI
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
+        Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(125,25)).createTerminal();
         Screen screen = new TerminalScreen(terminal);
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(),
                 new EmptySpace(TextColor.ANSI.BLUE));

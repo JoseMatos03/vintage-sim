@@ -99,7 +99,7 @@ public class Mala extends Artigo {
                 "Estado: " + estado + "\n" +
                 "Preço Base: " + this.getPrecoBase() + "\n" +
                 "Preço Final: " + this.calcularPreco() + "\n" +
-                "Dimensão: " + this.getDimensao().toString() + "\n" +
+                "Dimensão: " + "[" + + this.getDimensao()[COMPRIMENTO] + ", " + this.getDimensao()[LARGURA] + ", " + this.getDimensao()[ALTURA] + "]" + "\n" +
                 "Material: " + this.getMaterial() + "\n" +
                 "Ano Coleção: " + this.getAnoColecao() + "\n" +
                 "Transportadora: " + this.getTransportadora().getNome();
