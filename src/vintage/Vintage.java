@@ -18,6 +18,7 @@ import vintage.artigos.tshirt.TShirt;
 import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
+import vintage.utils.ErrorCode;
 import vintage.utils.ui.StatsUtils;
 
 public class Vintage {
@@ -118,21 +119,21 @@ public class Vintage {
         }
     }
 
-    public void removeArtigo(String info) {
+    public ErrorCode removeArtigo(String info) {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
 
         if (isArtigoInEncomendaExpedida(encomendas, artigo))
-            return;
+            return ErrorCode.ARTIGO_EXPEDIDO;
 
-        if (getEncomendaOfArtigo(encomendas, artigo) == -1)
-            return;
-
-        Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas, artigo));
-        encomenda.removerArtigo(artigos, codigo);
-
+        if (getEncomendaOfArtigo(encomendas, artigo) != -1){
+            Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas, artigo));
+            encomenda.removerArtigo(artigos, codigo);
+        }
         getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
         this.artigos.remove(artigo);
+
+        return ErrorCode.NO_ERRORS;
     }
 
     public void criaEncomenda(String[] info) {
@@ -142,6 +143,19 @@ public class Vintage {
 
         Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda);
         this.encomendas.add(encomenda);
+    }
+
+    public ErrorCode expedirEncomenda(String info) {
+        int codigo = Integer.parseInt(info);
+        Encomenda encomenda = getEncomenda(encomendas, codigo);
+
+        if (encomenda.getEstadoEncomenda() != Encomenda.PENDENTE)
+            return ErrorCode.EM_EXPEDICAO;
+
+        encomenda.setEstadoEncomenda(Encomenda.EXPEDIDA);
+        encomenda.setDataEntrega(LocalDateTime.now().plusDays(7));
+
+        return ErrorCode.NO_ERRORS;
     }
 
     public void entregarEncomendas() {
@@ -162,14 +176,16 @@ public class Vintage {
         }
     }
 
-    public void cancelaEncomenda(String info) {
+    public ErrorCode cancelaEncomenda(String info) {
         int codigo = Integer.parseInt(info);
         Encomenda encomenda = getEncomenda(encomendas, codigo);
         LocalDateTime dataCriacao = encomenda.getDataCriacao();
 
         if (dataCriacao.isAfter(dataCriacao.plusDays(Encomenda.DIAS_REEMBOLSO)))
-            return;
+            return ErrorCode.SEM_REEMBOLSO;
         encomendas.remove(encomenda);
+
+        return ErrorCode.NO_ERRORS;
     }
 
     public void criaUtilizador(String[] info) {
@@ -188,6 +204,7 @@ public class Vintage {
         this.utilizadores.add(utilizador);
     }
 
+    // TODO bugfix: Se utilizador for apagado com um artigo em expediçao, o artigo e apagado na mesma.
     public void apagaUtilizador(String info) {
         int codigo = Integer.parseInt(info);
         Utilizador utilizador = getUtilizador(utilizadores, codigo);

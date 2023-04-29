@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import vintage.utils.ErrorCode;
 import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
+
 import static vintage.utils.vintage.Utils.getArtigo;
-import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;;
+import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 
 public class Encomenda {
 
@@ -28,26 +30,30 @@ public class Encomenda {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataEntrega;
 
-    public void adicionarArtigo(List<Artigo> artigos, List<Encomenda> encomendas, int codigoArtigo) {
+    public ErrorCode adicionarArtigo(List<Artigo> artigos, List<Encomenda> encomendas, int codigoArtigo) {
         if (this.artigos.size() >= this.dimensaoEncomenda)
-            return;
+            return ErrorCode.SEM_ESPACO;
 
         Artigo artigo = getArtigo(artigos, codigoArtigo);
         if (getEncomendaOfArtigo(encomendas, artigo) != -1)
-            return;
+            return ErrorCode.EM_ENCOMENDA;
 
         this.artigos.add(codigoArtigo);
         float novoPrecoEncomenda = this.precoEncomenda + getArtigo(artigos, codigoArtigo).calcularPreco();
         this.setPrecoEncomenda(novoPrecoEncomenda);
+
+        return ErrorCode.NO_ERRORS;
     }
 
-    public void removerArtigo(List<Artigo> artigos, int codigoArtigo) {
+    public ErrorCode removerArtigo(List<Artigo> artigos, int codigoArtigo) {
         if (this.artigos.isEmpty())
-            return;
+            return ErrorCode.ENCOMENDA_VAZIA;
 
         this.artigos.remove(Integer.valueOf(codigoArtigo));
         float novoPrecoEncomenda = this.precoEncomenda - getArtigo(artigos, codigoArtigo).calcularPreco();
         this.setPrecoEncomenda(novoPrecoEncomenda);
+
+        return ErrorCode.NO_ERRORS;
     }
 
     public float calcularPrecoFinal(List<Artigo> artigos) {
@@ -60,7 +66,7 @@ public class Encomenda {
         return precoEncomenda;
     }
 
-    public void reembolsar() {
+    public void expedir() {
 
     }
 

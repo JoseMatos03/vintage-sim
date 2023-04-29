@@ -54,7 +54,6 @@ public class Utils {
         return -1;
     }
 
-
     public static boolean isArtigoInEncomendaExpedida(List<Encomenda> encomendas, Artigo artigo) {
         for (Encomenda encomenda : encomendas) {
             if (encomenda.getEstadoEncomenda() == Encomenda.PENDENTE)
