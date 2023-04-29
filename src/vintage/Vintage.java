@@ -126,7 +126,7 @@ public class Vintage {
         if (isArtigoInEncomendaExpedida(encomendas, artigo))
             return ErrorCode.ARTIGO_EXPEDIDO;
 
-        if (getEncomendaOfArtigo(encomendas, artigo) != -1){
+        if (getEncomendaOfArtigo(encomendas, artigo) != -1) {
             Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas, artigo));
             encomenda.removerArtigo(artigos, codigo);
         }
@@ -160,9 +160,9 @@ public class Vintage {
 
     public void entregarEncomendas() {
         for (Encomenda encomenda : encomendas) {
-            if (tempoAtual.isBefore(encomenda.getDataEntrega()))
-                continue;
             if (encomenda.getEstadoEncomenda() != Encomenda.EXPEDIDA)
+                continue;
+            if (tempoAtual.isBefore(encomenda.getDataEntrega()))
                 continue;
 
             Utilizador comprador = getUtilizador(utilizadores, encomenda.getCodigoComprador());
@@ -204,7 +204,8 @@ public class Vintage {
         this.utilizadores.add(utilizador);
     }
 
-    // TODO bugfix: Se utilizador for apagado com um artigo em expediçao, o artigo e apagado na mesma.
+    // TODO bugfix: Se utilizador for apagado com um artigo em expediçao, o artigo e
+    // apagado na mesma.
     public void apagaUtilizador(String info) {
         int codigo = Integer.parseInt(info);
         Utilizador utilizador = getUtilizador(utilizadores, codigo);
