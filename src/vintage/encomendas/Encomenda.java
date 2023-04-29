@@ -31,6 +31,9 @@ public class Encomenda {
     private LocalDateTime dataEntrega;
 
     public ErrorCode adicionarArtigo(List<Artigo> artigos, List<Encomenda> encomendas, int codigoArtigo) {
+        if (estadoEncomenda != PENDENTE)
+            return ErrorCode.EM_EXPEDICAO;
+
         if (this.artigos.size() >= this.dimensaoEncomenda)
             return ErrorCode.SEM_ESPACO;
 

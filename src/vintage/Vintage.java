@@ -204,8 +204,6 @@ public class Vintage {
         this.utilizadores.add(utilizador);
     }
 
-    // TODO bugfix: Se utilizador for apagado com um artigo em expediçao, o artigo e
-    // apagado na mesma.
     public void apagaUtilizador(String info) {
         int codigo = Integer.parseInt(info);
         Utilizador utilizador = getUtilizador(utilizadores, codigo);
@@ -214,8 +212,12 @@ public class Vintage {
         utilizador.setNome(null);
         utilizador.setMorada(null);
         utilizador.setNumeroFiscal(0);
-        for (int codigoArtigo : utilizador.getListados())
-            this.artigos.remove(getArtigo(artigos, codigoArtigo));
+        for (int codigoArtigo : utilizador.getListados()) {
+            Artigo artigo = getArtigo(artigos, codigoArtigo);
+            if (isArtigoInEncomendaExpedida(encomendas, artigo))
+                continue;
+            this.artigos.remove(artigo);
+        }
         utilizador.setListados(null);
         utilizador.setAtividade(Utilizador.INATIVA);
     }
