@@ -24,6 +24,7 @@ import vintage.transportadoras.Transportadora;
 import vintage.ui.UI;
 import vintage.utilizadores.Utilizador;
 import vintage.utils.ErrorCode;
+import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
 
 import static vintage.utils.vintage.Utils.getArtigo;
@@ -96,9 +97,9 @@ public class Info {
             String codigo = Integer.toString(artigo.getCodigo());
             String tipo = InfoUtils.parseTipoArtigo(artigo.getTipo());
             String marca = artigo.getMarca();
-            String preco = Float.toString(artigo.calcularPreco());
+            String preco = Float.toString(Utils.arrondarCentesimas(artigo.calcularPreco()));
             String numDonos = Integer.toString(artigo.getNumDonos());
-            String estadoDeUtilizacao = Float.toString(artigo.getEstadoUtilizacao());
+            String estadoDeUtilizacao = Float.toString(Utils.arrondarCentesimas(artigo.getEstadoUtilizacao()));
             table.getTableModel().addRow(codigo, tipo, marca, preco, numDonos, estadoDeUtilizacao);
         }
         table.setSelectAction(new Runnable() {
@@ -156,16 +157,15 @@ public class Info {
 
         Table<String> table = new Table<String>("Código", "Nome", "Email", "Morada", "NIF", "Vendas");
         for (Utilizador utilizador : utilizadores) {
-            if (utilizador.getAtividade() == Utilizador.INATIVA) {
+            if (utilizador.getAtividade() == Utilizador.INATIVA)
                 continue;
-            }
 
             String codigo = Integer.toString(utilizador.getCodigo());
             String nome = utilizador.getNome();
             String email = utilizador.getEmail();
             String morada = utilizador.getMorada();
             String nif = Integer.toString(utilizador.getNumeroFiscal());
-            String vendas = Float.toString(utilizador.getValorEmVendas());
+            String vendas = Float.toString(Utils.arrondarCentesimas(utilizador.getValorEmVendas()));
             table.getTableModel().addRow(codigo, nome, email, morada, nif, vendas);
         }
         table.setSelectAction(new Runnable() {
@@ -225,7 +225,7 @@ public class Info {
             String codigo = Integer.toString(encomenda.getCodigo());
             String dimensaoEncomenda = InfoUtils.parseDimensao(encomenda.getDimensaoEncomenda());
             String estadoEncomenda = InfoUtils.parseEstadoEncomenda(encomenda.getEstadoEncomenda());
-            String precoEncomenda = Float.toString(encomenda.getPrecoEncomenda());
+            String precoEncomenda = Float.toString(Utils.arrondarCentesimas(encomenda.getPrecoEncomenda()));
             String dataCriacao = encomenda.getDataCriacao().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
             table.getTableModel().addRow(codigo, dimensaoEncomenda, estadoEncomenda, precoEncomenda, dataCriacao);
         }
@@ -328,9 +328,9 @@ public class Info {
         Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição");
         for (Transportadora transportadora : transportadoras) {
             String nome = transportadora.getNome();
-            String margemLucro = Float.toString(transportadora.getMargemLucro());
-            String margemExtra = Float.toString(transportadora.getMargemExtra());
-            String valorExpedicao = Float.toString(transportadora.getValorExpedicao());
+            String margemLucro = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemLucro()));
+            String margemExtra = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemExtra()));
+            String valorExpedicao = Float.toString(Utils.arrondarCentesimas(transportadora.getValorExpedicao()));
             table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao);
         }
         table.setSelectAction(new Runnable() {

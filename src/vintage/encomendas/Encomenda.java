@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import vintage.utils.ErrorCode;
+import vintage.utils.artigos.Utils;
 import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
 
@@ -168,7 +169,7 @@ public class Encomenda {
                 "Artigos: " + artigos.toString() + "\n" +
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                 "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
-                "Preço: " + precoEncomenda + "\n" +
+                "Preço: " + Utils.arrondarCentesimas(precoEncomenda) + "\n" +
                 "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
                 "Data Entrega: " + dataEntrega.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }

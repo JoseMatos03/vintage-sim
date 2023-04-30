@@ -19,6 +19,7 @@ import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
 import vintage.utils.ErrorCode;
+import vintage.utils.artigos.Utils;
 import vintage.utils.ui.StatsUtils;
 
 public class Vintage {
@@ -354,7 +355,7 @@ public class Vintage {
                 "Nº Total Utilizadores: " + utilizadores.size() + "\n" +
                 "Nº Total Encomendas: " + encomendas.size() + "\n" +
                 "Nº Total Transportadoras: " + transportadoras.size() + "\n" +
-                "Total Faturado: " + totalFaturado + "\n" +
+                "Total Faturado: " + Utils.arrondarCentesimas(totalFaturado) + "\n" +
                 "--- ARTIGOS ---" + "\n" +
                 "Nº Listagens: " + artigos.size() + "\n" +
                 "Nº Vendas: " + numVendas + "\n" +

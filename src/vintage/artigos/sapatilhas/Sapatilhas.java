@@ -2,7 +2,6 @@ package vintage.artigos.sapatilhas;
 
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
-import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
 
 public class Sapatilhas extends Artigo {
@@ -34,7 +33,7 @@ public class Sapatilhas extends Artigo {
             correcao -= this.getPrecoBase() * 0.25;
         }
 
-        return Utils.arrondarCentesimas(correcao);
+        return correcao;
     }
 
     public Sapatilhas(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,

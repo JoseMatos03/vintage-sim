@@ -1,6 +1,9 @@
 package vintage.transportadoras;
 
 import static vintage.utils.transportadoras.Utils.VALORBASE;
+
+import vintage.utils.artigos.Utils;
+
 import static vintage.utils.transportadoras.Utils.IMPOSTO;
 
 public class Transportadora {
@@ -56,9 +59,9 @@ public class Transportadora {
     @Override
     public String toString() {
         return "Nome: " + nome + "\n" +
-                "Margem Lucro: " + margemLucro + "\n" +
-                "Margem Extra: " + margemExtra + "\n" +
-                "Valor Expedição: " + valorExpedicao;
+                "Margem Lucro: " + Utils.arrondarCentesimas(margemLucro) + "\n" +
+                "Margem Extra: " + Utils.arrondarCentesimas(margemExtra) + "\n" +
+                "Valor Expedição: " + Utils.arrondarCentesimas(valorExpedicao);
     }
 
 }
