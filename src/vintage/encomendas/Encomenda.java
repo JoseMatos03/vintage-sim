@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import vintage.utils.ErrorCode;
 import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
+
 import static vintage.utils.vintage.Utils.getArtigo;
+import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 
 public class Encomenda {
 
@@ -27,22 +30,33 @@ public class Encomenda {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataEntrega;
 
-    public void adicionarArtigos(List<Artigo> artigos, int codigoArtigo) {
+    public ErrorCode adicionarArtigo(List<Artigo> artigos, List<Encomenda> encomendas, int codigoArtigo) {
+        if (estadoEncomenda != PENDENTE)
+            return ErrorCode.EM_EXPEDICAO;
+
         if (this.artigos.size() >= this.dimensaoEncomenda)
-            return;
+            return ErrorCode.SEM_ESPACO;
+
+        Artigo artigo = getArtigo(artigos, codigoArtigo);
+        if (getEncomendaOfArtigo(encomendas, artigo) != -1)
+            return ErrorCode.EM_ENCOMENDA;
 
         this.artigos.add(codigoArtigo);
         float novoPrecoEncomenda = this.precoEncomenda + getArtigo(artigos, codigoArtigo).calcularPreco();
         this.setPrecoEncomenda(novoPrecoEncomenda);
+
+        return ErrorCode.NO_ERRORS;
     }
 
-    public void removerArtigo(List<Artigo> artigos, int codigoArtigo) {
+    public ErrorCode removerArtigo(List<Artigo> artigos, int codigoArtigo) {
         if (this.artigos.isEmpty())
-            return;
+            return ErrorCode.ENCOMENDA_VAZIA;
 
         this.artigos.remove(Integer.valueOf(codigoArtigo));
         float novoPrecoEncomenda = this.precoEncomenda - getArtigo(artigos, codigoArtigo).calcularPreco();
         this.setPrecoEncomenda(novoPrecoEncomenda);
+
+        return ErrorCode.NO_ERRORS;
     }
 
     public float calcularPrecoFinal(List<Artigo> artigos) {
@@ -55,8 +69,8 @@ public class Encomenda {
         return precoEncomenda;
     }
 
-    public void reembolsar() {
-   
+    public void expedir() {
+
     }
 
     public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda) {
@@ -136,8 +150,17 @@ public class Encomenda {
 
     @Override
     public String toString() {
+        if (dataEntrega == null) {
+            return "Código: " + codigo + "\n" +
+                    "Artigos: " + artigos.toString() + "\n" +
+                    "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
+                    "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
+                    "Preço: " + precoEncomenda + "\n" +
+                    "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
+                    "Data Entrega: " + "Por expedir.";
+        }
         return "Código: " + codigo + "\n" +
-        // artigos
+                "Artigos: " + artigos.toString() + "\n" +
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                 "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
                 "Preço: " + precoEncomenda + "\n" +

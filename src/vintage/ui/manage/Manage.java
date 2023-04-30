@@ -20,8 +20,6 @@ import vintage.artigos.Artigo;
 import vintage.ui.UI;
 import vintage.utils.ui.ManageUtils;
 
-// TODO corrigir bugs
-// Se preencher com um campo vazio, o programa crasha
 public class Manage {
 
     public static void menuManutencao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {

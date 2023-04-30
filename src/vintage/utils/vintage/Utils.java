@@ -45,4 +45,25 @@ public class Utils {
         return null;
     }
 
+    public static int getEncomendaOfArtigo(List<Encomenda> encomendas, Artigo artigo) {
+        for (Encomenda encomenda : encomendas) {
+            if (encomenda.getArtigos().contains(artigo.getCodigo())) {
+                return encomenda.getCodigo();
+            }
+        }
+        return -1;
+    }
+
+    public static boolean isArtigoInEncomendaExpedida(List<Encomenda> encomendas, Artigo artigo) {
+        for (Encomenda encomenda : encomendas) {
+            if (encomenda.getEstadoEncomenda() == Encomenda.PENDENTE)
+                continue;
+                
+            if (encomenda.getArtigos().contains(artigo.getCodigo())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

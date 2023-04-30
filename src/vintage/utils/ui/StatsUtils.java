@@ -3,6 +3,7 @@ package vintage.utils.ui;
 import java.util.List;
 
 import vintage.encomendas.Encomenda;
+import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
 
 public class StatsUtils {
@@ -59,6 +60,15 @@ public class StatsUtils {
                 ++encomendasFinalizadas;
         }
         return encomendasFinalizadas;
+    }
+
+    public static String transportadoraMaiorValorExpedicao(List<Transportadora> transportadoras) {
+        Transportadora transportadoraMaior = transportadoras.get(0);
+        for (Transportadora transportadora : transportadoras) {
+            if (transportadora.getValorExpedicao() > transportadoraMaior.getValorExpedicao())
+                transportadoraMaior = transportadora;
+        }
+        return transportadoraMaior.getNome();
     }
 
 }

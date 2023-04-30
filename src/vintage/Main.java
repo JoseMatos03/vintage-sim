@@ -39,6 +39,6 @@ public class Main {
 
         scanner.close();
         screen.close();
-        // save(gson, loja);
+        save(gson, loja);
     }
 }

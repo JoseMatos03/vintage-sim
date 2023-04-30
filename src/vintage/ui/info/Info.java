@@ -1,6 +1,5 @@
 package vintage.ui.info;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +15,6 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.gui2.table.Table;
 
 import vintage.Vintage;
@@ -25,12 +23,15 @@ import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.ui.UI;
 import vintage.utilizadores.Utilizador;
+import vintage.utils.ErrorCode;
 import vintage.utils.ui.InfoUtils;
 
 import static vintage.utils.vintage.Utils.getArtigo;
 import static vintage.utils.vintage.Utils.getUtilizador;
 import static vintage.utils.vintage.Utils.getEncomenda;
 import static vintage.utils.vintage.Utils.getTransportadora;
+
+import static vintage.ui.ErrorHandler.handleError;
 
 public class Info {
 
@@ -128,7 +129,8 @@ public class Info {
                     @Override
                     public void run() {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        loja.removeArtigo(codigo);
+                        ErrorCode erro = loja.removeArtigo(codigo);
+                        handleError(gui, erro);
                         actionWindow.close();
                         window.close();
                     }
@@ -266,8 +268,10 @@ public class Info {
                         new Button("Confirmar", new Runnable() {
                             @Override
                             public void run() {
-                                encomenda.adicionarArtigos(loja.getArtigos(), Integer.parseInt(codigoArtigo.getText()));
+                                ErrorCode error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(), Integer.parseInt(codigoArtigo.getText()));
+                                handleError(gui, error);
                                 actionWindow.close();
+                                window.close();
                             }
                         }).addTo(actionPanel);
 
@@ -278,14 +282,8 @@ public class Info {
                     @Override
                     public void run() {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
-
-                        if (encomenda.getEstadoEncomenda() != Encomenda.PENDENTE) {
-                            MessageDialog.showMessageDialog(gui, "Erro", "Encomenda já foi expedida");
-                            return;
-                        }
-                        encomenda.setEstadoEncomenda(Encomenda.EXPEDIDA);
-                        encomenda.setDataEntrega(LocalDateTime.now().plusDays(7));
+                        ErrorCode erro = loja.expedirEncomenda(codigo);
+                        handleError(gui, erro);
                         actionWindow.close();
                         window.close();
                     }
@@ -295,7 +293,8 @@ public class Info {
                     @Override
                     public void run() {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        loja.cancelaEncomenda(codigo);
+                        ErrorCode erro = loja.cancelaEncomenda(codigo);
+                        handleError(gui, erro);
                         actionWindow.close();
                         window.close();
                     }
