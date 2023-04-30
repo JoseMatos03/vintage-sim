@@ -71,4 +71,13 @@ public class StatsUtils {
         return transportadoraMaior.getNome();
     }
 
+    public static String transportadoraMaiorLucro(List<Transportadora> transportadoras) {
+        Transportadora transportadoraMaior = transportadoras.get(0);
+        for (Transportadora transportadora : transportadoras) {
+            if (transportadora.getLucro() > transportadoraMaior.getLucro())
+                transportadoraMaior = transportadora;
+        }
+        return transportadoraMaior.getNome();
+    }
+
 }

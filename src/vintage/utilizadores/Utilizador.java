@@ -27,7 +27,7 @@ public class Utilizador {
     private float valorEmVendas;
 
     public void criarListagem(Artigo artigo) {
-        if(this.atividade == INATIVA)
+        if (this.atividade == INATIVA)
             return;
 
         int codigo = artigo.getCodigo();
@@ -37,8 +37,8 @@ public class Utilizador {
         this.listados.add(artigo.getCodigo());
     }
 
-    public void removerListagem(Artigo artigo){
-        if(this.atividade == INATIVA)
+    public void removerListagem(Artigo artigo) {
+        if (this.atividade == INATIVA)
             return;
 
         int codigo = artigo.getCodigo();
@@ -49,20 +49,21 @@ public class Utilizador {
     }
 
     public void venderArtigo(Artigo artigo) {
-        if(this.atividade == INATIVA)
+        if (this.atividade == INATIVA)
             return;
-        
+
         this.vendidos.add(artigo);
         this.listados.remove(codigo);
-        this.valorEmVendas += artigo.calcularPreco();
+        this.valorEmVendas += artigo.calcularPreco()
+                - Utils.calcularPercentagem(artigo.getPrecoBase(), artigo.getTransportadora().getValorExpedicao());
     }
 
     public void comprarArtigo(List<Utilizador> utilizadores, Artigo artigo) {
-        if(this.atividade == INATIVA)
+        if (this.atividade == INATIVA)
             return;
-            
+        artigo.getTransportadora().calcularEntrega(artigo.getPrecoBase());
         Utilizador vendedor = getUtilizador(utilizadores, artigo.getCodigoVendedor());
-        
+
         vendedor.venderArtigo(artigo);
         this.comprados.add(artigo);
     }
@@ -169,8 +170,8 @@ public class Utilizador {
                 "NIF: " + numeroFiscal + "\n" +
                 "Estado Atividade: " + InfoUtils.parseEstadoAtividade(atividade) + "\n" +
                 "Artigos Listados: " + listados.toString() + "\n" +
-                "Artigos Comprados: " + InfoUtils.parseListaArtigos(comprados)+ "\n" +
-                "Artigos Vendidos: " + InfoUtils.parseListaArtigos(vendidos)+ "\n" +
+                "Artigos Comprados: " + InfoUtils.parseListaArtigos(comprados) + "\n" +
+                "Artigos Vendidos: " + InfoUtils.parseListaArtigos(vendidos) + "\n" +
                 "Valor Vendas: " + Utils.arrondarCentesimas(valorEmVendas);
     }
 

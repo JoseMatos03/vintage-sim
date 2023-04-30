@@ -26,9 +26,9 @@ public class Sapatilhas extends Artigo {
     public float calcularCorrecao() {
         float correcao = 0;
 
-        correcao += this.getTransportadora().getValorExpedicao();
+        correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         if (this.getEstadoUtilizacao() != 1f) {
-            correcao -= this.getPrecoBase() - (this.getPrecoBase() * this.getEstadoUtilizacao());
+            correcao -= this.getPrecoBase() * this.getEstadoUtilizacao();
         }
         if (this.tamanho > 45) {
             correcao -= this.getPrecoBase() * 0.25;
