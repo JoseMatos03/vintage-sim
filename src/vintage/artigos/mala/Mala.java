@@ -1,7 +1,5 @@
 package vintage.artigos.mala;
 
-import java.time.LocalDateTime;
-
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.artigos.Utils;
@@ -28,10 +26,7 @@ public class Mala extends Artigo {
 
     @Override
     public float calcularPreco() {
-        float precoFinal;
-        float premiumCorrecao = (LocalDateTime.now().getYear() - this.getAnoColecao()) / Utils.arrondarCentesimas(100);
-        if(this.getPremiumEstado() == true) precoFinal = (this.getPrecoBase() + (this.getPrecoBase() * premiumCorrecao)) + this.calcularCorrecao();
-        else precoFinal = this.getPrecoBase() + this.calcularCorrecao();
+        float precoFinal = this.getPrecoBase() + this.calcularCorrecaoPremium(this.getAnoColecao()) + this.calcularCorrecao();
         return precoFinal;
     }
 

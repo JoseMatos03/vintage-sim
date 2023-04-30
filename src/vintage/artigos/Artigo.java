@@ -1,6 +1,9 @@
 package vintage.artigos;
 
+import java.time.LocalDateTime;
+
 import vintage.transportadoras.Transportadora;
+import vintage.utils.artigos.Utils;
 
 public abstract class Artigo {
 
@@ -37,6 +40,15 @@ public abstract class Artigo {
         this.codigoVendedor = codigoVendedor;
         this.transportadora = transportadora;
         this.premiumEstado = premiumEstado;
+    }
+
+    public float calcularCorrecaoPremium(int anoColecao)
+    {
+        float precoPremium = 0;
+        if(this.getPremiumEstado() == true){
+            precoPremium += this.getPrecoBase() * ((LocalDateTime.now().getYear() - anoColecao) / Utils.arrondarCentesimas(100));
+        }
+        return precoPremium;
     }
 
     public float getEstadoUtilizacao() {
