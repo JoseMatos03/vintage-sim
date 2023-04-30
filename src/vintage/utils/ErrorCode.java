@@ -2,6 +2,7 @@ package vintage.utils;
 
 public enum ErrorCode {
     NO_ERRORS,
+    PARAMETRO_ERRADO,
 
     // Artigos
     ARTIGO_EXPEDIDO,

@@ -9,7 +9,6 @@ import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
 import vintage.ui.stats.Stats;
 
-// TODO Se preencher com um campo vazio, o programa crasha
 // TODO Impedir de adicionar códigos não existentes
 // TODO Formatar preços ate centésimas
 public class UI {

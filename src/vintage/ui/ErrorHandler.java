@@ -26,6 +26,9 @@ public class ErrorHandler {
             case SEM_REEMBOLSO:
                 MessageDialog.showMessageDialog(gui, "Erro", "O prazo de reembolso já ultrapassou.");
                 break;
+            case PARAMETRO_ERRADO:
+                MessageDialog.showMessageDialog(gui, "Erro", "Erro em parâmetros obrigatórios.");
+                break;
             case NO_ERRORS:
                 break;
             default:

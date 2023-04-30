@@ -268,7 +268,13 @@ public class Info {
                         new Button("Confirmar", new Runnable() {
                             @Override
                             public void run() {
-                                ErrorCode error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(), Integer.parseInt(codigoArtigo.getText()));
+                                ErrorCode error;
+                                try {
+                                    error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(),
+                                            Integer.parseInt(codigoArtigo.getText()));
+                                } catch (NumberFormatException e) {
+                                    error = ErrorCode.PARAMETRO_ERRADO;
+                                }
                                 handleError(gui, error);
                                 actionWindow.close();
                                 window.close();
