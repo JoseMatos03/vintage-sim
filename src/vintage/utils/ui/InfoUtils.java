@@ -3,6 +3,7 @@ package vintage.utils.ui;
 import java.util.List;
 
 import vintage.artigos.Artigo;
+import vintage.utils.artigos.Utils;
 
 public class InfoUtils {
 
@@ -105,9 +106,9 @@ public class InfoUtils {
     }
 
     public static String parseDimensoes(float[] dimensoes) {
-        float comprimento = dimensoes[0];
-        float largura = dimensoes[1];
-        float altura = dimensoes[2];
+        float comprimento = Utils.arrondarDecimas(dimensoes[0]);
+        float largura = Utils.arrondarDecimas(dimensoes[1]);
+        float altura = Utils.arrondarDecimas(dimensoes[2]);
         return comprimento + " x " + largura + " x " + altura;
     }
 }

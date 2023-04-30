@@ -9,8 +9,6 @@ import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
 import vintage.ui.stats.Stats;
 
-// TODO Impedir de adicionar códigos não existentes
-// TODO Formatar preços ate centésimas
 public class UI {
 
     public static void menu(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {

@@ -38,7 +38,7 @@ public class Mala extends Artigo {
         correcao += this.getTransportadora().getValorExpedicao();
         correcao -= (1f / dimensao) * CONSTANTECORRECAO;
 
-        return Utils.arrondarCentesimas(correcao);
+        return correcao;
     }
 
     public float calcularDimensao() {
@@ -47,7 +47,7 @@ public class Mala extends Artigo {
         float altura = this.getDimensao()[ALTURA];
 
         float dimensao = comprimento * largura * altura;
-        return Utils.arrondarDecimas(dimensao);
+        return dimensao;
     }
 
     public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
@@ -96,8 +96,8 @@ public class Mala extends Artigo {
                 "Descrição: " + this.getDescricao() + "\n" +
                 "Nº Donos: " + this.getNumDonos() + "\n" +
                 "Estado: " + estado + "\n" +
-                "Preço Base: " + this.getPrecoBase() + "\n" +
-                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Preço Base: " + Utils.arrondarCentesimas(this.getPrecoBase()) + "\n" +
+                "Preço Final: " + Utils.arrondarCentesimas(this.calcularPreco()) + "\n" +
                 "Dimensão: " + InfoUtils.parseDimensoes(dimensao) + "\n" +
                 "Material: " + material + "\n" +
                 "Ano Coleção: " + anoColecao + "\n" +

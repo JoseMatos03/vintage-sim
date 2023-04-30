@@ -1,6 +1,7 @@
 package vintage.utilizadores;
 
 import vintage.artigos.Artigo;
+import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
 import static vintage.utils.vintage.Utils.getUtilizador;
 
@@ -170,7 +171,7 @@ public class Utilizador {
                 "Artigos Listados: " + listados.toString() + "\n" +
                 "Artigos Comprados: " + InfoUtils.parseListaArtigos(comprados)+ "\n" +
                 "Artigos Vendidos: " + InfoUtils.parseListaArtigos(vendidos)+ "\n" +
-                "Valor Vendas: " + valorEmVendas;
+                "Valor Vendas: " + Utils.arrondarCentesimas(valorEmVendas);
     }
 
 }

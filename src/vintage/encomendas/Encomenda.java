@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import vintage.utils.ErrorCode;
+import vintage.utils.artigos.Utils;
 import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
 
@@ -36,6 +37,9 @@ public class Encomenda {
 
         if (this.artigos.size() >= this.dimensaoEncomenda)
             return ErrorCode.SEM_ESPACO;
+
+        if (getArtigo(artigos, codigoArtigo) == null)
+            return ErrorCode.CODIGO_INVALIDO;
 
         Artigo artigo = getArtigo(artigos, codigoArtigo);
         if (getEncomendaOfArtigo(encomendas, artigo) != -1)
@@ -152,6 +156,7 @@ public class Encomenda {
     public String toString() {
         if (dataEntrega == null) {
             return "Código: " + codigo + "\n" +
+                    "Código Comprador: " + codigoComprador + "\n" +
                     "Artigos: " + artigos.toString() + "\n" +
                     "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                     "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
@@ -160,10 +165,11 @@ public class Encomenda {
                     "Data Entrega: " + "Por expedir.";
         }
         return "Código: " + codigo + "\n" +
+                "Código Comprador: " + codigoComprador + "\n" +
                 "Artigos: " + artigos.toString() + "\n" +
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                 "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
-                "Preço: " + precoEncomenda + "\n" +
+                "Preço: " + Utils.arrondarCentesimas(precoEncomenda) + "\n" +
                 "Data Criação: " + dataCriacao.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
                 "Data Entrega: " + dataEntrega.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }

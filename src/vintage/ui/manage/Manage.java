@@ -88,7 +88,7 @@ public class Manage {
 
         // CÓDIGO VENDEDOR
         final Label codigoVendedorLabel = new Label("Código Vendedor");
-        final TextBox codigoVendedor = new TextBox(size).setValidationPattern(Pattern.compile("[0-9]*"));
+        final TextBox codigoVendedor = new TextBox(size).setValidationPattern(Pattern.compile("[0-9]{0,9}"));
 
         // ESTADO
         final Label estadoUtilizacaoLabel = new Label("Estado");
@@ -101,7 +101,7 @@ public class Manage {
 
         // Nº DONOS
         final Label numDonosLabel = new Label("Nº Donos");
-        final TextBox numDonos = new TextBox(size).setValidationPattern(Pattern.compile("[0-9]*"));
+        final TextBox numDonos = new TextBox(size).setValidationPattern(Pattern.compile("[0-9]{0,4}"));
 
         // DESCRIÇÃO
         final Label descricaoLabel = new Label("Descrição");
@@ -123,11 +123,13 @@ public class Manage {
         // DIMENSÕES
         final Label comprimentoLabel = new Label("Comprimento");
         final TextBox comprimento = new TextBox(size)
-                .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
+                .setValidationPattern(Pattern.compile("^[0-9]{0,3}+(?:[.][0-9]{0,2})?$"));
         final Label larguraLabel = new Label("Largura");
-        final TextBox largura = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
+        final TextBox largura = new TextBox(size)
+                .setValidationPattern(Pattern.compile("^[0-9]{0,3}+(?:[.][0-9]{0,2})?$"));
         final Label alturaLabel = new Label("Altura");
-        final TextBox altura = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"));
+        final TextBox altura = new TextBox(size)
+                .setValidationPattern(Pattern.compile("^[0-9]{0,3}+(?:[.][0-9]{0,2})?$"));
         // MATERIAL
         final Label materialLabel = new Label("Material");
         final ComboBox<String> material = new ComboBox<String>();
@@ -174,58 +176,56 @@ public class Manage {
         final Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                // TODO fazer checks nos parametros para as pessoas não abusarem
-                try {
-                    if (tipo.getSelectedItem().equals("Mala")) {
-                        loja.criaArtigo(new String[] {
-                                Integer.toString(Artigo.MALA),
-                                codigoVendedor.getText(),
-                                ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
-                                numDonos.getText(),
-                                descricao.getText(),
-                                marca.getText(),
-                                precoBase.getText(),
-                                transportadora.getText(),
-                                comprimento.getText(),
-                                largura.getText(),
-                                altura.getText(),
-                                ManageUtils.parseMaterialMala(material.getText()),
-                                anoColecao.getText()
-                        });
-                    }
-                    if (tipo.getSelectedItem().equals("Sapatilhas")) {
-                        loja.criaArtigo(new String[] {
-                                Integer.toString(Artigo.SAPATILHAS),
-                                codigoVendedor.getText(),
-                                ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
-                                numDonos.getText(),
-                                descricao.getText(),
-                                marca.getText(),
-                                precoBase.getText(),
-                                transportadora.getText(),
-                                tamanho.getText(),
-                                Integer.toString(atacadores.getSelectedIndex()),
-                                cor.getText(),
-                                anoColecao.getText()
-                        });
-                    }
-                    if (tipo.getSelectedItem().equals("T-Shirt")) {
-                        loja.criaArtigo(new String[] {
-                                Integer.toString(Artigo.TSHIRT),
-                                codigoVendedor.getText(),
-                                ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
-                                numDonos.getText(),
-                                descricao.getText(),
-                                marca.getText(),
-                                precoBase.getText(),
-                                transportadora.getText(),
-                                tamanhoTShirt.getSelectedItem(),
-                                Integer.toString(padrao.getSelectedIndex())
-                        });
-                    }
-                } catch (Exception e) {
-                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
+                ErrorCode error = ErrorCode.NO_ERRORS;
+                if (tipo.getSelectedItem().equals("Mala")) {
+                    error = loja.criaArtigo(new String[] {
+                            Integer.toString(Artigo.MALA),
+                            codigoVendedor.getText(),
+                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                            numDonos.getText(),
+                            descricao.getText(),
+                            marca.getText(),
+                            precoBase.getText(),
+                            transportadora.getText(),
+                            comprimento.getText(),
+                            largura.getText(),
+                            altura.getText(),
+                            ManageUtils.parseMaterialMala(material.getText()),
+                            anoColecao.getText()
+                    });
                 }
+                if (tipo.getSelectedItem().equals("Sapatilhas")) {
+                    error = loja.criaArtigo(new String[] {
+                            Integer.toString(Artigo.SAPATILHAS),
+                            codigoVendedor.getText(),
+                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                            numDonos.getText(),
+                            descricao.getText(),
+                            marca.getText(),
+                            precoBase.getText(),
+                            transportadora.getText(),
+                            tamanho.getText(),
+                            Integer.toString(atacadores.getSelectedIndex()),
+                            cor.getText(),
+                            anoColecao.getText()
+                    });
+                }
+                if (tipo.getSelectedItem().equals("T-Shirt")) {
+                    error = loja.criaArtigo(new String[] {
+                            Integer.toString(Artigo.TSHIRT),
+                            codigoVendedor.getText(),
+                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                            numDonos.getText(),
+                            descricao.getText(),
+                            marca.getText(),
+                            precoBase.getText(),
+                            transportadora.getText(),
+                            tamanhoTShirt.getSelectedItem(),
+                            Integer.toString(padrao.getSelectedIndex())
+                    });
+                }
+                handleError(gui, error);
+
                 window.close();
             }
         });
@@ -341,16 +341,14 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                try {
-                    loja.criaUtilizador(new String[] {
-                            email.getText(),
-                            nome.getText(),
-                            morada.getText(),
-                            nif.getText()
-                    });
-                } catch (Exception e) {
-                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
-                }
+                ErrorCode error = loja.criaUtilizador(new String[] {
+                        email.getText(),
+                        nome.getText(),
+                        morada.getText(),
+                        nif.getText()
+                });
+                handleError(gui, error);
+
                 window.close();
             }
         });
@@ -383,14 +381,12 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                try {
-                    loja.criaEncomenda(new String[] {
-                            codigoVendedor.getText(),
-                            ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
-                    });
-                } catch (Exception e) {
-                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
-                }
+                ErrorCode error = loja.criaEncomenda(new String[] {
+                        codigoVendedor.getText(),
+                        ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
+                });
+                handleError(gui, error);
+
                 window.close();
             }
         });
@@ -425,15 +421,13 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                try {
-                    loja.criaTransportadora(new String[] {
-                            nome.getText(),
-                            margemLucro.getText(),
-                            margemExtra.getText()
-                    });
-                } catch (Exception e) {
-                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
-                }
+                ErrorCode error = loja.criaTransportadora(new String[] {
+                        nome.getText(),
+                        margemLucro.getText(),
+                        margemExtra.getText()
+                });
+                handleError(gui, error);
+
                 window.close();
             }
         });
