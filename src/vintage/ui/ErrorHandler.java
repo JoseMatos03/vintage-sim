@@ -29,6 +29,12 @@ public class ErrorHandler {
             case PARAMETRO_ERRADO:
                 MessageDialog.showMessageDialog(gui, "Erro", "Erro em parâmetros obrigatórios.");
                 break;
+            case CODIGO_INVALIDO:
+                MessageDialog.showMessageDialog(gui, "Erro", "O código introduzido é inválido.");
+                break;
+            case TRANSPORTADORA_INVALIDA:
+                MessageDialog.showMessageDialog(gui, "Erro", "A transportadora introduzida não existe.");
+                break;
             case NO_ERRORS:
                 break;
             default:

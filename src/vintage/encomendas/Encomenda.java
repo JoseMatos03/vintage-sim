@@ -37,6 +37,9 @@ public class Encomenda {
         if (this.artigos.size() >= this.dimensaoEncomenda)
             return ErrorCode.SEM_ESPACO;
 
+        if (getArtigo(artigos, codigoArtigo) == null)
+            return ErrorCode.CODIGO_INVALIDO;
+
         Artigo artigo = getArtigo(artigos, codigoArtigo);
         if (getEncomendaOfArtigo(encomendas, artigo) != -1)
             return ErrorCode.EM_ENCOMENDA;
@@ -152,6 +155,7 @@ public class Encomenda {
     public String toString() {
         if (dataEntrega == null) {
             return "Código: " + codigo + "\n" +
+                    "Código Comprador: " + codigoComprador + "\n" +
                     "Artigos: " + artigos.toString() + "\n" +
                     "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                     "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +
@@ -160,6 +164,7 @@ public class Encomenda {
                     "Data Entrega: " + "Por expedir.";
         }
         return "Código: " + codigo + "\n" +
+                "Código Comprador: " + codigoComprador + "\n" +
                 "Artigos: " + artigos.toString() + "\n" +
                 "Dimensão: " + InfoUtils.parseDimensao(dimensaoEncomenda) + "\n" +
                 "Estado: " + InfoUtils.parseEstadoEncomenda(estadoEncomenda) + "\n" +

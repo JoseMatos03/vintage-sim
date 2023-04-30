@@ -33,89 +33,101 @@ public class Vintage {
 
     private LocalDateTime tempoAtual;
 
-    public void criaArtigo(String[] info) {
-        int tipo = Integer.parseInt(info[0]);
-        int codigoVendedor = Integer.parseInt(info[1]);
-        float estadoUtilizacao = Float.parseFloat(info[2]);
-        int numDonos = Integer.parseInt(info[3]);
-        String descricao = info[4];
-        String marca = info[5];
-        int codigo = this.codigoProximoArtigo++;
-        float precoBase = Float.parseFloat(info[6]);
-        Transportadora transportadora = getTransportadora(transportadoras, info[7]);
-        switch (tipo) {
-            case Artigo.MALA:
-                float comprimento = Float.parseFloat(info[8]);
-                float largura = Float.parseFloat(info[9]);
-                float altura = Float.parseFloat(info[10]);
-                float[] dimensao = { comprimento, largura, altura };
-                int material = Integer.parseInt(info[11]);
-                int anoColecaoMala = Integer.parseInt(info[12]);
-                Artigo mala = new Mala(
-                        tipo,
-                        estadoUtilizacao,
-                        numDonos,
-                        descricao,
-                        marca,
-                        codigo,
-                        precoBase,
-                        dimensao,
-                        material,
-                        anoColecaoMala,
-                        codigoVendedor,
-                        transportadora);
+    public ErrorCode criaArtigo(String[] info) {
+        try {
+            int tipo = Integer.parseInt(info[0]);
+            int codigoVendedor = Integer.parseInt(info[1]);
+            float estadoUtilizacao = Float.parseFloat(info[2]);
+            int numDonos = Integer.parseInt(info[3]);
+            String descricao = info[4];
+            String marca = info[5];
+            int codigo = this.codigoProximoArtigo++;
+            float precoBase = Float.parseFloat(info[6]);
+            Transportadora transportadora = getTransportadora(transportadoras, info[7]);
 
-                this.artigos.add(mala);
-                getUtilizador(utilizadores, codigoVendedor).criarListagem(mala);
-                break;
+            if (getUtilizador(utilizadores, codigoVendedor) == null)
+                return ErrorCode.CODIGO_INVALIDO;
 
-            case Artigo.SAPATILHAS:
-                int tamanhoSapatilhas = Integer.parseInt(info[8]);
-                int atacadores = Integer.parseInt(info[9]);
-                String cor = info[10];
-                int anoColecaoSapatilhas = Integer.parseInt(info[11]);
-                Artigo sapatilhas = new Sapatilhas(
-                        tipo,
-                        estadoUtilizacao,
-                        numDonos,
-                        descricao,
-                        marca,
-                        codigo,
-                        precoBase,
-                        tamanhoSapatilhas,
-                        atacadores,
-                        cor,
-                        anoColecaoSapatilhas,
-                        codigoVendedor,
-                        transportadora);
+            if (transportadora == null)
+                return ErrorCode.TRANSPORTADORA_INVALIDA;
 
-                this.artigos.add(sapatilhas);
-                getUtilizador(utilizadores, codigoVendedor).criarListagem(sapatilhas);
-                break;
+            switch (tipo) {
+                case Artigo.MALA:
+                    float comprimento = Float.parseFloat(info[8]);
+                    float largura = Float.parseFloat(info[9]);
+                    float altura = Float.parseFloat(info[10]);
+                    float[] dimensao = { comprimento, largura, altura };
+                    int material = Integer.parseInt(info[11]);
+                    int anoColecaoMala = Integer.parseInt(info[12]);
+                    Artigo mala = new Mala(
+                            tipo,
+                            estadoUtilizacao,
+                            numDonos,
+                            descricao,
+                            marca,
+                            codigo,
+                            precoBase,
+                            dimensao,
+                            material,
+                            anoColecaoMala,
+                            codigoVendedor,
+                            transportadora);
 
-            case Artigo.TSHIRT:
-                String tamanhoTShirt = info[8];
-                int padrao = Integer.parseInt(info[9]);
-                Artigo tshirt = new TShirt(
-                        tipo,
-                        estadoUtilizacao,
-                        numDonos,
-                        descricao,
-                        marca,
-                        codigo,
-                        precoBase,
-                        tamanhoTShirt,
-                        padrao,
-                        codigoVendedor,
-                        transportadora);
+                    this.artigos.add(mala);
+                    getUtilizador(utilizadores, codigoVendedor).criarListagem(mala);
+                    break;
 
-                this.artigos.add(tshirt);
-                getUtilizador(utilizadores, codigoVendedor).criarListagem(tshirt);
-                break;
+                case Artigo.SAPATILHAS:
+                    int tamanhoSapatilhas = Integer.parseInt(info[8]);
+                    int atacadores = Integer.parseInt(info[9]);
+                    String cor = info[10];
+                    int anoColecaoSapatilhas = Integer.parseInt(info[11]);
+                    Artigo sapatilhas = new Sapatilhas(
+                            tipo,
+                            estadoUtilizacao,
+                            numDonos,
+                            descricao,
+                            marca,
+                            codigo,
+                            precoBase,
+                            tamanhoSapatilhas,
+                            atacadores,
+                            cor,
+                            anoColecaoSapatilhas,
+                            codigoVendedor,
+                            transportadora);
 
-            default:
-                break;
+                    this.artigos.add(sapatilhas);
+                    getUtilizador(utilizadores, codigoVendedor).criarListagem(sapatilhas);
+                    break;
+
+                case Artigo.TSHIRT:
+                    String tamanhoTShirt = info[8];
+                    int padrao = Integer.parseInt(info[9]);
+                    Artigo tshirt = new TShirt(
+                            tipo,
+                            estadoUtilizacao,
+                            numDonos,
+                            descricao,
+                            marca,
+                            codigo,
+                            precoBase,
+                            tamanhoTShirt,
+                            padrao,
+                            codigoVendedor,
+                            transportadora);
+
+                    this.artigos.add(tshirt);
+                    getUtilizador(utilizadores, codigoVendedor).criarListagem(tshirt);
+                    break;
+
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            return ErrorCode.PARAMETRO_ERRADO;
         }
+        return ErrorCode.NO_ERRORS;
     }
 
     public ErrorCode removeArtigo(String info) {
@@ -135,13 +147,21 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
-    public void criaEncomenda(String[] info) {
-        int codigo = encomendas.size();
-        int codigoComprador = Integer.parseInt(info[0]);
-        int dimensaoEncomenda = Integer.parseInt(info[1]);
+    public ErrorCode criaEncomenda(String[] info) {
+        try {
+            int codigo = encomendas.size();
+            int codigoComprador = Integer.parseInt(info[0]);
+            int dimensaoEncomenda = Integer.parseInt(info[1]);
 
-        Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda);
-        this.encomendas.add(encomenda);
+            if (getUtilizador(utilizadores, codigoComprador) == null)
+                return ErrorCode.CODIGO_INVALIDO;
+
+            Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda);
+            this.encomendas.add(encomenda);
+        } catch (Exception e) {
+            return ErrorCode.PARAMETRO_ERRADO;
+        }
+        return ErrorCode.NO_ERRORS;
     }
 
     public ErrorCode expedirEncomenda(String info) {
@@ -187,20 +207,25 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
-    public void criaUtilizador(String[] info) {
-        int codigo = utilizadores.size();
-        String email = info[0];
-        String nome = info[1];
-        String morada = info[2];
-        int numeroFiscal = Integer.parseInt(info[3]);
+    public ErrorCode criaUtilizador(String[] info) {
+        try {
+            int codigo = utilizadores.size();
+            String email = info[0];
+            String nome = info[1];
+            String morada = info[2];
+            int numeroFiscal = Integer.parseInt(info[3]);
 
-        Utilizador utilizador = new Utilizador(
-                codigo,
-                email,
-                nome,
-                morada,
-                numeroFiscal);
-        this.utilizadores.add(utilizador);
+            Utilizador utilizador = new Utilizador(
+                    codigo,
+                    email,
+                    nome,
+                    morada,
+                    numeroFiscal);
+            this.utilizadores.add(utilizador);
+        } catch (Exception e) {
+            return ErrorCode.PARAMETRO_ERRADO;
+        }
+        return ErrorCode.NO_ERRORS;
     }
 
     public void apagaUtilizador(String info) {
@@ -221,17 +246,22 @@ public class Vintage {
         utilizador.setAtividade(Utilizador.INATIVA);
     }
 
-    public void criaTransportadora(String[] info) {
-        String nome = info[0];
-        float margemLucro = Float.parseFloat(info[1]);
-        float margemExtra = Float.parseFloat(info[2]);
+    public ErrorCode criaTransportadora(String[] info) {
+        try {
+            String nome = info[0];
+            float margemLucro = Float.parseFloat(info[1]);
+            float margemExtra = Float.parseFloat(info[2]);
 
-        Transportadora transportadora = new Transportadora(
-                nome,
-                margemLucro,
-                margemExtra);
+            Transportadora transportadora = new Transportadora(
+                    nome,
+                    margemLucro,
+                    margemExtra);
 
-        this.transportadoras.add(transportadora);
+            this.transportadoras.add(transportadora);
+        } catch (Exception e) {
+            return ErrorCode.PARAMETRO_ERRADO;
+        }
+        return ErrorCode.NO_ERRORS;
     }
 
     public void apagaTransportadora(String nome) {

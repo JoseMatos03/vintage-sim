@@ -247,7 +247,7 @@ public class Info {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
 
-                        new Label(encomenda.toString()).setPreferredSize(new TerminalSize(70, 7)).addTo(actionPanel);
+                        new Label(encomenda.toString()).setPreferredSize(new TerminalSize(70, 10)).addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
                     }
@@ -272,7 +272,7 @@ public class Info {
                                 try {
                                     error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(),
                                             Integer.parseInt(codigoArtigo.getText()));
-                                } catch (NumberFormatException e) {
+                                } catch (Exception e) {
                                     error = ErrorCode.PARAMETRO_ERRADO;
                                 }
                                 handleError(gui, error);
@@ -351,7 +351,7 @@ public class Info {
                         String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                         Transportadora transportadora = getTransportadora(transportadoras, nome);
 
-                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 7))
+                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 10))
                                 .addTo(actionPanel);
 
                         actionWindow.setComponent(actionPanel);
