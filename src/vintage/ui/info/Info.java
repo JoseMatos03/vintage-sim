@@ -195,10 +195,19 @@ public class Info {
                 actionListBox.addItem("Apagar...", new Runnable() {
                     @Override
                     public void run() {
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        loja.apagaUtilizador(codigo);
-                        actionWindow.close();
-                        window.close();
+                        Panel actionPanel = new Panel();
+
+                        new Label("Todos os artigos associados serão apagados. Continuar?").addTo(actionPanel);
+                        new Button("Confirmar", new Runnable() {
+                            public void run()
+                            {
+                                String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                                loja.apagaUtilizador(codigo);
+                                actionWindow.close();
+                                window.close();
+                            }
+                            }).addTo(actionPanel);
+                        actionWindow.setComponent(actionPanel);
                     }
                 });
 
