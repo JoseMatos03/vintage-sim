@@ -225,8 +225,8 @@ public class Manage {
                     });
                 }
                 handleError(gui, error);
-
-                window.close();
+                if (error.equals(ErrorCode.NO_ERRORS))
+                    window.close();
             }
         });
 
@@ -348,8 +348,8 @@ public class Manage {
                         nif.getText()
                 });
                 handleError(gui, error);
-
-                window.close();
+                if (error.equals(ErrorCode.NO_ERRORS))
+                    window.close();
             }
         });
         confirmButton.addTo(panel);
@@ -386,8 +386,8 @@ public class Manage {
                         ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
                 });
                 handleError(gui, error);
-
-                window.close();
+                if (error.equals(ErrorCode.NO_ERRORS))
+                    window.close();
             }
         });
         confirmButton.addTo(panel);
@@ -427,8 +427,8 @@ public class Manage {
                         margemExtra.getText()
                 });
                 handleError(gui, error);
-
-                window.close();
+                if (error.equals(ErrorCode.NO_ERRORS))
+                    window.close();
             }
         });
         confirmButton.addTo(panel);

@@ -276,8 +276,10 @@ public class Info {
                                     error = ErrorCode.PARAMETRO_ERRADO;
                                 }
                                 handleError(gui, error);
-                                actionWindow.close();
-                                window.close();
+                                if (error.equals(ErrorCode.NO_ERRORS)) {
+                                    actionWindow.close();
+                                    window.close();
+                                }
                             }
                         }).addTo(actionPanel);
 
@@ -288,10 +290,12 @@ public class Info {
                     @Override
                     public void run() {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        ErrorCode erro = loja.expedirEncomenda(codigo);
-                        handleError(gui, erro);
-                        actionWindow.close();
-                        window.close();
+                        ErrorCode error = loja.expedirEncomenda(codigo);
+                        handleError(gui, error);
+                        if (error.equals(ErrorCode.NO_ERRORS)) {
+                            actionWindow.close();
+                            window.close();
+                        }
                     }
                 });
                 // Cancelar encomenda
@@ -299,10 +303,12 @@ public class Info {
                     @Override
                     public void run() {
                         String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        ErrorCode erro = loja.cancelaEncomenda(codigo);
-                        handleError(gui, erro);
-                        actionWindow.close();
-                        window.close();
+                        ErrorCode error = loja.cancelaEncomenda(codigo);
+                        handleError(gui, error);
+                        if (error.equals(ErrorCode.NO_ERRORS)) {
+                            actionWindow.close();
+                            window.close();
+                        }
                     }
                 });
 
