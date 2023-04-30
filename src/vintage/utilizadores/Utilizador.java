@@ -53,7 +53,7 @@ public class Utilizador {
             return;
 
         this.vendidos.add(artigo);
-        this.listados.remove(codigo);
+        this.listados.remove(Integer.valueOf(codigo));
         this.valorEmVendas += artigo.calcularPreco()
                 - Utils.calcularPercentagem(artigo.getPrecoBase(), artigo.getTransportadora().getValorExpedicao());
     }
