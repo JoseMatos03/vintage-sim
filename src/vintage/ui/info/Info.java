@@ -268,20 +268,16 @@ public class Info {
                         new Button("Confirmar", new Runnable() {
                             @Override
                             public void run() {
-                                if(encomenda.getEstadoEncomenda() != Encomenda.PENDENTE)
-                                {
-                                    handleError(gui, ErrorCode.EM_EXPEDICAO);
+                                ErrorCode error;
+                                try {
+                                    error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(),
+                                            Integer.parseInt(codigoArtigo.getText()));
+                                } catch (NumberFormatException e) {
+                                    error = ErrorCode.PARAMETRO_ERRADO;
                                 }
-                                else if(codigoArtigo.getText() == "")
-                                {
-                                    handleError(gui, ErrorCode.SEM_TEXTO);
-                                }
-                                else {
-                                    ErrorCode error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(), Integer.parseInt(codigoArtigo.getText()));
-                                    handleError(gui, error);
-                                    actionWindow.close();
-                                    window.close();
-                                }
+                                handleError(gui, error);
+                                actionWindow.close();
+                                window.close();
                             }
                         }).addTo(actionPanel);
 

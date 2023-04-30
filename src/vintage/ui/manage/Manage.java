@@ -174,74 +174,59 @@ public class Manage {
         final Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                //TODO fazer checks nos parametros para as pessoas não abusarem
-                if(tipo.getSelectedItem().equals("Mala") && (codigoVendedor.getText() == "" || numDonos.getText() == "" || descricao.getText() == "" || marca.getText() == "" ||
-                precoBase.getText() == "" || transportadora.getText() == "" || comprimento.getText() == "" || largura.getText() == "" ||
-                altura.getText() == "" || anoColecao.getText() == ""))
-                {
-                    handleError(gui,ErrorCode.SEM_PARAMETRO);
+                // TODO fazer checks nos parametros para as pessoas não abusarem
+                try {
+                    if (tipo.getSelectedItem().equals("Mala")) {
+                        loja.criaArtigo(new String[] {
+                                Integer.toString(Artigo.MALA),
+                                codigoVendedor.getText(),
+                                ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                                numDonos.getText(),
+                                descricao.getText(),
+                                marca.getText(),
+                                precoBase.getText(),
+                                transportadora.getText(),
+                                comprimento.getText(),
+                                largura.getText(),
+                                altura.getText(),
+                                ManageUtils.parseMaterialMala(material.getText()),
+                                anoColecao.getText()
+                        });
+                    }
+                    if (tipo.getSelectedItem().equals("Sapatilhas")) {
+                        loja.criaArtigo(new String[] {
+                                Integer.toString(Artigo.SAPATILHAS),
+                                codigoVendedor.getText(),
+                                ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                                numDonos.getText(),
+                                descricao.getText(),
+                                marca.getText(),
+                                precoBase.getText(),
+                                transportadora.getText(),
+                                tamanho.getText(),
+                                Integer.toString(atacadores.getSelectedIndex()),
+                                cor.getText(),
+                                anoColecao.getText()
+                        });
+                    }
+                    if (tipo.getSelectedItem().equals("T-Shirt")) {
+                        loja.criaArtigo(new String[] {
+                                Integer.toString(Artigo.TSHIRT),
+                                codigoVendedor.getText(),
+                                ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
+                                numDonos.getText(),
+                                descricao.getText(),
+                                marca.getText(),
+                                precoBase.getText(),
+                                transportadora.getText(),
+                                tamanhoTShirt.getSelectedItem(),
+                                Integer.toString(padrao.getSelectedIndex())
+                        });
+                    }
+                } catch (Exception e) {
+                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
                 }
-                else if (tipo.getSelectedItem().equals("Mala")) {
-                    loja.criaArtigo(new String[] {
-                            Integer.toString(Artigo.MALA),
-                            codigoVendedor.getText(),
-                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
-                            numDonos.getText(),
-                            descricao.getText(),
-                            marca.getText(),
-                            precoBase.getText(),
-                            transportadora.getText(),
-                            comprimento.getText(),
-                            largura.getText(),
-                            altura.getText(),
-                            ManageUtils.parseMaterialMala(material.getText()),
-                            anoColecao.getText()
-                    });
-                    window.close();
-                }
-                else if(tipo.getSelectedItem().equals("Sapatilhas") && (codigoVendedor.getText() == "" || numDonos.getText() == "" || descricao.getText() == "" || marca.getText() == "" ||
-                precoBase.getText() == "" || transportadora.getText() == "" || tamanho.getText() == "" || cor.getText() == "" ||
-                anoColecao.getText() == ""))
-                {
-                    handleError(gui,ErrorCode.SEM_PARAMETRO);
-                }
-                else if (tipo.getSelectedItem().equals("Sapatilhas")) {
-                    loja.criaArtigo(new String[] {
-                            Integer.toString(Artigo.SAPATILHAS),
-                            codigoVendedor.getText(),
-                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
-                            numDonos.getText(),
-                            descricao.getText(),
-                            marca.getText(),
-                            precoBase.getText(),
-                            transportadora.getText(),
-                            tamanho.getText(),
-                            Integer.toString(atacadores.getSelectedIndex()),
-                            cor.getText(),
-                            anoColecao.getText()
-                    });
-                    window.close();
-                }
-                else if(tipo.getSelectedItem().equals("T-Shirt") && (codigoVendedor.getText() == "" || numDonos.getText() == "" || descricao.getText() == "" || marca.getText() == "" ||
-                        precoBase.getText() == "" || transportadora.getText() == ""))
-                {
-                    handleError(gui,ErrorCode.SEM_PARAMETRO);
-                }
-                else if (tipo.getSelectedItem().equals("T-Shirt")) {
-                    loja.criaArtigo(new String[] {
-                            Integer.toString(Artigo.TSHIRT),
-                            codigoVendedor.getText(),
-                            ManageUtils.parseEstadoUtilizacao(estadoUtilizacao.getText()),
-                            numDonos.getText(),
-                            descricao.getText(),
-                            marca.getText(),
-                            precoBase.getText(),
-                            transportadora.getText(),
-                            tamanhoTShirt.getSelectedItem(),
-                            Integer.toString(padrao.getSelectedIndex())
-                    });
-                    window.close();
-                }
+                window.close();
             }
         });
 
@@ -356,20 +341,17 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                //TODO verificar se email tem @ e n sei se podemos verificar o nif?
-                if(email.getText() == "" || nome.getText() == "" || morada.getText() == "" || nif.getText() == "")
-                {
-                    handleError(gui, ErrorCode.SEM_PARAMETRO);
-                }
-                else {
-                    loja.criaUtilizador(new String[]{
+                try {
+                    loja.criaUtilizador(new String[] {
                             email.getText(),
                             nome.getText(),
                             morada.getText(),
                             nif.getText()
                     });
-                    window.close();
+                } catch (Exception e) {
+                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
                 }
+                window.close();
             }
         });
         confirmButton.addTo(panel);
@@ -401,17 +383,15 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                if(codigoVendedor.getText() == "")
-                {
-                    handleError(gui, ErrorCode.SEM_PARAMETRO);
-                }
-                else {
-                    loja.criaEncomenda(new String[]{
+                try {
+                    loja.criaEncomenda(new String[] {
                             codigoVendedor.getText(),
                             ManageUtils.parseTamanhoEncomenda(material.getSelectedItem())
                     });
-                    window.close();
+                } catch (Exception e) {
+                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
                 }
+                window.close();
             }
         });
         confirmButton.addTo(panel);
@@ -445,18 +425,16 @@ public class Manage {
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
-                if(nome.getText() == "" || margemLucro.getText() == "" || margemExtra.getText() == "")
-                {
-                    handleError(gui, ErrorCode.SEM_PARAMETRO);
-                }
-                else {
-                    loja.criaTransportadora(new String[]{
+                try {
+                    loja.criaTransportadora(new String[] {
                             nome.getText(),
                             margemLucro.getText(),
                             margemExtra.getText()
                     });
-                    window.close();
+                } catch (Exception e) {
+                    handleError(gui, ErrorCode.PARAMETRO_ERRADO);
                 }
+                window.close();
             }
         });
         confirmButton.addTo(panel);

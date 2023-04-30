@@ -103,4 +103,11 @@ public class InfoUtils {
         }
         return string + "]";
     }
+
+    public static String parseDimensoes(float[] dimensoes) {
+        float comprimento = dimensoes[0];
+        float largura = dimensoes[1];
+        float altura = dimensoes[2];
+        return comprimento + " x " + largura + " x " + altura;
+    }
 }
