@@ -31,7 +31,7 @@ public class TShirt extends Artigo {
     public float calcularCorrecao() {
         float correcao = 0;
 
-        correcao += this.getTransportadora().getValorExpedicao();
+        correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         if (this.padrao == LISO) {
             return 0;
         }

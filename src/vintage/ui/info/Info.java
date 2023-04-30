@@ -340,13 +340,14 @@ public class Info {
 
         Panel panel = new Panel();
 
-        Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição");
+        Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição", "Lucro");
         for (Transportadora transportadora : transportadoras) {
             String nome = transportadora.getNome();
             String margemLucro = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemLucro()));
             String margemExtra = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemExtra()));
             String valorExpedicao = Float.toString(Utils.arrondarCentesimas(transportadora.getValorExpedicao()));
-            table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao);
+            String lucro = Float.toString(Utils.arrondarCentesimas(transportadora.getLucro()));
+            table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao, lucro);
         }
         table.setSelectAction(new Runnable() {
             // Opções para cada item
