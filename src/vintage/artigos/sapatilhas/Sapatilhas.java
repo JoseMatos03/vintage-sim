@@ -3,6 +3,7 @@ package vintage.artigos.sapatilhas;
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.ui.InfoUtils;
+import vintage.utils.artigos.Utils;
 
 public class Sapatilhas extends Artigo {
 
@@ -92,8 +93,8 @@ public class Sapatilhas extends Artigo {
                 "Ano coleção: " + this.getAnoColecao() + "\n" +
                 "Nº Donos: " + this.getNumDonos() + "\n" +
                 "Estado: " + estado + "\n" +
-                "Preço Base: " + this.getPrecoBase() + "\n" +
-                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Preço Base: " + Utils.arrondarCentesimas(this.getPrecoBase()) + "\n" +
+                "Preço Final: " + Utils.arrondarCentesimas(this.calcularPreco()) + "\n" +
                 "Tamanho: " + this.getTamanho() + "\n" +
                 "Tipo Atacadores: " + InfoUtils.parseTipoAtacadores(this.getAtacadores()) + "\n" +
                 "Cor: " + this.getCor() + "\n" +
