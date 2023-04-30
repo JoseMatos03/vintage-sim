@@ -2,6 +2,17 @@ package vintage.utils.ui;
 
 public class ManageUtils {
 
+    public static String parsePremiumBoolean(String premium)
+    {
+        switch(premium){
+            case "Sim":
+                return "true";
+            case "Não":
+                return "false";
+            default:
+                return null;
+        }
+    }
     public static String parseEstadoUtilizacao(String estadoUtilizacao) {
         switch (estadoUtilizacao) {
             case "Sem uso":

@@ -60,6 +60,7 @@ public class Vintage {
                     float[] dimensao = { comprimento, largura, altura };
                     int material = Integer.parseInt(info[11]);
                     int anoColecaoMala = Integer.parseInt(info[12]);
+                    boolean premiumMala = Boolean.parseBoolean(info[13]);
                     Artigo mala = new Mala(
                             tipo,
                             estadoUtilizacao,
@@ -72,7 +73,8 @@ public class Vintage {
                             material,
                             anoColecaoMala,
                             codigoVendedor,
-                            transportadora);
+                            transportadora,
+                            premiumMala);
 
                     this.artigos.add(mala);
                     getUtilizador(utilizadores, codigoVendedor).criarListagem(mala);
@@ -83,6 +85,7 @@ public class Vintage {
                     int atacadores = Integer.parseInt(info[9]);
                     String cor = info[10];
                     int anoColecaoSapatilhas = Integer.parseInt(info[11]);
+                    boolean premiumSapatilha = Boolean.parseBoolean(info[12]);
                     Artigo sapatilhas = new Sapatilhas(
                             tipo,
                             estadoUtilizacao,
@@ -96,7 +99,8 @@ public class Vintage {
                             cor,
                             anoColecaoSapatilhas,
                             codigoVendedor,
-                            transportadora);
+                            transportadora,
+                            premiumSapatilha);
 
                     this.artigos.add(sapatilhas);
                     getUtilizador(utilizadores, codigoVendedor).criarListagem(sapatilhas);

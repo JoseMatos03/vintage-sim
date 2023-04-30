@@ -1,7 +1,10 @@
 package vintage.artigos.sapatilhas;
 
+import java.time.LocalDateTime;
+
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
+import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
 
 public class Sapatilhas extends Artigo {
@@ -17,7 +20,10 @@ public class Sapatilhas extends Artigo {
 
     @Override
     public float calcularPreco() {
-        float precoFinal = this.getPrecoBase() + this.calcularCorrecao();
+        float precoFinal;
+        float premiumCorrecao = (LocalDateTime.now().getYear() - this.getAnoColecao()) / Utils.arrondarCentesimas(100);
+        if(this.getPremiumEstado() == true) precoFinal = (this.getPrecoBase() + (this.getPrecoBase() * premiumCorrecao)) + this.calcularCorrecao();
+        else precoFinal = this.getPrecoBase() + this.calcularCorrecao();
         return precoFinal;
     }
 
@@ -38,8 +44,8 @@ public class Sapatilhas extends Artigo {
 
     public Sapatilhas(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
             float precoBase, int tamanho, int atacadores, String cor, int anoColecao, int codigoVendedor,
-            Transportadora transportadora) {
-        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora);
+            Transportadora transportadora, boolean premiumEstado) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
 
         this.tamanho = tamanho;
         this.atacadores = atacadores;

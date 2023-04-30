@@ -142,6 +142,13 @@ public class Manage {
         final Label anoColecaoLabel = new Label("Ano Coleção");
         final TextBox anoColecao = new TextBox(size).setValidationPattern(Pattern.compile("^[0-9]{0,4}?$"));
 
+        // PREMIUM
+        final Label premiumLabelMala = new Label("Premium");
+        final ComboBox<String> premiumBoxMala = new ComboBox<>();
+        premiumBoxMala.addItem("Sim");
+        premiumBoxMala.addItem("Não");
+        premiumBoxMala.setPreferredSize(size);
+
         // --- SAPATILHAS ---
         // TAMANHO
         final Label tamanhoLabel = new Label("Tamanho");
@@ -155,6 +162,13 @@ public class Manage {
         // COR
         final Label corLabel = new Label("Cor");
         final TextBox cor = new TextBox(size);
+
+        // PREMIUM
+        final Label premiumLabelSapatilha = new Label("Premium");
+        final ComboBox<String> premiumBoxSapatilha = new ComboBox<>();
+        premiumBoxSapatilha.addItem("Sim");
+        premiumBoxSapatilha.addItem("Não");
+        premiumBoxSapatilha.setPreferredSize(size);
 
         // --- TSHIRT ---
         // TAMANHO
@@ -191,7 +205,8 @@ public class Manage {
                             largura.getText(),
                             altura.getText(),
                             ManageUtils.parseMaterialMala(material.getText()),
-                            anoColecao.getText()
+                            anoColecao.getText(),
+                            ManageUtils.parsePremiumBoolean(premiumBoxMala.getText())
                     });
                 }
                 if (tipo.getSelectedItem().equals("Sapatilhas")) {
@@ -207,7 +222,8 @@ public class Manage {
                             tamanho.getText(),
                             Integer.toString(atacadores.getSelectedIndex()),
                             cor.getText(),
-                            anoColecao.getText()
+                            anoColecao.getText(),
+                            ManageUtils.parsePremiumBoolean(premiumBoxSapatilha.getText())
                     });
                 }
                 if (tipo.getSelectedItem().equals("T-Shirt")) {
@@ -257,6 +273,8 @@ public class Manage {
                     material.addTo(panel);
                     anoColecaoLabel.addTo(panel);
                     anoColecao.addTo(panel);
+                    premiumLabelMala.addTo(panel);
+                    premiumBoxMala.addTo(panel);
                 }
                 if (selectedIndex == 1) {
                     tamanhoLabel.addTo(panel);
@@ -267,6 +285,8 @@ public class Manage {
                     cor.addTo(panel);
                     anoColecaoLabel.addTo(panel);
                     anoColecao.addTo(panel);
+                    premiumLabelSapatilha.addTo(panel);
+                    premiumBoxSapatilha.addTo(panel);
                 }
                 if (selectedIndex == 2) {
                     tamanhoTShirtLabel.addTo(panel);
@@ -305,6 +325,8 @@ public class Manage {
         panel.addComponent(material);
         panel.addComponent(anoColecaoLabel);
         panel.addComponent(anoColecao);
+        panel.addComponent(premiumLabelMala);
+        panel.addComponent(premiumBoxMala);
         panel.addComponent(codigoVendedorLabel);
         panel.addComponent(codigoVendedor);
         panel.addComponent(transportadoraLabel);
