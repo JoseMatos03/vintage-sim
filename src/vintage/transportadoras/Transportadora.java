@@ -3,6 +3,7 @@ package vintage.transportadoras;
 import static vintage.utils.transportadoras.Utils.VALORBASE;
 
 import vintage.utils.artigos.Utils;
+import vintage.utils.ui.InfoUtils;
 
 import static vintage.utils.transportadoras.Utils.IMPOSTO;
 
@@ -13,21 +14,23 @@ public class Transportadora {
     private float margemExtra;
     private float valorExpedicao;
     private float lucro;
+    private boolean premiumEstado;
 
     public void calcularEntrega(float precoArtigo) {
         lucro += Utils.calcularPercentagem(precoArtigo, valorExpedicao);
     }
 
     public float calcularValorExpedicao() {
-        return (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra;
+        return this.premiumEstado ? (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra : VALORBASE * margemLucro * (1 + IMPOSTO);
     }
 
-    public Transportadora(String nome, float margemLucro, float margemExtra) {
+    public Transportadora(String nome, float margemLucro, float margemExtra, boolean premiumEstado) {
         this.nome = nome;
         this.margemLucro = margemLucro;
         this.margemExtra = margemExtra;
         this.valorExpedicao = calcularValorExpedicao();
         this.lucro = 0.00f;
+        this.premiumEstado = premiumEstado;
     }
 
     public float getValorExpedicao() {
@@ -70,13 +73,24 @@ public class Transportadora {
         this.lucro = lucro;
     }
 
+    public boolean getPremiumEstado() {
+        return premiumEstado;
+    }
+
+    public void setPremiumEstado(boolean premiumEstado) {
+        this.premiumEstado = premiumEstado;
+    }
+
     @Override
     public String toString() {
+        String premium = InfoUtils.parsePremium(this.getPremiumEstado());
+        
         return "Nome: " + nome + "\n" +
                 "Margem Lucro: " + Utils.arrondarCentesimas(margemLucro) + "\n" +
                 "Margem Extra: " + Utils.arrondarCentesimas(margemExtra) + "\n" +
                 "Valor Expedição: " + Utils.arrondarCentesimas(valorExpedicao) + "\n" +
-                "Lucro: " + Utils.arrondarCentesimas(lucro);
+                "Lucro: " + Utils.arrondarCentesimas(lucro) + "\n" +
+                "Premium: " + premium;
     }
 
 }

@@ -61,6 +61,10 @@ public class Vintage {
                     int material = Integer.parseInt(info[11]);
                     int anoColecaoMala = Integer.parseInt(info[12]);
                     boolean premiumMala = Boolean.parseBoolean(info[13]);
+
+                    if (premiumMala && !transportadora.getPremiumEstado())
+                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+
                     Artigo mala = new Mala(
                             tipo,
                             estadoUtilizacao,
@@ -86,7 +90,11 @@ public class Vintage {
                     String cor = info[10];
                     int anoColecaoSapatilhas = Integer.parseInt(info[11]);
                     boolean premiumSapatilha = Boolean.parseBoolean(info[12]);
-                    Artigo sapatilhas = new Sapatilhas(
+
+                    if (premiumSapatilha && !transportadora.getPremiumEstado())
+                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+                    
+                        Artigo sapatilhas = new Sapatilhas(
                             tipo,
                             estadoUtilizacao,
                             numDonos,
@@ -260,11 +268,13 @@ public class Vintage {
             String nome = info[0];
             float margemLucro = Float.parseFloat(info[1]);
             float margemExtra = Float.parseFloat(info[2]);
+            boolean premiumTransportadora = Boolean.parseBoolean(info[3]);
 
             Transportadora transportadora = new Transportadora(
                     nome,
                     margemLucro,
-                    margemExtra);
+                    margemExtra,
+                    premiumTransportadora);
 
             this.transportadoras.add(transportadora);
         } catch (Exception e) {

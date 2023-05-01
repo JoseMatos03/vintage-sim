@@ -88,6 +88,7 @@ public class Mala extends Artigo {
     public String toString() {
         String tipo = InfoUtils.parseTipoArtigo(this.getTipo());
         String estado = InfoUtils.parseEstadoUtilizacao(this.getEstadoUtilizacao());
+        String premium = InfoUtils.parsePremium(this.getPremiumEstado());
 
         return "Código: " + this.getCodigo() + "\n" +
                 "Código Vendedor: " + this.getCodigoVendedor() + "\n" +
@@ -101,7 +102,8 @@ public class Mala extends Artigo {
                 "Dimensão: " + InfoUtils.parseDimensoes(dimensao) + "\n" +
                 "Material: " + material + "\n" +
                 "Ano Coleção: " + anoColecao + "\n" +
-                "Transportadora: " + this.getTransportadora().getNome();
+                "Transportadora: " + this.getTransportadora().getNome() + "\n" +
+                "Premium: " + premium;
     }
 
 }

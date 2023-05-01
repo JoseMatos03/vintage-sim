@@ -419,26 +419,38 @@ public class Manage {
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
-        new Label("Nome").addTo(panel);
-        final TextBox nome = new TextBox().setPreferredSize(new TerminalSize(35, 1)).addTo(panel);
+        final TerminalSize size = new TerminalSize(35, 1);
 
-        new Label("Margem Lucro").addTo(panel);
-        final TextBox margemLucro = new TextBox().setPreferredSize(new TerminalSize(35, 1))
+        final Label nomeLabel = new Label("Nome").addTo(panel);
+        final TextBox nome = new TextBox().setPreferredSize(size).addTo(panel);
+
+        final Label margemLucroLabel = new Label("Margem Lucro").addTo(panel);
+        final TextBox margemLucro = new TextBox().setPreferredSize(size)
                 .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
                 .addTo(panel);
 
-        new Label("Margem Extra").addTo(panel);
-        final TextBox margemExtra = new TextBox().setPreferredSize(new TerminalSize(35, 1))
+        final Label margemExtraLabel = new Label("Margem Extra").addTo(panel);
+        final TextBox margemExtra = new TextBox().setPreferredSize(size)
                 .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
                 .addTo(panel);
+
+        final Label premiumLabel = new Label("Premium");
+        final ComboBox<String> premiumBox = new ComboBox<>();
+        premiumBox.addItem("Sim");
+        premiumBox.addItem("Não");
+        premiumBox.setPreferredSize(size);
+        premiumLabel.addTo(panel);
+        premiumBox.addTo(panel);
 
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
+                String valorMargemExtra = margemExtra.getText().isEmpty() ? "1" : margemExtra.getText();
                 ErrorCode error = loja.criaTransportadora(new String[] {
                         nome.getText(),
                         margemLucro.getText(),
-                        margemExtra.getText()
+                        valorMargemExtra,
+                        ManageUtils.parsePremiumBoolean(premiumBox.getText())
                 });
                 handleError(gui, error);
                 if (error.equals(ErrorCode.NO_ERRORS))
@@ -446,6 +458,26 @@ public class Manage {
             }
         });
         confirmButton.addTo(panel);
+
+        premiumBox.addListener(new Listener(){
+            @Override
+            public void onSelectionChanged(int selectedIndex, int previousSelection, boolean changedByUserInteraction) {
+                panel.removeAllComponents();
+                margemExtra.setText("");
+                nomeLabel.addTo(panel);
+                nome.addTo(panel);
+                margemLucroLabel.addTo(panel);
+                margemLucro.addTo(panel);
+                if(selectedIndex == 0)
+                {
+                    margemExtraLabel.addTo(panel);
+                    margemExtra.addTo(panel);
+                }
+                premiumLabel.addTo(panel);
+                premiumBox.addTo(panel);
+                confirmButton.addTo(panel);
+            }
+        });
 
         window.setComponent(panel);
         gui.addWindowAndWait(window);
