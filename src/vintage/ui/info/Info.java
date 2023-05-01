@@ -92,7 +92,7 @@ public class Info {
 
         Panel panel = new Panel();
 
-        Table<String> table = new Table<String>("Código", "Tipo", "Marca", "Preço", "Nº Donos", "Estado");
+        Table<String> table = new Table<String>("Código", "Tipo", "Marca", "Preço", "Nº Donos", "Estado", "Premium");
         for (Artigo artigo : artigos) {
             String codigo = Integer.toString(artigo.getCodigo());
             String tipo = InfoUtils.parseTipoArtigo(artigo.getTipo());
@@ -100,7 +100,8 @@ public class Info {
             String preco = Float.toString(Utils.arrondarCentesimas(artigo.calcularPreco()));
             String numDonos = Integer.toString(artigo.getNumDonos());
             String estadoDeUtilizacao = Float.toString(Utils.arrondarCentesimas(artigo.getEstadoUtilizacao()));
-            table.getTableModel().addRow(codigo, tipo, marca, preco, numDonos, estadoDeUtilizacao);
+            String premium = InfoUtils.parsePremium(artigo.getPremiumEstado());
+            table.getTableModel().addRow(codigo, tipo, marca, preco, numDonos, estadoDeUtilizacao, premium);
         }
         table.setSelectAction(new Runnable() {
             // Opções para cada item

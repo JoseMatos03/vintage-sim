@@ -46,7 +46,7 @@ public abstract class Artigo {
     {
         float precoPremium = 0;
         if(this.getPremiumEstado() == true){
-            precoPremium += this.getPrecoBase() * ((LocalDateTime.now().getYear() - anoColecao) / Utils.arrondarCentesimas(100));
+            precoPremium += this.getPrecoBase() * ((LocalDateTime.now().getYear() - anoColecao) / 100f);
         }
         return precoPremium;
     }

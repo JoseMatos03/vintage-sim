@@ -111,4 +111,8 @@ public class InfoUtils {
         float altura = Utils.arrondarDecimas(dimensoes[2]);
         return comprimento + " x " + largura + " x " + altura;
     }
+
+    public static String parsePremium(boolean premium) {
+        return premium ? "Sim" : "Não";
+    }
 }
