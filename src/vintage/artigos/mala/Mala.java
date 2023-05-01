@@ -26,7 +26,7 @@ public class Mala extends Artigo {
 
     @Override
     public float calcularPreco() {
-        float precoFinal = this.getPrecoBase() + this.calcularCorrecao();
+        float precoFinal = this.getPrecoBase() + this.calcularCorrecaoPremium(this.getAnoColecao()) + this.calcularCorrecao();
         return precoFinal;
     }
 
@@ -52,8 +52,8 @@ public class Mala extends Artigo {
 
     public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
             float precoBase,
-            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora) {
-        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora);
+            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora, boolean premiumEstado) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
 
         this.dimensao = dimensao;
         this.material = material;
