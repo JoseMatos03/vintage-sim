@@ -21,7 +21,7 @@ public class Transportadora {
     }
 
     public float calcularValorExpedicao() {
-        return (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra;
+        return this.premiumEstado ? (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra : VALORBASE * margemLucro * (1 + IMPOSTO);
     }
 
     public Transportadora(String nome, float margemLucro, float margemExtra, boolean premiumEstado) {
