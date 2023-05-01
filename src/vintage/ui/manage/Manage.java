@@ -416,6 +416,8 @@ public class Manage {
         window.setHints(Arrays.asList(Window.Hint.CENTERED));
         window.setCloseWindowWithEscape(true);
 
+        final TerminalSize size = new TerminalSize(20, 1);
+
         Panel panel = new Panel();
         panel.setLayoutManager(new GridLayout(2));
 
@@ -432,13 +434,22 @@ public class Manage {
                 .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
                 .addTo(panel);
 
+        final Label premiumLabel = new Label("Premium");
+        final ComboBox<String> premiumBox = new ComboBox<>();
+        premiumBox.addItem("Sim");
+        premiumBox.addItem("Não");
+        premiumBox.setPreferredSize(size);
+        premiumLabel.addTo(panel);
+        premiumBox.addTo(panel);
+
         Button confirmButton = new Button("Confirmar", new Runnable() {
             @Override
             public void run() {
                 ErrorCode error = loja.criaTransportadora(new String[] {
                         nome.getText(),
                         margemLucro.getText(),
-                        margemExtra.getText()
+                        margemExtra.getText(),
+                        ManageUtils.parsePremiumBoolean(premiumBox.getText())
                 });
                 handleError(gui, error);
                 if (error.equals(ErrorCode.NO_ERRORS))

@@ -341,14 +341,15 @@ public class Info {
 
         Panel panel = new Panel();
 
-        Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição", "Lucro");
+        Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição", "Lucro", "Premium");
         for (Transportadora transportadora : transportadoras) {
             String nome = transportadora.getNome();
             String margemLucro = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemLucro()));
             String margemExtra = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemExtra()));
             String valorExpedicao = Float.toString(Utils.arrondarCentesimas(transportadora.getValorExpedicao()));
             String lucro = Float.toString(Utils.arrondarCentesimas(transportadora.getLucro()));
-            table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao, lucro);
+            String premium = InfoUtils.parsePremium(transportadora.getPremiumEstado());
+            table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao, lucro, premium);
         }
         table.setSelectAction(new Runnable() {
             // Opções para cada item

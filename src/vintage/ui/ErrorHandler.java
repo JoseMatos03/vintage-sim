@@ -33,7 +33,7 @@ public class ErrorHandler {
                 MessageDialog.showMessageDialog(gui, "Erro", "O código introduzido é inválido.");
                 break;
             case TRANSPORTADORA_INVALIDA:
-                MessageDialog.showMessageDialog(gui, "Erro", "A transportadora introduzida não existe.");
+                MessageDialog.showMessageDialog(gui, "Erro", "A transportadora introduzida é inválida.");
                 break;
             case NO_ERRORS:
                 break;

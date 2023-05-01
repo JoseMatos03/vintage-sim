@@ -84,6 +84,7 @@ public class Sapatilhas extends Artigo {
     public String toString() {
         String tipo = InfoUtils.parseTipoArtigo(this.getTipo());
         String estado = InfoUtils.parseEstadoUtilizacao(this.getEstadoUtilizacao());
+        String premium = InfoUtils.parsePremium(this.getPremiumEstado());
 
         return "Código: " + this.getCodigo() + "\n" +
                 "Código Vendedor: " + this.getCodigoVendedor() + "\n" +
@@ -98,7 +99,8 @@ public class Sapatilhas extends Artigo {
                 "Tamanho: " + this.getTamanho() + "\n" +
                 "Tipo Atacadores: " + InfoUtils.parseTipoAtacadores(this.getAtacadores()) + "\n" +
                 "Cor: " + this.getCor() + "\n" +
-                "Transportadora: " + this.getTransportadora().getNome();
+                "Transportadora: " + this.getTransportadora().getNome() + "\n" +
+                "Premium: " + premium;
     }
 
 }
