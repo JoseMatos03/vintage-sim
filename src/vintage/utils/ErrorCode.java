@@ -4,7 +4,7 @@ public enum ErrorCode {
     NO_ERRORS,
     PARAMETRO_ERRADO,
     CODIGO_INVALIDO,
-    
+    DATA_INVALIDA,
 
     // Artigos
     ARTIGO_EXPEDIDO,

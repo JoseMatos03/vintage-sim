@@ -38,6 +38,9 @@ public class ErrorHandler {
             case ARTIGO_DO_COMPRADOR:
                 MessageDialog.showMessageDialog(gui, "Erro", "O artigo pertence ao comprador da encomenda.");
                 break;
+            case DATA_INVALIDA:
+                MessageDialog.showMessageDialog(gui, "Erro", "A data introduzida não está formatada corretamente.");
+                break;
             case NO_ERRORS:
                 break;
             default:
