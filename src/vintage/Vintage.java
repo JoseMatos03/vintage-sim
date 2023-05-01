@@ -61,7 +61,10 @@ public class Vintage {
                     int material = Integer.parseInt(info[11]);
                     int anoColecaoMala = Integer.parseInt(info[12]);
                     boolean premiumMala = Boolean.parseBoolean(info[13]);
-                    if(premiumMala == true && transportadora.getPremiumEstado() != true) return ErrorCode.TRANSPORTADORA_INVALIDA;
+
+                    if (premiumMala && !transportadora.getPremiumEstado())
+                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+
                     Artigo mala = new Mala(
                             tipo,
                             estadoUtilizacao,
@@ -87,8 +90,11 @@ public class Vintage {
                     String cor = info[10];
                     int anoColecaoSapatilhas = Integer.parseInt(info[11]);
                     boolean premiumSapatilha = Boolean.parseBoolean(info[12]);
-                    if(premiumSapatilha == true && transportadora.getPremiumEstado() != true) return ErrorCode.TRANSPORTADORA_INVALIDA;
-                    Artigo sapatilhas = new Sapatilhas(
+
+                    if (premiumSapatilha && !transportadora.getPremiumEstado())
+                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+                    
+                        Artigo sapatilhas = new Sapatilhas(
                             tipo,
                             estadoUtilizacao,
                             numDonos,

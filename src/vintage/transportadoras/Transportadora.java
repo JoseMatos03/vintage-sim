@@ -73,13 +73,18 @@ public class Transportadora {
         this.lucro = lucro;
     }
 
-    public boolean getPremiumEstado() { return premiumEstado;}
+    public boolean getPremiumEstado() {
+        return premiumEstado;
+    }
 
-    public void setPremiumEstado(boolean premiumEstado) { this.premiumEstado = premiumEstado; }
+    public void setPremiumEstado(boolean premiumEstado) {
+        this.premiumEstado = premiumEstado;
+    }
 
     @Override
     public String toString() {
         String premium = InfoUtils.parsePremium(this.getPremiumEstado());
+        
         return "Nome: " + nome + "\n" +
                 "Margem Lucro: " + Utils.arrondarCentesimas(margemLucro) + "\n" +
                 "Margem Extra: " + Utils.arrondarCentesimas(margemExtra) + "\n" +
