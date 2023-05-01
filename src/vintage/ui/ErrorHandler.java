@@ -35,6 +35,9 @@ public class ErrorHandler {
             case TRANSPORTADORA_INVALIDA:
                 MessageDialog.showMessageDialog(gui, "Erro", "A transportadora introduzida não existe.");
                 break;
+            case ARTIGO_DO_COMPRADOR:
+                MessageDialog.showMessageDialog(gui, "Erro", "O artigo pertence ao comprador da encomenda.");
+                break;
             case NO_ERRORS:
                 break;
             default:

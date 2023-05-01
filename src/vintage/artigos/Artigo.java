@@ -3,7 +3,6 @@ package vintage.artigos;
 import java.time.LocalDateTime;
 
 import vintage.transportadoras.Transportadora;
-import vintage.utils.artigos.Utils;
 
 public abstract class Artigo {
 
@@ -42,10 +41,9 @@ public abstract class Artigo {
         this.premiumEstado = premiumEstado;
     }
 
-    public float calcularCorrecaoPremium(int anoColecao)
-    {
+    public float calcularCorrecaoPremium(int anoColecao) {
         float precoPremium = 0;
-        if(this.getPremiumEstado() == true){
+        if (this.getPremiumEstado() == true) {
             precoPremium += this.getPrecoBase() * ((LocalDateTime.now().getYear() - anoColecao) / 100f);
         }
         return precoPremium;
@@ -122,12 +120,12 @@ public abstract class Artigo {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    public void setPremiumEstado(boolean premiumEstado)
-    {
+
+    public void setPremiumEstado(boolean premiumEstado) {
         this.premiumEstado = premiumEstado;
     }
-    public boolean getPremiumEstado()
-    {
+
+    public boolean getPremiumEstado() {
         return premiumEstado;
     }
 }
