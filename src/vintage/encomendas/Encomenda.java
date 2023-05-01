@@ -42,6 +42,9 @@ public class Encomenda {
             return ErrorCode.CODIGO_INVALIDO;
 
         Artigo artigo = getArtigo(artigos, codigoArtigo);
+        if (artigo.getCodigoVendedor() == codigoComprador)
+            return ErrorCode.ARTIGO_DO_COMPRADOR;
+
         if (getEncomendaOfArtigo(encomendas, artigo) != -1)
             return ErrorCode.EM_ENCOMENDA;
 
