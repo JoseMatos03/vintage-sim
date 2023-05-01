@@ -8,6 +8,7 @@ import vintage.Vintage;
 import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
 import vintage.ui.stats.Stats;
+import vintage.ui.timetravel.TimeTravel;
 
 public class UI {
 
@@ -38,6 +39,14 @@ public class UI {
             }
         });
         statsButton.addTo(panel);
+
+        Button timeTravelButton = new Button("Time Travel...", new Runnable() {
+            @Override
+            public void run() {
+                TimeTravel.menuTimeTravel(gui, loja);
+            }
+        });
+        timeTravelButton.addTo(panel);
 
         Button exitButton = new Button("Sair", new Runnable() {
             @Override

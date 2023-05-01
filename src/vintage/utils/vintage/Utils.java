@@ -1,5 +1,6 @@
 package vintage.utils.vintage;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import vintage.artigos.Artigo;
@@ -8,6 +9,8 @@ import vintage.transportadoras.Transportadora;
 import vintage.utilizadores.Utilizador;
 
 public class Utils {
+
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     public static Artigo getArtigo(List<Artigo> artigos, int codigo) {
         for (Artigo artigo : artigos) {

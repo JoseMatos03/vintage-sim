@@ -6,8 +6,10 @@ import static vintage.utils.vintage.Utils.getTransportadora;
 import static vintage.utils.vintage.Utils.getUtilizador;
 import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 import static vintage.utils.vintage.Utils.isArtigoInEncomendaExpedida;
+import static vintage.utils.vintage.Utils.FORMATTER;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,8 +95,8 @@ public class Vintage {
 
                     if (premiumSapatilha && !transportadora.getPremiumEstado())
                         return ErrorCode.TRANSPORTADORA_INVALIDA;
-                    
-                        Artigo sapatilhas = new Sapatilhas(
+
+                    Artigo sapatilhas = new Sapatilhas(
                             tipo,
                             estadoUtilizacao,
                             numDonos,
@@ -288,6 +290,16 @@ public class Vintage {
         this.transportadoras.remove(transportadora);
     }
 
+    public ErrorCode timeTravel(String info) {
+        try {
+            this.setTempoAtual(LocalDateTime.parse(info, FORMATTER));
+        } catch (DateTimeParseException e) {
+            return ErrorCode.DATA_INVALIDA;
+        }
+        this.entregarEncomendas();
+        return ErrorCode.NO_ERRORS;
+    }
+
     public Vintage() {
         this.artigos = new ArrayList<>();
         this.encomendas = new ArrayList<>();
@@ -307,7 +319,7 @@ public class Vintage {
         this.codigoProximoArtigo = loja.getCodigoProximoArtigo();
         this.numVendas = loja.getNumVendas();
         this.totalFaturado = loja.getTotalFaturado();
-        this.tempoAtual = LocalDateTime.now();
+        this.tempoAtual = loja.getTempoAtual();
     }
 
     public List<Artigo> getArtigos() {
@@ -366,6 +378,14 @@ public class Vintage {
         this.numVendas = numVendas;
     }
 
+    public LocalDateTime getTempoAtual() {
+        return tempoAtual;
+    }
+
+    public void setTempoAtual(LocalDateTime tempoAtual) {
+        this.tempoAtual = tempoAtual;
+    }
+
     @Override
     public String toString() {
         return "--- GERAIS ---" + "\n" +
@@ -388,6 +408,7 @@ public class Vintage {
                 "--- TRANSPORTADORAS ---" + "\n" +
                 "Maior Lucro: " + StatsUtils.transportadoraMaiorLucro(transportadoras) + "\n" +
                 "Maior Valor Expedição: " + StatsUtils.transportadoraMaiorValorExpedicao(transportadoras);
+
     }
 
 }
