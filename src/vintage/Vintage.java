@@ -194,6 +194,10 @@ public class Vintage {
                 Artigo artigo = getArtigo(artigos, codigoArtigo);
                 comprador.comprarArtigo(utilizadores, artigo);
                 totalFaturado += artigo.calcularPreco();
+                ++numVendas;
+
+                getTransportadora(transportadoras, artigo.getTransportadora().getNome())
+                        .calcularEntrega(artigo.getPrecoBase());
                 artigos.remove(artigo);
             }
             encomenda.setEstadoEncomenda(Encomenda.FINALIZADA);
@@ -372,6 +376,7 @@ public class Vintage {
                 "Nº Expedidas: " + StatsUtils.numEncomendasExpedidas(encomendas) + "\n" +
                 "Nº Finalizadas: " + StatsUtils.numEncomendasFinalizadas(encomendas) + "\n" +
                 "--- TRANSPORTADORAS ---" + "\n" +
+                "Maior Lucro: " + StatsUtils.transportadoraMaiorLucro(transportadoras) + "\n" +
                 "Maior Valor Expedição: " + StatsUtils.transportadoraMaiorValorExpedicao(transportadoras);
     }
 

@@ -10,4 +10,8 @@ public class Utils {
         return Math.round(num * 100) / 100f;
     }
 
+    public static float calcularPercentagem(float num, float percentagem) {
+        return (num*(percentagem/100f));
+    }
+
 }

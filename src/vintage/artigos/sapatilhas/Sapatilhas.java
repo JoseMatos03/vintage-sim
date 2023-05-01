@@ -3,6 +3,7 @@ package vintage.artigos.sapatilhas;
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.ui.InfoUtils;
+import vintage.utils.artigos.Utils;
 
 public class Sapatilhas extends Artigo {
 
@@ -25,9 +26,9 @@ public class Sapatilhas extends Artigo {
     public float calcularCorrecao() {
         float correcao = 0;
 
-        correcao += this.getTransportadora().getValorExpedicao();
+        correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         if (this.getEstadoUtilizacao() != 1f) {
-            correcao -= this.getPrecoBase() - (this.getPrecoBase() * this.getEstadoUtilizacao());
+            correcao -= this.getPrecoBase() * this.getEstadoUtilizacao();
         }
         if (this.tamanho > 45) {
             correcao -= this.getPrecoBase() * 0.25;
@@ -92,8 +93,8 @@ public class Sapatilhas extends Artigo {
                 "Ano coleção: " + this.getAnoColecao() + "\n" +
                 "Nº Donos: " + this.getNumDonos() + "\n" +
                 "Estado: " + estado + "\n" +
-                "Preço Base: " + this.getPrecoBase() + "\n" +
-                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Preço Base: " + Utils.arrondarCentesimas(this.getPrecoBase()) + "\n" +
+                "Preço Final: " + Utils.arrondarCentesimas(this.calcularPreco()) + "\n" +
                 "Tamanho: " + this.getTamanho() + "\n" +
                 "Tipo Atacadores: " + InfoUtils.parseTipoAtacadores(this.getAtacadores()) + "\n" +
                 "Cor: " + this.getCor() + "\n" +

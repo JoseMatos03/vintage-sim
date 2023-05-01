@@ -3,6 +3,7 @@ package vintage.artigos.tshirt;
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
 import vintage.utils.ui.InfoUtils;
+import vintage.utils.artigos.Utils;
 
 public class TShirt extends Artigo {
 
@@ -30,7 +31,7 @@ public class TShirt extends Artigo {
     public float calcularCorrecao() {
         float correcao = 0;
 
-        correcao += this.getTransportadora().getValorExpedicao();
+        correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         if (this.padrao == LISO) {
             return 0;
         }
@@ -78,8 +79,8 @@ public class TShirt extends Artigo {
                 "Descrição: " + this.getDescricao() + "\n" +
                 "Nº Donos: " + this.getNumDonos() + "\n" +
                 "Estado: " + estado + "\n" +
-                "Preço Base: " + this.getPrecoBase() + "\n" +
-                "Preço Final: " + this.calcularPreco() + "\n" +
+                "Preço Base: " + Utils.arrondarCentesimas(this.getPrecoBase()) + "\n" +
+                "Preço Final: " + Utils.arrondarCentesimas(this.calcularPreco()) + "\n" +
                 "Tamanho: " + this.getTamanho() + "\n" +
                 "Padrão: " + InfoUtils.parsePadrao(this.getPadrao()) + "\n" +
                 "Transportadora: " + this.getTransportadora().getNome();

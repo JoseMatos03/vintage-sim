@@ -12,6 +12,11 @@ public class Transportadora {
     private float margemLucro;
     private float margemExtra;
     private float valorExpedicao;
+    private float lucro;
+
+    public void calcularEntrega(float precoArtigo) {
+        lucro += Utils.calcularPercentagem(precoArtigo, valorExpedicao);
+    }
 
     public float calcularValorExpedicao() {
         return (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra;
@@ -22,6 +27,7 @@ public class Transportadora {
         this.margemLucro = margemLucro;
         this.margemExtra = margemExtra;
         this.valorExpedicao = calcularValorExpedicao();
+        this.lucro = 0.00f;
     }
 
     public float getValorExpedicao() {
@@ -56,12 +62,21 @@ public class Transportadora {
         this.margemExtra = margemExtra;
     }
 
+    public float getLucro() {
+        return lucro;
+    }
+
+    public void setLucro(float lucro) {
+        this.lucro = lucro;
+    }
+
     @Override
     public String toString() {
         return "Nome: " + nome + "\n" +
                 "Margem Lucro: " + Utils.arrondarCentesimas(margemLucro) + "\n" +
                 "Margem Extra: " + Utils.arrondarCentesimas(margemExtra) + "\n" +
-                "Valor Expedição: " + Utils.arrondarCentesimas(valorExpedicao);
+                "Valor Expedição: " + Utils.arrondarCentesimas(valorExpedicao) + "\n" +
+                "Lucro: " + Utils.arrondarCentesimas(lucro);
     }
 
 }

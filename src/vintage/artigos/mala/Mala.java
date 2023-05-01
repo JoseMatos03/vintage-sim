@@ -35,7 +35,7 @@ public class Mala extends Artigo {
         float dimensao = this.calcularDimensao();
         float correcao = 0;
 
-        correcao += this.getTransportadora().getValorExpedicao();
+        correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         correcao -= (1f / dimensao) * CONSTANTECORRECAO;
 
         return correcao;
