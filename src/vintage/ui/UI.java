@@ -48,6 +48,14 @@ public class UI {
         });
         timeTravelButton.addTo(panel);
 
+        Button wipeAllButton = new Button("Apagar loja", new Runnable() {
+            @Override
+            public void run() {
+                loja.wipeAll();
+            }
+        });
+        wipeAllButton.addTo(panel);
+
         Button exitButton = new Button("Sair", new Runnable() {
             @Override
             public void run() {
