@@ -17,6 +17,7 @@ import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.table.Table;
 
+import vintage.AutoRun;
 import vintage.Vintage;
 import vintage.artigos.Artigo;
 import vintage.encomendas.Encomenda;
@@ -36,7 +37,7 @@ import static vintage.ui.ErrorHandler.handleError;
 
 public class Info {
 
-    public static void menuInformacao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
+    public static void menuInformacao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja, AutoRun runner) {
 
         Panel panel = new Panel();
 
@@ -75,7 +76,7 @@ public class Info {
         Button goBackButton = new Button("Voltar", new Runnable() {
             @Override
             public void run() {
-                UI.menu(gui, window, loja);
+                UI.menu(gui, window, loja, runner);
             }
         });
         goBackButton.addTo(panel);

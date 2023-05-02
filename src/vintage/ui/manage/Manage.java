@@ -15,6 +15,7 @@ import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 
+import vintage.AutoRun;
 import vintage.Vintage;
 import vintage.artigos.Artigo;
 import vintage.ui.UI;
@@ -25,7 +26,7 @@ import static vintage.ui.ErrorHandler.handleError;
 
 public class Manage {
 
-    public static void menuManutencao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja) {
+    public static void menuManutencao(MultiWindowTextGUI gui, BasicWindow window, Vintage loja, AutoRun runner) {
         Panel panel = new Panel();
 
         new Button("Criar artigo", new Runnable() {
@@ -56,10 +57,18 @@ public class Manage {
             }
         }).addTo(panel);
 
+        new Button("Correr automação", new Runnable() {
+            @Override
+            public void run() {
+                ErrorCode error = runner.readAndExecute(loja);
+                handleError(gui, error);
+            }
+        }).addTo(panel);
+
         new Button("Voltar", new Runnable() {
             @Override
             public void run() {
-                UI.menu(gui, window, loja);
+                UI.menu(gui, window, loja, runner);
             }
         }).addTo(panel);
 
@@ -459,7 +468,7 @@ public class Manage {
         });
         confirmButton.addTo(panel);
 
-        premiumBox.addListener(new Listener(){
+        premiumBox.addListener(new Listener() {
             @Override
             public void onSelectionChanged(int selectedIndex, int previousSelection, boolean changedByUserInteraction) {
                 panel.removeAllComponents();
@@ -468,8 +477,7 @@ public class Manage {
                 nome.addTo(panel);
                 margemLucroLabel.addTo(panel);
                 margemLucro.addTo(panel);
-                if(selectedIndex == 0)
-                {
+                if (selectedIndex == 0) {
                     margemExtraLabel.addTo(panel);
                     margemExtra.addTo(panel);
                 }

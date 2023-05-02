@@ -1,6 +1,7 @@
 package vintage.utils;
 
 public enum ErrorCode {
+    // Loja
     NO_ERRORS,
     PARAMETRO_ERRADO,
     CODIGO_INVALIDO,
@@ -18,5 +19,9 @@ public enum ErrorCode {
     ARTIGO_DO_COMPRADOR,
 
     // Transportadoras
-    TRANSPORTADORA_INVALIDA
+    TRANSPORTADORA_INVALIDA,
+
+    // Runner
+    AUTORUN_SUCCESS,
+    AUTORUN_ERROR
 }

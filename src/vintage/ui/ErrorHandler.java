@@ -41,6 +41,12 @@ public class ErrorHandler {
             case DATA_INVALIDA:
                 MessageDialog.showMessageDialog(gui, "Erro", "A data introduzida não está formatada corretamente.");
                 break;
+            case AUTORUN_ERROR:
+                MessageDialog.showMessageDialog(gui, "Erro", "Falha ao correr a operação AutoRun.");
+                break;
+            case AUTORUN_SUCCESS:
+                MessageDialog.showMessageDialog(gui, "Sucesso", "Operação realizada com sucesso.");
+                break;
             case NO_ERRORS:
                 break;
             default:

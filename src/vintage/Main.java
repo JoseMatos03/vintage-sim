@@ -26,6 +26,8 @@ public class Main {
         Gson gson = prepareGsonLoader(true);
 
         Vintage loja = load(gson);
+        AutoRun runner = new AutoRun();
+
         loja.entregarEncomendas();
 
         // UI
@@ -36,7 +38,7 @@ public class Main {
         BasicWindow window = new BasicWindow();
 
         screen.startScreen();
-        UI.menu(gui, window, loja);
+        UI.menu(gui, window, loja, runner);
 
         scanner.close();
         screen.close();
