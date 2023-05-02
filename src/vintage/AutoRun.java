@@ -11,6 +11,21 @@ import java.util.HashMap;
 import vintage.utils.ErrorCode;
 
 public class AutoRun {
+    // Exemplos de cada comando:
+    // (Mala): criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,C,L,A,TMATERIAL,ANO,PREMIUM
+    // (Sapatilhas): criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TAMANHO,TATACADORES,COR,ANO,PREMIUM
+    // (TShirt): criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TTAMANHO,TPADRAO
+    // removeArtigo,CODIGO
+    // criaEncomenda,CODCOMPRADOR,DIMENSAO
+    // expedirEncomenda,CODIGO
+    // entregarEncomendas
+    // cancelaEncomenda,CODIGO
+    // criaUtilizador,EMAIL,NOME,MORADA,NIF
+    // apagaUtilizador,CODIGO
+    // criaTransportadora,NOME,LUCRO,EXTRA(só em PREMIUM),PREMIUM
+    // apagaTransportadora,NOME
+    // travelTo,DATAHORA
+
     public static final String RUNNER_FILEPATH = System.getProperty("user.dir") + File.separator + "runner"
             + File.separator
             + "autorun.csv";
@@ -65,7 +80,7 @@ public class AutoRun {
             opCodeMap.put("apagaUtilizador", Vintage.class.getMethod("apagaUtilizador", String.class));
             opCodeMap.put("criaTransportadora", Vintage.class.getMethod("criaTransportadora", String[].class));
             opCodeMap.put("apagaTransportadora", Vintage.class.getMethod("apagaTransportadora", String.class));
-            opCodeMap.put("timeTravel", Vintage.class.getMethod("timeTravel", String.class));
+            opCodeMap.put("travelTo", Vintage.class.getMethod("timeTravel", String.class));
         } catch (NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }
