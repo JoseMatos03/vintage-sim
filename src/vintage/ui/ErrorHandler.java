@@ -41,6 +41,12 @@ public class ErrorHandler {
             case DATA_INVALIDA:
                 MessageDialog.showMessageDialog(gui, "Erro", "A data introduzida não está formatada corretamente.");
                 break;
+            case EMAIL_INVALIDO:
+                MessageDialog.showMessageDialog(gui, "Erro", "Formato de e-mail inválido.");
+                break;
+            case NIF_INVALIDO:
+                MessageDialog.showMessageDialog(gui, "Erro", "NIF inválido.");
+                break;
             case AUTORUN_ERROR:
                 MessageDialog.showMessageDialog(gui, "Erro", "Falha ao correr a operação AutoRun.");
                 break;

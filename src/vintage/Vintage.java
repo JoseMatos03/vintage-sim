@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import vintage.artigos.Artigo;
 import vintage.artigos.mala.Mala;
@@ -235,6 +236,15 @@ public class Vintage {
             String nome = info[1];
             String morada = info[2];
             int numeroFiscal = Integer.parseInt(info[3]);
+
+            String emailRegex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+            Pattern pattern = Pattern.compile(emailRegex);
+
+            if (!pattern.matcher(email).matches())
+                return ErrorCode.EMAIL_INVALIDO;
+
+            if (info[3].length() != 9)
+                return ErrorCode.NIF_INVALIDO;
 
             Utilizador utilizador = new Utilizador(
                     codigo,
