@@ -2,10 +2,8 @@ package vintage.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
@@ -78,12 +76,9 @@ public class SaveLoad {
 
             br.close();
             return new Vintage(gson.fromJson(reader, Vintage.class));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            return new Vintage();
         }
-        return new Vintage();
     }
 
 }
