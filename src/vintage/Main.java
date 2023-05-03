@@ -22,7 +22,6 @@ import static vintage.utils.SaveLoad.prepareGsonLoader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
         Gson gson = prepareGsonLoader(true);
 
         Vintage loja = load(gson);
@@ -37,9 +36,8 @@ public class Main {
 
         screen.startScreen();
         UI.menu(gui, window, loja);
-
-        scanner.close();
         screen.close();
+        
         save(gson, loja);
     }
 }
