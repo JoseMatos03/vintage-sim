@@ -57,14 +57,6 @@ public class Manage {
             }
         }).addTo(panel);
 
-        new Button("Correr automação", new Runnable() {
-            @Override
-            public void run() {
-                ErrorCode error = runner.readAndExecute(loja);
-                handleError(gui, error);
-            }
-        }).addTo(panel);
-
         new Button("Voltar", new Runnable() {
             @Override
             public void run() {

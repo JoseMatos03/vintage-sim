@@ -37,7 +37,7 @@ public class UI {
         Button controlCenterButton = new Button("Controlo", new Runnable() {
             @Override
             public void run() {
-                ControlCenter.menuControlo(gui, window, loja);
+                ControlCenter.menuControlo(gui, window, loja, runner);
             }
         });
         controlCenterButton.addTo(panel);

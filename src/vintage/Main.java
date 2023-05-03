@@ -36,7 +36,7 @@ public class Main {
         BasicWindow window = new BasicWindow();
 
         screen.startScreen();
-        UI.menu(gui, window, loja);
+        UI.menu(gui, window, loja, runner);
         screen.close();
 
         save(gson, loja);
