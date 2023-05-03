@@ -1,7 +1,6 @@
 package vintage;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.googlecode.lanterna.TerminalSize;
@@ -37,7 +36,7 @@ public class Main {
         screen.startScreen();
         UI.menu(gui, window, loja);
         screen.close();
-        
+
         save(gson, loja);
     }
 }
