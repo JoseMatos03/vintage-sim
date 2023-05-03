@@ -300,6 +300,17 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
+    public void wipeAll() {
+        this.artigos = new ArrayList<>();
+        this.encomendas = new ArrayList<>();
+        this.utilizadores = new ArrayList<>();
+        this.transportadoras = new ArrayList<>();
+        this.codigoProximoArtigo = 0;
+        this.numVendas = 0;
+        this.totalFaturado = 0;
+        this.tempoAtual = LocalDateTime.now();
+    }
+
     public Vintage() {
         this.artigos = new ArrayList<>();
         this.encomendas = new ArrayList<>();

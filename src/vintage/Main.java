@@ -1,7 +1,6 @@
 package vintage;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.googlecode.lanterna.TerminalSize;
@@ -22,7 +21,6 @@ import static vintage.utils.SaveLoad.prepareGsonLoader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
         Gson gson = prepareGsonLoader(true);
 
         Vintage loja = load(gson);
@@ -38,10 +36,9 @@ public class Main {
         BasicWindow window = new BasicWindow();
 
         screen.startScreen();
-        UI.menu(gui, window, loja, runner);
-
-        scanner.close();
+        UI.menu(gui, window, loja);
         screen.close();
+
         save(gson, loja);
     }
 }
