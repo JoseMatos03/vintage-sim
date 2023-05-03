@@ -5,10 +5,10 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import vintage.Vintage;
+import vintage.ui.controlcenter.ControlCenter;
 import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
 import vintage.ui.stats.Stats;
-import vintage.ui.timetravel.TimeTravel;
 
 public class UI {
 
@@ -32,6 +32,14 @@ public class UI {
         });
         manButton.addTo(panel);
 
+        Button controlCenterButton = new Button("Controlo", new Runnable() {
+            @Override
+            public void run() {
+                ControlCenter.menuControlo(gui, window, loja);
+            }
+        });
+        controlCenterButton.addTo(panel);
+
         Button statsButton = new Button("Estatísticas", new Runnable() {
             @Override
             public void run() {
@@ -39,14 +47,6 @@ public class UI {
             }
         });
         statsButton.addTo(panel);
-
-        Button timeTravelButton = new Button("Time Travel...", new Runnable() {
-            @Override
-            public void run() {
-                TimeTravel.menuTimeTravel(gui, loja);
-            }
-        });
-        timeTravelButton.addTo(panel);
 
         Button exitButton = new Button("Sair", new Runnable() {
             @Override
