@@ -1,7 +1,9 @@
 package vintage.ui;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 
@@ -12,11 +14,17 @@ import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
 import vintage.ui.stats.Stats;
 
+import static vintage.utils.vintage.Utils.FORMATTER;
+
 public class UI {
 
     public static void menu(MultiWindowTextGUI gui, BasicWindow window, Vintage loja, AutoRun runner) {
 
         Panel panel = new Panel();
+
+        new Label("Data:").addTo(panel);
+        Label data = new Label(loja.getTempoAtual().format(FORMATTER)).setPreferredSize(new TerminalSize(17, 3));
+        data.addTo(panel);
 
         Button infoButton = new Button("Informação", new Runnable() {
             @Override
