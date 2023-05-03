@@ -1,0 +1,35 @@
+criaUtilizador,jose.matos@email.com,José matos,Rua Monte de Aldão,255372442
+criaUtilizador,antoniofcsilva2003@gmail.com,António Silva,Rua de São Brás,258877421
+criaUtilizador,pedrometaleiro@gmail.com,Pedro Silva,Rua da Coutada,258891779
+criaUtilizador,marcelorebelodesousa@gmail.com,Marcelo Sousa,Palácio de Belém,150917269
+criaUtilizador,antoniocosta@gmail.com,António Costa,Rua da Amadora,194317412
+criaUtilizador,joebiden@gmail.com,Joe Biden,White House,143219210
+criaUtilizador,michaeljordan@gmail.com,Michael Jordan, Chicago,180213512
+criaUtilizador,ronaldogoat@gmail.com,Cristiano Ronaldo,Abu Dhabi,201213217
+criaUtilizador,papafrancisco@hotmail.com,Papa Francisco,Vaticano,144213123
+criaUtilizador,quimbarreiros@gmail.com,Quim Barreiros,Vila Nova de Cerveira,182123411
+criaTransportadora,CTT,1.2,1,false
+criaTransportadora,Torrestir,1.1,1,false
+criaTransportadora,AmazonPrime,1.5,0.99,true
+criaTransportadora,UPS,1.05,1,false
+criaTransportadora,Fedex,1.4,0.95,true
+criaArtigo,0,3,1,1,Mala Gucci de 1995. Com apenas 1 dono e em perfeito estado.,Gucci,1250.00,AmazonPrime,12,6,10,1,1995,true
+criaArtigo,0,2,0.75,1,Mala Tous à venda. Boa condição.,Tous,85.00,CTT,15,8,12,0,2019,false
+criaArtigo,0,1,0.25,4,Mala Tommy Hilfiger com muito uso.,Tommy Hillfiger,25.00,Torrestir,10,5,19,2,2021,false
+criaArtigo,0,6,1,2,Mala da Chanel em perfeita condição.,Chanel,665.50,CTT,8,4,8,1,2023,false
+criaArtigo,0,5,0.75,1,Mala Hugo Boss vintage com muito pouco uso.,Hugo Boss,2650.00,Fedex,13,7,10,3,1985,true
+criaArtigo,1,4,0.5,3,Sapatilhas de rua,Nike,40,CTT,40,0,Vermelhas,2015,false
+criaArtigo,1,6,1,1,Sapatilhas do Michael Jordan,Adidas,1000,Fedex,44,0,Pretas,1990,true
+criaArtigo,1,7,0.25,8,Sapatilhas casuais,Puma,15,UPS,39,1,Brancas,2011,false
+criaArtigo,1,8,1,0,Sapatilhas  para corrida,Sport Zone,50,Torrestir,38,0,Verdes,2019,false
+criaArtigo,1,9,1,2,Sapatilhas de futebol,Decathlon,20,UPS,45,0,Roxas,2018,false
+criaArtigo,2,1,0.75,2,Tshirt boa e barata,Primark,10,CTT,S,0
+criaArtigo,2,3,0.5,4,Tshirt para o verão,Bershka,8,UPS,M,1
+criaArtigo,2,5,0.25,8,Tshirt havaiana,H&M,5,Torrestir,L,2
+criaArtigo,2,7,0.75,2,Tshirt muito colorida,Lefties,15,UPS,XL,1
+criaArtigo,2,9,1,0,Tshirt vermelha e preta,Primark,20,CTT,M,0
+criaEncomenda,7,10
+criaEncomenda,0,1
+criaEncomenda,1,5
+criaEncomenda,5,1
+criaEncomenda,4,10
