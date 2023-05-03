@@ -8,6 +8,8 @@ import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 import static vintage.utils.vintage.Utils.isArtigoInEncomendaExpedida;
 import static vintage.utils.vintage.Utils.FORMATTER;
 
+import static vintage.utils.encomendas.Utils.parseTempoExpedicao;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -187,7 +189,7 @@ public class Vintage {
             return ErrorCode.EM_EXPEDICAO;
 
         encomenda.setEstadoEncomenda(Encomenda.EXPEDIDA);
-        encomenda.setDataEntrega(LocalDateTime.now().plusDays(7));
+        encomenda.setDataEntrega(LocalDateTime.now().plusDays(parseTempoExpedicao(encomenda)));
 
         return ErrorCode.NO_ERRORS;
     }
