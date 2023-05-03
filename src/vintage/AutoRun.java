@@ -12,9 +12,12 @@ import vintage.utils.ErrorCode;
 
 public class AutoRun {
     // Exemplos de cada comando:
-    // (Mala): criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,C,L,A,TMATERIAL,ANO,PREMIUM
-    // (Sapatilhas): criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TAMANHO,TATACADORES,COR,ANO,PREMIUM
-    // (TShirt): criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TTAMANHO,TPADRAO
+    // (Mala):
+    // criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,C,L,A,TMATERIAL,ANO,PREMIUM
+    // (Sapatilhas):
+    // criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TAMANHO,TATACADORES,COR,ANO,PREMIUM
+    // (TShirt):
+    // criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TTAMANHO,TPADRAO
     // removeArtigo,CODIGO
     // criaEncomenda,CODCOMPRADOR,DIMENSAO
     // expedirEncomenda,CODIGO
@@ -45,10 +48,13 @@ public class AutoRun {
                 if (command.length > 2) {
                     String[] info = Arrays.copyOfRange(command, 1, command.length);
                     runMethod(loja, code, info);
-                } else {
+                } else if (command.length > 1) {
                     String info = command[1];
                     runMethod(loja, code, info);
+                } else {
+                    runMethod(loja, code);
                 }
+
             }
             reader.close();
         } catch (Exception e) {
@@ -66,6 +72,11 @@ public class AutoRun {
     public void runMethod(Vintage loja, String code, String info)
             throws IllegalAccessException, InvocationTargetException {
         opCodeMap.get(code).invoke(loja, info);
+    }
+
+    public void runMethod(Vintage loja, String code)
+            throws IllegalAccessException, InvocationTargetException {
+        opCodeMap.get(code).invoke(loja);
     }
 
     public void mapCodesToMethods() {
