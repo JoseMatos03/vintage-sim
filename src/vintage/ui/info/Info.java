@@ -104,45 +104,47 @@ public class Info {
             String premium = InfoUtils.parsePremium(artigo.getPremiumEstado());
             table.getTableModel().addRow(codigo, tipo, marca, preco, numDonos, estadoDeUtilizacao, premium);
         }
-        table.setSelectAction(new Runnable() {
-            // Opções para cada item
-            @Override
-            public void run() {
-                BasicWindow actionWindow = new BasicWindow();
-                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
-                actionWindow.setCloseWindowWithEscape(true);
+        if (table.getTableModel().getRowCount() > 0) {
+            table.setSelectAction(new Runnable() {
+                // Opções para cada item
+                @Override
+                public void run() {
+                    BasicWindow actionWindow = new BasicWindow();
+                    actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                    actionWindow.setCloseWindowWithEscape(true);
 
-                ActionListBox actionListBox = new ActionListBox();
-                // Mais informação sobre o artigo
-                actionListBox.addItem("Mais informação...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Panel actionPanel = new Panel();
+                    ActionListBox actionListBox = new ActionListBox();
+                    // Mais informação sobre o artigo
+                    actionListBox.addItem("Mais informação...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel();
 
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        Artigo artigo = getArtigo(artigos, Integer.parseInt(codigo));
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            Artigo artigo = getArtigo(artigos, Integer.parseInt(codigo));
 
-                        new Label(artigo.toString()).setPreferredSize(new TerminalSize(70, 18)).addTo(actionPanel);
+                            new Label(artigo.toString()).setPreferredSize(new TerminalSize(70, 18)).addTo(actionPanel);
 
-                        actionWindow.setComponent(actionPanel);
-                    }
-                });
-                // Remover artigo
-                actionListBox.addItem("Remover...", new Runnable() {
-                    @Override
-                    public void run() {
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        ErrorCode erro = loja.removeArtigo(codigo);
-                        handleError(gui, erro);
-                        actionWindow.close();
-                        window.close();
-                    }
-                });
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
+                    // Remover artigo
+                    actionListBox.addItem("Remover...", new Runnable() {
+                        @Override
+                        public void run() {
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            ErrorCode erro = loja.removeArtigo(codigo);
+                            handleError(gui, erro);
+                            actionWindow.close();
+                            window.close();
+                        }
+                    });
 
-                actionWindow.setComponent(actionListBox);
-                gui.addWindowAndWait(actionWindow);
-            }
-        });
+                    actionWindow.setComponent(actionListBox);
+                    gui.addWindowAndWait(actionWindow);
+                }
+            });
+        }
         table.addTo(panel);
 
         window.setComponent(panel);
@@ -170,53 +172,55 @@ public class Info {
             String vendas = Float.toString(Utils.arrondarCentesimas(utilizador.getValorEmVendas()));
             table.getTableModel().addRow(codigo, nome, email, morada, nif, vendas);
         }
-        table.setSelectAction(new Runnable() {
-            // Opções para cada item
-            @Override
-            public void run() {
-                BasicWindow actionWindow = new BasicWindow();
-                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
-                actionWindow.setCloseWindowWithEscape(true);
+        if (table.getTableModel().getRowCount() > 0) {
+            table.setSelectAction(new Runnable() {
+                // Opções para cada item
+                @Override
+                public void run() {
+                    BasicWindow actionWindow = new BasicWindow();
+                    actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                    actionWindow.setCloseWindowWithEscape(true);
 
-                ActionListBox actionListBox = new ActionListBox();
-                // Mais informação
-                actionListBox.addItem("Mais informação...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Panel actionPanel = new Panel();
+                    ActionListBox actionListBox = new ActionListBox();
+                    // Mais informação
+                    actionListBox.addItem("Mais informação...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel();
 
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        Utilizador utilizador = getUtilizador(utilizadores, Integer.parseInt(codigo));
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            Utilizador utilizador = getUtilizador(utilizadores, Integer.parseInt(codigo));
 
-                        new Label(utilizador.toString()).setPreferredSize(new TerminalSize(70, 10)).addTo(actionPanel);
+                            new Label(utilizador.toString()).setPreferredSize(new TerminalSize(70, 10))
+                                    .addTo(actionPanel);
 
-                        actionWindow.setComponent(actionPanel);
-                    }
-                });
-                // Apagar utilizador
-                actionListBox.addItem("Apagar...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Panel actionPanel = new Panel();
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
+                    // Apagar utilizador
+                    actionListBox.addItem("Apagar...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel();
 
-                        new Label("Todos os artigos associados serão apagados. Continuar?").addTo(actionPanel);
-                        new Button("Confirmar", new Runnable() {
-                            public void run()
-                            {
-                                String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                                loja.apagaUtilizador(codigo);
-                                actionWindow.close();
-                                window.close();
-                            }
+                            new Label("Todos os artigos associados serão apagados. Continuar?").addTo(actionPanel);
+                            new Button("Confirmar", new Runnable() {
+                                public void run() {
+                                    String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                                    loja.apagaUtilizador(codigo);
+                                    actionWindow.close();
+                                    window.close();
+                                }
                             }).addTo(actionPanel);
-                        actionWindow.setComponent(actionPanel);
-                    }
-                });
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
 
-                actionWindow.setComponent(actionListBox);
-                gui.addWindowAndWait(actionWindow);
-            }
-        });
+                    actionWindow.setComponent(actionListBox);
+                    gui.addWindowAndWait(actionWindow);
+                }
+            });
+        }
         table.addTo(panel);
 
         window.setComponent(panel);
@@ -240,93 +244,96 @@ public class Info {
             String dataCriacao = encomenda.getDataCriacao().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
             table.getTableModel().addRow(codigo, dimensaoEncomenda, estadoEncomenda, precoEncomenda, dataCriacao);
         }
-        table.setSelectAction(new Runnable() {
-            // Opções para cada item
-            @Override
-            public void run() {
-                BasicWindow actionWindow = new BasicWindow();
-                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
-                actionWindow.setCloseWindowWithEscape(true);
+        if (table.getTableModel().getRowCount() > 0) {
+            table.setSelectAction(new Runnable() {
+                // Opções para cada item
+                @Override
+                public void run() {
+                    BasicWindow actionWindow = new BasicWindow();
+                    actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                    actionWindow.setCloseWindowWithEscape(true);
 
-                ActionListBox actionListBox = new ActionListBox();
-                // Mais informação
-                actionListBox.addItem("Mais informação...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Panel actionPanel = new Panel();
+                    ActionListBox actionListBox = new ActionListBox();
+                    // Mais informação
+                    actionListBox.addItem("Mais informação...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel();
 
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
 
-                        new Label(encomenda.toString()).setPreferredSize(new TerminalSize(70, 10)).addTo(actionPanel);
+                            new Label(encomenda.toString()).setPreferredSize(new TerminalSize(70, 10))
+                                    .addTo(actionPanel);
 
-                        actionWindow.setComponent(actionPanel);
-                    }
-                });
-                // Adicionar artigo
-                actionListBox.addItem("Adicionar artigo...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Panel actionPanel = new Panel(new GridLayout(2));
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
+                    // Adicionar artigo
+                    actionListBox.addItem("Adicionar artigo...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel(new GridLayout(2));
 
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
 
-                        new Label("Código Artigo").addTo(actionPanel);
-                        final TextBox codigoArtigo = new TextBox().setValidationPattern(Pattern.compile("[0-9]*"))
-                                .addTo(actionPanel);
+                            new Label("Código Artigo").addTo(actionPanel);
+                            final TextBox codigoArtigo = new TextBox().setValidationPattern(Pattern.compile("[0-9]*"))
+                                    .addTo(actionPanel);
 
-                        new Button("Confirmar", new Runnable() {
-                            @Override
-                            public void run() {
-                                ErrorCode error;
-                                try {
-                                    error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(),
-                                            Integer.parseInt(codigoArtigo.getText()));
-                                } catch (Exception e) {
-                                    error = ErrorCode.PARAMETRO_ERRADO;
+                            new Button("Confirmar", new Runnable() {
+                                @Override
+                                public void run() {
+                                    ErrorCode error;
+                                    try {
+                                        error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(),
+                                                Integer.parseInt(codigoArtigo.getText()));
+                                    } catch (Exception e) {
+                                        error = ErrorCode.PARAMETRO_ERRADO;
+                                    }
+                                    handleError(gui, error);
+                                    if (error.equals(ErrorCode.NO_ERRORS)) {
+                                        actionWindow.close();
+                                        window.close();
+                                    }
                                 }
-                                handleError(gui, error);
-                                if (error.equals(ErrorCode.NO_ERRORS)) {
-                                    actionWindow.close();
-                                    window.close();
-                                }
+                            }).addTo(actionPanel);
+
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
+                    actionListBox.addItem("Expedir...", new Runnable() {
+                        @Override
+                        public void run() {
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            ErrorCode error = loja.expedirEncomenda(codigo);
+                            handleError(gui, error);
+                            if (error.equals(ErrorCode.NO_ERRORS)) {
+                                actionWindow.close();
+                                window.close();
                             }
-                        }).addTo(actionPanel);
-
-                        actionWindow.setComponent(actionPanel);
-                    }
-                });
-                actionListBox.addItem("Expedir...", new Runnable() {
-                    @Override
-                    public void run() {
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        ErrorCode error = loja.expedirEncomenda(codigo);
-                        handleError(gui, error);
-                        if (error.equals(ErrorCode.NO_ERRORS)) {
-                            actionWindow.close();
-                            window.close();
                         }
-                    }
-                });
-                // Cancelar encomenda
-                actionListBox.addItem("Cancelar...", new Runnable() {
-                    @Override
-                    public void run() {
-                        String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        ErrorCode error = loja.cancelaEncomenda(codigo);
-                        handleError(gui, error);
-                        if (error.equals(ErrorCode.NO_ERRORS)) {
-                            actionWindow.close();
-                            window.close();
+                    });
+                    // Cancelar encomenda
+                    actionListBox.addItem("Cancelar...", new Runnable() {
+                        @Override
+                        public void run() {
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            ErrorCode error = loja.cancelaEncomenda(codigo);
+                            handleError(gui, error);
+                            if (error.equals(ErrorCode.NO_ERRORS)) {
+                                actionWindow.close();
+                                window.close();
+                            }
                         }
-                    }
-                });
+                    });
 
-                actionWindow.setComponent(actionListBox);
-                gui.addWindowAndWait(actionWindow);
-            }
-        });
+                    actionWindow.setComponent(actionListBox);
+                    gui.addWindowAndWait(actionWindow);
+                }
+            });
+        }
         table.addTo(panel);
 
         window.setComponent(panel);
@@ -342,7 +349,8 @@ public class Info {
 
         Panel panel = new Panel();
 
-        Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição", "Lucro", "Premium");
+        Table<String> table = new Table<String>("Nome", "Margem Lucro", "Margem Extra", "Valor de Expedição", "Lucro",
+                "Premium");
         for (Transportadora transportadora : transportadoras) {
             String nome = transportadora.getNome();
             String margemLucro = Float.toString(Utils.arrondarCentesimas(transportadora.getMargemLucro()));
@@ -352,45 +360,47 @@ public class Info {
             String premium = InfoUtils.parsePremium(transportadora.getPremiumEstado());
             table.getTableModel().addRow(nome, margemLucro, margemExtra, valorExpedicao, lucro, premium);
         }
-        table.setSelectAction(new Runnable() {
-            // Opções para cada item
-            @Override
-            public void run() {
-                BasicWindow actionWindow = new BasicWindow();
-                actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
-                actionWindow.setCloseWindowWithEscape(true);
+        if (table.getTableModel().getRowCount() > 0) {
+            table.setSelectAction(new Runnable() {
+                // Opções para cada item
+                @Override
+                public void run() {
+                    BasicWindow actionWindow = new BasicWindow();
+                    actionWindow.setHints(Arrays.asList(Window.Hint.CENTERED));
+                    actionWindow.setCloseWindowWithEscape(true);
 
-                ActionListBox actionListBox = new ActionListBox();
-                // Mais informação
-                actionListBox.addItem("Mais informação...", new Runnable() {
-                    @Override
-                    public void run() {
-                        Panel actionPanel = new Panel();
+                    ActionListBox actionListBox = new ActionListBox();
+                    // Mais informação
+                    actionListBox.addItem("Mais informação...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel();
 
-                        String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        Transportadora transportadora = getTransportadora(transportadoras, nome);
+                            String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            Transportadora transportadora = getTransportadora(transportadoras, nome);
 
-                        new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 10))
-                                .addTo(actionPanel);
+                            new Label(transportadora.toString()).setPreferredSize(new TerminalSize(70, 10))
+                                    .addTo(actionPanel);
 
-                        actionWindow.setComponent(actionPanel);
-                    }
-                });
-                // Apagar transportadora
-                actionListBox.addItem("Apagar...", new Runnable() {
-                    @Override
-                    public void run() {
-                        String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                        loja.apagaTransportadora(nome);
-                        actionWindow.close();
-                        window.close();
-                    }
-                });
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
+                    // Apagar transportadora
+                    actionListBox.addItem("Apagar...", new Runnable() {
+                        @Override
+                        public void run() {
+                            String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            loja.apagaTransportadora(nome);
+                            actionWindow.close();
+                            window.close();
+                        }
+                    });
 
-                actionWindow.setComponent(actionListBox);
-                gui.addWindowAndWait(actionWindow);
-            }
-        });
+                    actionWindow.setComponent(actionListBox);
+                    gui.addWindowAndWait(actionWindow);
+                }
+            });
+        }
         table.addTo(panel);
 
         window.setComponent(panel);
