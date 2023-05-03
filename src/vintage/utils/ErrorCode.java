@@ -10,6 +10,10 @@ public enum ErrorCode {
     // Artigos
     ARTIGO_EXPEDIDO,
 
+    // Utilizadores,
+    EMAIL_INVALIDO,
+    NIF_INVALIDO,
+
     // Encomendas
     SEM_ESPACO,
     ENCOMENDA_VAZIA,
