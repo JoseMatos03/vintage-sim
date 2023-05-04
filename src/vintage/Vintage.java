@@ -216,6 +216,10 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
+    // TODO Adicionar artigo a uma encomenda
+    
+    // TODO Remover artigo de uma encomenda
+
     public void entregarEncomendas() {
         for (Encomenda encomenda : encomendas) {
             if (encomenda.getEstadoEncomenda() != Encomenda.EXPEDIDA)
