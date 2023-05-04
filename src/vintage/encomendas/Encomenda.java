@@ -20,7 +20,7 @@ public class Encomenda {
     public static final int EXPEDIDA = 1;
     public static final int FINALIZADA = 2;
 
-    public static final int DIAS_REEMBOLSO = 3;
+    public static final int DIAS_REEMBOLSO = 2;
 
     private int codigo;
     private int codigoComprador;
