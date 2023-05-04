@@ -10,8 +10,7 @@ import com.googlecode.lanterna.gui2.Label;
 import vintage.Vintage;
 
 public class Clock {
-    public static void run(Vintage loja) {
-        Timer timer = new Timer();
+    public static void run(Timer timer, Vintage loja) {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -20,8 +19,7 @@ public class Clock {
         }, 0, 1000);
     }
 
-    public static void update(Vintage loja, Label data) {
-        Timer timer = new Timer();
+    public static void update(Timer timer, Vintage loja, Label data) {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {

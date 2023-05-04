@@ -5,6 +5,7 @@ import static vintage.utils.SaveLoad.prepareGsonLoader;
 import static vintage.utils.SaveLoad.save;
 
 import java.io.IOException;
+import java.util.Timer;
 
 import com.google.gson.Gson;
 import com.googlecode.lanterna.TerminalSize;
@@ -28,8 +29,9 @@ public class Main {
 
         Vintage loja = load(gson);
         AutoRun runner = new AutoRun();
+        Timer timer = new Timer();
 
-        Clock.run(loja);
+        Clock.run(timer, loja);
         loja.entregarEncomendas();
 
         // UI
@@ -42,7 +44,9 @@ public class Main {
 
         screen.startScreen();
         UI.menu(gui, window, loja, runner);
+        
         screen.close();
+        timer.cancel();
 
         save(gson, loja);
     }

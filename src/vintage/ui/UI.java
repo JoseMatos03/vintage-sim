@@ -2,6 +2,8 @@ package vintage.ui;
 
 import static vintage.utils.vintage.Utils.FORMATTER;
 
+import java.util.Timer;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
@@ -22,10 +24,10 @@ public class UI {
     public static void menu(MultiWindowTextGUI gui, BasicWindow window, Vintage loja, AutoRun runner) {
 
         Panel panel = new Panel();
+        Timer timer = new Timer();
 
         new Label("Data:").addTo(panel);
-        Label data = new Label(loja.getTempoAtual().format(FORMATTER))
-                .setPreferredSize(new TerminalSize(17, 3));
+        Label data = new Label(loja.getTempoAtual().format(FORMATTER)).setPreferredSize(new TerminalSize(17, 3));
         data.addTo(panel);
 
         Button infoButton = new Button("Informação", new Runnable() {
@@ -68,9 +70,10 @@ public class UI {
         });
         exitButton.addTo(panel);
 
-        Clock.update(loja, data);
+        Clock.update(timer, loja, data);
         window.setComponent(panel);
         gui.addWindowAndWait(window);
+        timer.cancel();
 
     }
 
