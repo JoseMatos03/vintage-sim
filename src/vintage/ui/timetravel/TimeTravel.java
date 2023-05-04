@@ -1,5 +1,7 @@
 package vintage.ui.timetravel;
 
+import static vintage.ui.ErrorHandler.handleError;
+
 import java.util.Arrays;
 
 import com.googlecode.lanterna.TerminalSize;
@@ -13,7 +15,6 @@ import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 
 import vintage.Vintage;
-import static vintage.ui.ErrorHandler.handleError;
 import vintage.utils.ErrorCode;
 
 public class TimeTravel {

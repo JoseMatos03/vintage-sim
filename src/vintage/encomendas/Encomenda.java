@@ -1,16 +1,17 @@
 package vintage.encomendas;
 
+import static vintage.utils.vintage.Utils.getArtigo;
+import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import vintage.artigos.Artigo;
 import vintage.utils.ErrorCode;
 import vintage.utils.artigos.Utils;
-import vintage.artigos.Artigo;
 import vintage.utils.ui.InfoUtils;
-
-import static vintage.utils.vintage.Utils.getArtigo;
-import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 
 public class Encomenda {
 
@@ -30,6 +31,17 @@ public class Encomenda {
     private float precoEncomenda;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataEntrega;
+
+    public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda) {
+        this.codigo = codigo;
+        this.codigoComprador = codigoComprador;
+        this.artigos = new ArrayList<>();
+        this.dimensaoEncomenda = dimensaoEncomenda;
+        this.estadoEncomenda = PENDENTE;
+        this.precoEncomenda = 0;
+        this.dataCriacao = LocalDateTime.now();
+        this.dataEntrega = null;
+    }
 
     public ErrorCode adicionarArtigo(List<Artigo> artigos, List<Encomenda> encomendas, int codigoArtigo) {
         if (estadoEncomenda != PENDENTE)
@@ -78,17 +90,6 @@ public class Encomenda {
 
     public void expedir() {
 
-    }
-
-    public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda) {
-        this.codigo = codigo;
-        this.codigoComprador = codigoComprador;
-        this.artigos = new ArrayList<>();
-        this.dimensaoEncomenda = dimensaoEncomenda;
-        this.estadoEncomenda = PENDENTE;
-        this.precoEncomenda = 0;
-        this.dataCriacao = LocalDateTime.now();
-        this.dataEntrega = null;
     }
 
     public List<Integer> getArtigos() {

@@ -1,5 +1,7 @@
 package vintage.utils;
 
+import static vintage.utils.vintage.Utils.FORMATTER;
+
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 
@@ -10,8 +12,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-
-import static vintage.utils.vintage.Utils.FORMATTER;
 
 public class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
 

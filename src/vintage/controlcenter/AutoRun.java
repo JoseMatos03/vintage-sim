@@ -1,4 +1,4 @@
-package vintage;
+package vintage.controlcenter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import vintage.Vintage;
 import vintage.utils.ErrorCode;
 
 public class AutoRun {
@@ -34,6 +35,11 @@ public class AutoRun {
             + "autorun.csv";
 
     private HashMap<String, Method> opCodeMap;
+
+    public AutoRun() {
+        this.opCodeMap = new HashMap<String, Method>();
+        this.mapCodesToMethods();
+    }
 
     public ErrorCode readAndExecute(Vintage loja) {
         String line = "";
@@ -95,11 +101,6 @@ public class AutoRun {
         } catch (NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }
-    }
-
-    public AutoRun() {
-        this.opCodeMap = new HashMap<String, Method>();
-        this.mapCodesToMethods();
     }
 
 }

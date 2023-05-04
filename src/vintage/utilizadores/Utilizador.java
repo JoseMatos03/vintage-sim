@@ -1,12 +1,13 @@
 package vintage.utilizadores;
 
-import vintage.artigos.Artigo;
-import vintage.utils.artigos.Utils;
-import vintage.utils.ui.InfoUtils;
 import static vintage.utils.vintage.Utils.getUtilizador;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import vintage.artigos.Artigo;
+import vintage.utils.artigos.Utils;
+import vintage.utils.ui.InfoUtils;
 
 public class Utilizador {
 
@@ -25,6 +26,19 @@ public class Utilizador {
     private List<Artigo> vendidos;
     private List<Artigo> comprados;
     private float valorEmVendas;
+
+    public Utilizador(int codigo, String email, String nome, String morada, int numeroFiscal) {
+        this.codigo = codigo;
+        this.email = email;
+        this.nome = nome;
+        this.morada = morada;
+        this.numeroFiscal = numeroFiscal;
+
+        this.listados = new ArrayList<>();
+        this.vendidos = new ArrayList<>();
+        this.comprados = new ArrayList<>();
+        this.valorEmVendas = 0;
+    }
 
     public void criarListagem(Artigo artigo) {
         if (this.atividade == INATIVA)
@@ -66,19 +80,6 @@ public class Utilizador {
 
         vendedor.venderArtigo(artigo);
         this.comprados.add(artigo);
-    }
-
-    public Utilizador(int codigo, String email, String nome, String morada, int numeroFiscal) {
-        this.codigo = codigo;
-        this.email = email;
-        this.nome = nome;
-        this.morada = morada;
-        this.numeroFiscal = numeroFiscal;
-
-        this.listados = new ArrayList<>();
-        this.vendidos = new ArrayList<>();
-        this.comprados = new ArrayList<>();
-        this.valorEmVendas = 0;
     }
 
     public int getCodigo() {

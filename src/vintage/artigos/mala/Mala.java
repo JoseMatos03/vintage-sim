@@ -24,6 +24,16 @@ public class Mala extends Artigo {
     private int material;
     private int anoColecao;
 
+    public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
+            float precoBase,
+            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora, boolean premiumEstado) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
+
+        this.dimensao = dimensao;
+        this.material = material;
+        this.anoColecao = anoColecao;
+    }
+
     @Override
     public float calcularPreco() {
         float precoFinal = this.getPrecoBase() + this.calcularCorrecaoPremium(this.getAnoColecao()) + this.calcularCorrecao();
@@ -48,16 +58,6 @@ public class Mala extends Artigo {
 
         float dimensao = comprimento * largura * altura;
         return dimensao;
-    }
-
-    public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
-            float precoBase,
-            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora, boolean premiumEstado) {
-        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
-
-        this.dimensao = dimensao;
-        this.material = material;
-        this.anoColecao = anoColecao;
     }
 
     public float[] getDimensao() {

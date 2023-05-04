@@ -22,10 +22,6 @@ public abstract class Artigo {
     private Transportadora transportadora;
     private boolean premiumEstado;
 
-    public abstract float calcularPreco();
-
-    public abstract float calcularCorrecao();
-
     public Artigo(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
             float precoBase,
             int codigoVendedor, Transportadora transportadora, boolean premiumEstado) {
@@ -40,6 +36,10 @@ public abstract class Artigo {
         this.transportadora = transportadora;
         this.premiumEstado = premiumEstado;
     }
+
+    public abstract float calcularPreco();
+
+    public abstract float calcularCorrecao();
 
     public float calcularCorrecaoPremium(int anoColecao) {
         float precoPremium = 0;

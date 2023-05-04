@@ -1,5 +1,7 @@
 package vintage.ui.controlcenter;
 
+import static vintage.ui.ErrorHandler.handleError;
+
 import java.util.Arrays;
 
 import com.googlecode.lanterna.gui2.BasicWindow;
@@ -9,13 +11,11 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
-import vintage.AutoRun;
 import vintage.Vintage;
+import vintage.controlcenter.AutoRun;
 import vintage.ui.UI;
 import vintage.ui.timetravel.TimeTravel;
 import vintage.utils.ErrorCode;
-
-import static vintage.ui.ErrorHandler.handleError;
 
 public class ControlCenter {
     public static void menuControlo(MultiWindowTextGUI gui, BasicWindow window, Vintage loja, AutoRun runner) {

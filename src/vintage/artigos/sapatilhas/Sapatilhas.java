@@ -2,8 +2,8 @@ package vintage.artigos.sapatilhas;
 
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
-import vintage.utils.ui.InfoUtils;
 import vintage.utils.artigos.Utils;
+import vintage.utils.ui.InfoUtils;
 
 public class Sapatilhas extends Artigo {
 
@@ -15,6 +15,17 @@ public class Sapatilhas extends Artigo {
     private int atacadores;
     private String cor;
     private int anoColecao;
+
+    public Sapatilhas(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
+            float precoBase, int tamanho, int atacadores, String cor, int anoColecao, int codigoVendedor,
+            Transportadora transportadora, boolean premiumEstado) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
+
+        this.tamanho = tamanho;
+        this.atacadores = atacadores;
+        this.cor = cor;
+        this.anoColecao = anoColecao;
+    }
 
     @Override
     public float calcularPreco() {
@@ -35,17 +46,6 @@ public class Sapatilhas extends Artigo {
         }
 
         return correcao;
-    }
-
-    public Sapatilhas(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
-            float precoBase, int tamanho, int atacadores, String cor, int anoColecao, int codigoVendedor,
-            Transportadora transportadora, boolean premiumEstado) {
-        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
-
-        this.tamanho = tamanho;
-        this.atacadores = atacadores;
-        this.cor = cor;
-        this.anoColecao = anoColecao;
     }
 
     public int getTamanho() {

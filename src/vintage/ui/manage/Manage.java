@@ -1,5 +1,7 @@
 package vintage.ui.manage;
 
+import static vintage.ui.ErrorHandler.handleError;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -15,14 +17,12 @@ import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 
-import vintage.AutoRun;
 import vintage.Vintage;
 import vintage.artigos.Artigo;
+import vintage.controlcenter.AutoRun;
 import vintage.ui.UI;
 import vintage.utils.ErrorCode;
 import vintage.utils.ui.ManageUtils;
-
-import static vintage.ui.ErrorHandler.handleError;
 
 public class Manage {
 
