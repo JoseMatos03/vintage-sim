@@ -68,8 +68,17 @@ public class Encomenda {
     }
 
     public ErrorCode removerArtigo(List<Artigo> artigos, int codigoArtigo) {
+        if (estadoEncomenda != PENDENTE)
+            return ErrorCode.EM_EXPEDICAO;
+
         if (this.artigos.isEmpty())
             return ErrorCode.ENCOMENDA_VAZIA;
+
+        if (getArtigo(artigos, codigoArtigo) == null)
+            return ErrorCode.CODIGO_INVALIDO;
+
+        if (!this.artigos.contains(Integer.valueOf(codigoArtigo)))
+            return ErrorCode.ARTIGO_INVALIDO;
 
         this.artigos.remove(Integer.valueOf(codigoArtigo));
         float novoPrecoEncomenda = this.precoEncomenda - getArtigo(artigos, codigoArtigo).calcularPreco();

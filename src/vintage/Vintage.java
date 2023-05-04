@@ -203,6 +203,34 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
+    public ErrorCode adicionarArtigoEmEncomenda(String... info) {
+        ErrorCode error;
+        try {
+            int codigoEncomenda = Integer.parseInt(info[0]);
+            int codigoArtigo = Integer.parseInt(info[1]);
+            Encomenda encomenda = getEncomenda(encomendas, codigoEncomenda);
+
+            error = encomenda.adicionarArtigo(artigos, encomendas, codigoArtigo);
+        } catch (Exception e) {
+            return ErrorCode.CODIGO_INVALIDO;
+        }
+        return error;
+    }
+
+    public ErrorCode removerArtigoEmEncomenda(String... info) {
+        ErrorCode error;
+        try {
+            int codigoEncomenda = Integer.parseInt(info[0]);
+            int codigoArtigo = Integer.parseInt(info[1]);
+            Encomenda encomenda = getEncomenda(encomendas, codigoEncomenda);
+
+            error = encomenda.removerArtigo(artigos, codigoArtigo);
+        } catch (Exception e) {
+            return ErrorCode.CODIGO_INVALIDO;
+        }
+        return error;
+    }
+
     public ErrorCode expedirEncomenda(String info) {
         int codigo = Integer.parseInt(info);
         Encomenda encomenda = getEncomenda(encomendas, codigo);
@@ -215,10 +243,6 @@ public class Vintage {
 
         return ErrorCode.NO_ERRORS;
     }
-
-    // TODO Adicionar artigo a uma encomenda
-    
-    // TODO Remover artigo de uma encomenda
 
     public void entregarEncomendas() {
         for (Encomenda encomenda : encomendas) {

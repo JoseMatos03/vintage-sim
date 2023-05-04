@@ -21,6 +21,7 @@ public enum ErrorCode {
     EM_EXPEDICAO,
     SEM_REEMBOLSO,
     ARTIGO_DO_COMPRADOR,
+    ARTIGO_INVALIDO,
 
     // Transportadoras
     TRANSPORTADORA_INVALIDA,

@@ -90,6 +90,8 @@ public class AutoRun {
             opCodeMap.put("criaArtigo", Vintage.class.getMethod("criaArtigo", String[].class));
             opCodeMap.put("removeArtigo", Vintage.class.getMethod("removeArtigo", String.class));
             opCodeMap.put("criaEncomenda", Vintage.class.getMethod("criaEncomenda", String[].class));
+            opCodeMap.put("adicionarArtigo", Vintage.class.getMethod("adicionarArtigoEmEncomenda", String[].class));
+            opCodeMap.put("removerArtigo", Vintage.class.getMethod("removerArtigoEmEncomenda", String[].class));
             opCodeMap.put("expedirEncomenda", Vintage.class.getMethod("expedirEncomenda", String.class));
             opCodeMap.put("entregarEncomendas", Vintage.class.getMethod("entregarEncomendas"));
             opCodeMap.put("cancelaEncomenda", Vintage.class.getMethod("cancelaEncomenda", String.class));
