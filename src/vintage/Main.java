@@ -26,10 +26,12 @@ public class Main {
         Vintage loja = load(gson);
         AutoRun runner = new AutoRun();
 
+        Clock.run(loja);
         loja.entregarEncomendas();
 
         // UI
-        Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(125,25)).createTerminal();
+        Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(125, 25))
+                .createTerminal();
         Screen screen = new TerminalScreen(terminal);
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen, new DefaultWindowManager(),
                 new EmptySpace(TextColor.ANSI.BLUE));

@@ -8,6 +8,7 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 
 import vintage.AutoRun;
+import vintage.Clock;
 import vintage.Vintage;
 import vintage.ui.controlcenter.ControlCenter;
 import vintage.ui.info.Info;
@@ -23,7 +24,8 @@ public class UI {
         Panel panel = new Panel();
 
         new Label("Data:").addTo(panel);
-        Label data = new Label(loja.getTempoAtual().format(FORMATTER)).setPreferredSize(new TerminalSize(17, 3));
+        Label data = new Label(loja.getTempoAtual().format(FORMATTER))
+                .setPreferredSize(new TerminalSize(17, 3));
         data.addTo(panel);
 
         Button infoButton = new Button("Informação", new Runnable() {
@@ -66,6 +68,7 @@ public class UI {
         });
         exitButton.addTo(panel);
 
+        Clock.update(loja, data);
         window.setComponent(panel);
         gui.addWindowAndWait(window);
 
