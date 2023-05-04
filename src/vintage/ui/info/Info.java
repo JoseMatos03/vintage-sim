@@ -275,8 +275,6 @@ public class Info {
                             Panel actionPanel = new Panel(new GridLayout(2));
 
                             String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                            Encomenda encomenda = getEncomenda(encomendas, Integer.parseInt(codigo));
-
                             new Label("Código Artigo").addTo(actionPanel);
                             final TextBox codigoArtigo = new TextBox().setValidationPattern(Pattern.compile("[0-9]*"))
                                     .addTo(actionPanel);
@@ -284,13 +282,8 @@ public class Info {
                             new Button("Confirmar", new Runnable() {
                                 @Override
                                 public void run() {
-                                    ErrorCode error;
-                                    try {
-                                        error = encomenda.adicionarArtigo(loja.getArtigos(), loja.getEncomendas(),
-                                                Integer.parseInt(codigoArtigo.getText()));
-                                    } catch (Exception e) {
-                                        error = ErrorCode.PARAMETRO_ERRADO;
-                                    }
+                                    ErrorCode error = loja.adicionarArtigoEmEncomenda(codigo, codigoArtigo.getText());
+
                                     handleError(gui, error);
                                     if (error.equals(ErrorCode.NO_ERRORS)) {
                                         actionWindow.close();
@@ -302,6 +295,34 @@ public class Info {
                             actionWindow.setComponent(actionPanel);
                         }
                     });
+                    // Remover artigo
+                    actionListBox.addItem("Remover artigo...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel(new GridLayout(2));
+
+                            String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            new Label("Código Artigo").addTo(actionPanel);
+                            final TextBox codigoArtigo = new TextBox().setValidationPattern(Pattern.compile("[0-9]*"))
+                                    .addTo(actionPanel);
+
+                            new Button("Confirmar", new Runnable() {
+                                @Override
+                                public void run() {
+                                    ErrorCode error = loja.removerArtigoEmEncomenda(codigo, codigoArtigo.getText());
+
+                                    handleError(gui, error);
+                                    if (error.equals(ErrorCode.NO_ERRORS)) {
+                                        actionWindow.close();
+                                        window.close();
+                                    }
+                                }
+                            }).addTo(actionPanel);
+
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
+                    // Expedir
                     actionListBox.addItem("Expedir...", new Runnable() {
                         @Override
                         public void run() {
