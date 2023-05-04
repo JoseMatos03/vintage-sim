@@ -24,6 +24,7 @@ import vintage.artigos.tshirt.TShirt;
 
 public class SaveLoad {
 
+    public static final String OUT_FILEPATH = System.getProperty("user.dir") + File.separator + "out";
     public static final String FILEPATH = System.getProperty("user.dir") + File.separator + "out" + File.separator
             + "save.json";
 
@@ -56,6 +57,10 @@ public class SaveLoad {
     }
 
     public static void save(Gson gson, Vintage loja) {
+        File directory = new File(OUT_FILEPATH);
+        if (!(directory.exists()))
+            directory.mkdir();
+
         try {
             Writer writer = new FileWriter(FILEPATH);
             gson.toJson(loja, writer);
