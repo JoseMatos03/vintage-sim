@@ -25,7 +25,7 @@ import vintage.ui.UI;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Gson gson = prepareGsonLoader(true);
+        Gson gson = prepareGsonLoader(false);
 
         Vintage loja = load(gson);
         AutoRun runner = new AutoRun();
