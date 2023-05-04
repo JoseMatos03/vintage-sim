@@ -271,7 +271,7 @@ public class Vintage {
         Encomenda encomenda = getEncomenda(encomendas, codigo);
         LocalDateTime dataCriacao = encomenda.getDataCriacao();
 
-        if (dataCriacao.isAfter(dataCriacao.plusDays(Encomenda.DIAS_REEMBOLSO)))
+        if (tempoAtual.isAfter(dataCriacao.plusDays(Encomenda.DIAS_REEMBOLSO)))
             return ErrorCode.SEM_REEMBOLSO;
         encomendas.remove(encomenda);
 
