@@ -1,5 +1,9 @@
 package vintage;
 
+import static vintage.utils.SaveLoad.load;
+import static vintage.utils.SaveLoad.prepareGsonLoader;
+import static vintage.utils.SaveLoad.save;
+
 import java.io.IOException;
 
 import com.google.gson.Gson;
@@ -14,10 +18,9 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
+import vintage.controlcenter.AutoRun;
+import vintage.controlcenter.Clock;
 import vintage.ui.UI;
-import static vintage.utils.SaveLoad.save;
-import static vintage.utils.SaveLoad.load;
-import static vintage.utils.SaveLoad.prepareGsonLoader;
 
 public class Main {
     public static void main(String[] args) throws IOException {

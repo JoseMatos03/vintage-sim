@@ -1,11 +1,13 @@
-package vintage;
+package vintage.controlcenter;
+
+import static vintage.utils.vintage.Utils.FORMATTER;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.googlecode.lanterna.gui2.Label;
 
-import static vintage.utils.vintage.Utils.FORMATTER;
+import vintage.Vintage;
 
 public class Clock {
     public static void run(Vintage loja) {

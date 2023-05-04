@@ -1,12 +1,14 @@
 package vintage.ui.stats;
 
 import java.util.Arrays;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
+
 import vintage.Vintage;
 
 public class Stats {

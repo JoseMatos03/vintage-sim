@@ -2,8 +2,8 @@ package vintage.artigos.tshirt;
 
 import vintage.artigos.Artigo;
 import vintage.transportadoras.Transportadora;
-import vintage.utils.ui.InfoUtils;
 import vintage.utils.artigos.Utils;
+import vintage.utils.ui.InfoUtils;
 
 public class TShirt extends Artigo {
 
@@ -20,6 +20,15 @@ public class TShirt extends Artigo {
 
     private String tamanho;
     private int padrao;
+
+    public TShirt(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
+            float precoBase,
+            String tamanho, int padrao, int codigoVendedor, Transportadora transportadora) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, false);
+
+        this.tamanho = tamanho;
+        this.padrao = padrao;
+    }
 
     @Override
     public float calcularPreco() {
@@ -40,15 +49,6 @@ public class TShirt extends Artigo {
         }
 
         return correcao;
-    }
-
-    public TShirt(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
-            float precoBase,
-            String tamanho, int padrao, int codigoVendedor, Transportadora transportadora) {
-        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, false);
-
-        this.tamanho = tamanho;
-        this.padrao = padrao;
     }
 
     public String getTamanho() {

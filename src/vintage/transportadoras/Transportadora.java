@@ -1,11 +1,10 @@
 package vintage.transportadoras;
 
+import static vintage.utils.transportadoras.Utils.IMPOSTO;
 import static vintage.utils.transportadoras.Utils.VALORBASE;
 
 import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
-
-import static vintage.utils.transportadoras.Utils.IMPOSTO;
 
 public class Transportadora {
 
@@ -16,14 +15,6 @@ public class Transportadora {
     private float lucro;
     private boolean premiumEstado;
 
-    public void calcularEntrega(float precoArtigo) {
-        lucro += Utils.calcularPercentagem(precoArtigo, valorExpedicao);
-    }
-
-    public float calcularValorExpedicao() {
-        return this.premiumEstado ? (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra : VALORBASE * margemLucro * (1 + IMPOSTO);
-    }
-
     public Transportadora(String nome, float margemLucro, float margemExtra, boolean premiumEstado) {
         this.nome = nome;
         this.margemLucro = margemLucro;
@@ -31,6 +22,14 @@ public class Transportadora {
         this.valorExpedicao = calcularValorExpedicao();
         this.lucro = 0.00f;
         this.premiumEstado = premiumEstado;
+    }
+
+    public void calcularEntrega(float precoArtigo) {
+        lucro += Utils.calcularPercentagem(precoArtigo, valorExpedicao);
+    }
+
+    public float calcularValorExpedicao() {
+        return this.premiumEstado ? (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra : VALORBASE * margemLucro * (1 + IMPOSTO);
     }
 
     public float getValorExpedicao() {

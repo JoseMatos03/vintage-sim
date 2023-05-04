@@ -1,14 +1,13 @@
 package vintage;
 
+import static vintage.utils.encomendas.Utils.parseTempoExpedicao;
+import static vintage.utils.vintage.Utils.FORMATTER;
 import static vintage.utils.vintage.Utils.getArtigo;
 import static vintage.utils.vintage.Utils.getEncomenda;
+import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 import static vintage.utils.vintage.Utils.getTransportadora;
 import static vintage.utils.vintage.Utils.getUtilizador;
-import static vintage.utils.vintage.Utils.getEncomendaOfArtigo;
 import static vintage.utils.vintage.Utils.isArtigoInEncomendaExpedida;
-import static vintage.utils.vintage.Utils.FORMATTER;
-
-import static vintage.utils.encomendas.Utils.parseTempoExpedicao;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -38,6 +37,28 @@ public class Vintage {
     private float totalFaturado;
 
     private LocalDateTime tempoAtual;
+
+    public Vintage() {
+        this.artigos = new ArrayList<>();
+        this.encomendas = new ArrayList<>();
+        this.utilizadores = new ArrayList<>();
+        this.transportadoras = new ArrayList<>();
+        this.codigoProximoArtigo = 0;
+        this.numVendas = 0;
+        this.totalFaturado = 0;
+        this.tempoAtual = LocalDateTime.now();
+    }
+
+    public Vintage(Vintage loja) {
+        this.artigos = loja.getArtigos();
+        this.encomendas = loja.getEncomendas();
+        this.utilizadores = loja.getUtilizadores();
+        this.transportadoras = loja.getTransportadoras();
+        this.codigoProximoArtigo = loja.getCodigoProximoArtigo();
+        this.numVendas = loja.getNumVendas();
+        this.totalFaturado = loja.getTotalFaturado();
+        this.tempoAtual = loja.getTempoAtual();
+    }
 
     public ErrorCode criaArtigo(String[] info) {
         try {
@@ -321,28 +342,6 @@ public class Vintage {
         this.numVendas = 0;
         this.totalFaturado = 0;
         this.tempoAtual = LocalDateTime.now();
-    }
-
-    public Vintage() {
-        this.artigos = new ArrayList<>();
-        this.encomendas = new ArrayList<>();
-        this.utilizadores = new ArrayList<>();
-        this.transportadoras = new ArrayList<>();
-        this.codigoProximoArtigo = 0;
-        this.numVendas = 0;
-        this.totalFaturado = 0;
-        this.tempoAtual = LocalDateTime.now();
-    }
-
-    public Vintage(Vintage loja) {
-        this.artigos = loja.getArtigos();
-        this.encomendas = loja.getEncomendas();
-        this.utilizadores = loja.getUtilizadores();
-        this.transportadoras = loja.getTransportadoras();
-        this.codigoProximoArtigo = loja.getCodigoProximoArtigo();
-        this.numVendas = loja.getNumVendas();
-        this.totalFaturado = loja.getTotalFaturado();
-        this.tempoAtual = loja.getTempoAtual();
     }
 
     public List<Artigo> getArtigos() {

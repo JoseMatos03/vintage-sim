@@ -1,5 +1,11 @@
 package vintage.ui.info;
 
+import static vintage.ui.ErrorHandler.handleError;
+import static vintage.utils.vintage.Utils.getArtigo;
+import static vintage.utils.vintage.Utils.getEncomenda;
+import static vintage.utils.vintage.Utils.getTransportadora;
+import static vintage.utils.vintage.Utils.getUtilizador;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +23,9 @@ import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.table.Table;
 
-import vintage.AutoRun;
 import vintage.Vintage;
 import vintage.artigos.Artigo;
+import vintage.controlcenter.AutoRun;
 import vintage.encomendas.Encomenda;
 import vintage.transportadoras.Transportadora;
 import vintage.ui.UI;
@@ -27,13 +33,6 @@ import vintage.utilizadores.Utilizador;
 import vintage.utils.ErrorCode;
 import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
-
-import static vintage.utils.vintage.Utils.getArtigo;
-import static vintage.utils.vintage.Utils.getUtilizador;
-import static vintage.utils.vintage.Utils.getEncomenda;
-import static vintage.utils.vintage.Utils.getTransportadora;
-
-import static vintage.ui.ErrorHandler.handleError;
 
 public class Info {
 

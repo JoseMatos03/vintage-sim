@@ -1,5 +1,7 @@
 package vintage.ui;
 
+import static vintage.utils.vintage.Utils.FORMATTER;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
@@ -7,15 +9,13 @@ import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 
-import vintage.AutoRun;
-import vintage.Clock;
 import vintage.Vintage;
+import vintage.controlcenter.AutoRun;
+import vintage.controlcenter.Clock;
 import vintage.ui.controlcenter.ControlCenter;
 import vintage.ui.info.Info;
 import vintage.ui.manage.Manage;
 import vintage.ui.stats.Stats;
-
-import static vintage.utils.vintage.Utils.FORMATTER;
 
 public class UI {
 
