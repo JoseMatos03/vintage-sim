@@ -21,6 +21,8 @@ public class AutoRun {
     // criaArtigo,TIPO,CODVENDEDOR,ESTADO,NDONOS,DESCRICAO,MARCA,PRECO,TRANSPORTADORA,TTAMANHO,TPADRAO
     // removeArtigo,CODIGO
     // criaEncomenda,CODCOMPRADOR,DIMENSAO
+    // adicionarArtigo,CODENCOMENDA,CODARTIGO
+    // removerArtigo,CODENCOMENDA,CODARTIGO
     // expedirEncomenda,CODIGO
     // entregarEncomendas
     // cancelaEncomenda,CODIGO
