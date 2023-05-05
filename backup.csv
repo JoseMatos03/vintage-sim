@@ -33,3 +33,14 @@ criaEncomenda,0,1
 criaEncomenda,1,5
 criaEncomenda,5,1
 criaEncomenda,4,10
+adicionarArtigo,0,1
+adicionarArtigo,0,3
+adicionarArtigo,0,5
+adicionarArtigo,0,9
+adicionarArtigo,0,8
+adicionarArtigo,1,2
+adicionarArtigo,2,4
+adicionarArtigo,2,6
+expedirEncomenda,0
+expedirEncomenda,2
+travelTo,14-05-2023 12:30:30
