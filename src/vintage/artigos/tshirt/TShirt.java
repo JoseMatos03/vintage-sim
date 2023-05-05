@@ -42,7 +42,7 @@ public class TShirt extends Artigo {
 
         correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         if (this.padrao == LISO) {
-            return 0;
+            return correcao;
         }
         if (this.getEstadoUtilizacao() != 1f) {
             correcao -= this.getPrecoBase() * 0.5f;
