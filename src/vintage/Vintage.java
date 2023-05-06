@@ -91,7 +91,7 @@ public class Vintage {
                     if (premiumMala && !transportadora.getPremiumEstado())
                         return ErrorCode.TRANSPORTADORA_INVALIDA;
 
-                    if (Mala.calcularDimensao(comprimento, largura, altura) <= Mala.CONSTANTE_CORRECAO + Mala.MARGEM_ERRO)
+                    if (Mala.calcularDimensao(comprimento, largura, altura) <= Mala.CONSTANTE_CORRECAO - Mala.MARGEM_ERRO)
                         return ErrorCode.DIMENSOES_INVALIDAS;
 
                     Artigo mala = new Mala(
