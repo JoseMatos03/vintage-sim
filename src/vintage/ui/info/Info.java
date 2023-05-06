@@ -190,7 +190,7 @@ public class Info {
                             String codigo = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                             Utilizador utilizador = getUtilizador(utilizadores, Integer.parseInt(codigo));
 
-                            new Label(utilizador.toString()).setPreferredSize(new TerminalSize(70, 10))
+                            new Label(utilizador.toString()).setPreferredSize(new TerminalSize(70, 12))
                                     .addTo(actionPanel);
 
                             actionWindow.setComponent(actionPanel);
@@ -413,7 +413,7 @@ public class Info {
 
                             String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
                             Transportadora transportadora = getTransportadora(transportadoras, nome);
-                            
+
                             if (!transportadora.getPremiumEstado()) {
                                 handleError(gui, ErrorCode.PREMIUM_REQUIRED);
                                 return;
