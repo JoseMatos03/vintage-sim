@@ -421,12 +421,12 @@ public class Info {
 
                             new Label("Margem Lucro").addTo(actionPanel);
                             final TextBox margemLucro = new TextBox()
-                                    .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                                    .setValidationPattern(Pattern.compile("^[0-9]{0,2}+(?:[.][0-9]{0,2})?$"))
                                     .addTo(actionPanel);
 
                             new Label("Margem Extra").addTo(actionPanel);
                             final TextBox margemExtra = new TextBox()
-                                    .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                                    .setValidationPattern(Pattern.compile("^[0-9]{0,2}+(?:[.][0-9]{0,2})?$"))
                                     .addTo(actionPanel);
 
                             new Button("Confirmar", new Runnable() {

@@ -427,12 +427,12 @@ public class Manage {
 
         final Label margemLucroLabel = new Label("Margem Lucro").addTo(panel);
         final TextBox margemLucro = new TextBox().setPreferredSize(size)
-                .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                .setValidationPattern(Pattern.compile("^[0-9]{0,2}+(?:[.][0-9]{0,2})?$"))
                 .addTo(panel);
 
         final Label margemExtraLabel = new Label("Margem Extra").addTo(panel);
         final TextBox margemExtra = new TextBox().setPreferredSize(size)
-                .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                .setValidationPattern(Pattern.compile("^[0-9]{0,2}+(?:[.][0-9]{0,2})?$"))
                 .addTo(panel);
 
         final Label premiumLabel = new Label("Premium");
