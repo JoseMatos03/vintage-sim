@@ -97,10 +97,6 @@ public class Encomenda {
         return precoEncomenda;
     }
 
-    public void expedir() {
-
-    }
-
     public List<Integer> getArtigos() {
         return artigos;
     }
