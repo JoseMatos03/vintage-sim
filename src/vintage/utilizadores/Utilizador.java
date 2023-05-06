@@ -26,6 +26,7 @@ public class Utilizador {
     private List<Artigo> vendidos;
     private List<Artigo> comprados;
     private float valorEmVendas;
+    private float valorEmCompras;
 
     public Utilizador(int codigo, String email, String nome, String morada, int numeroFiscal) {
         this.codigo = codigo;
@@ -38,6 +39,7 @@ public class Utilizador {
         this.vendidos = new ArrayList<>();
         this.comprados = new ArrayList<>();
         this.valorEmVendas = 0;
+        this.valorEmCompras = 0;
     }
 
     public void criarListagem(Artigo artigo) {
@@ -80,6 +82,7 @@ public class Utilizador {
 
         vendedor.venderArtigo(artigo);
         this.comprados.add(artigo);
+        this.valorEmCompras += artigo.calcularPreco();
     }
 
     public int getCodigo() {
@@ -173,7 +176,8 @@ public class Utilizador {
                 "Artigos Listados: " + listados.toString() + "\n" +
                 "Artigos Comprados: " + InfoUtils.parseListaArtigos(comprados) + "\n" +
                 "Artigos Vendidos: " + InfoUtils.parseListaArtigos(vendidos) + "\n" +
-                "Valor Vendas: " + Utils.arrondarCentesimas(valorEmVendas);
+                "Valor Vendas: " + Utils.arrondarCentesimas(valorEmVendas) + "\n" +
+                "Valor Compras: " + Utils.arrondarCentesimas(valorEmCompras);
     }
 
 }

@@ -9,6 +9,7 @@ public enum ErrorCode {
 
     // Artigos
     ARTIGO_EXPEDIDO,
+    DIMENSOES_INVALIDAS,
 
     // Utilizadores,
     EMAIL_INVALIDO,
@@ -25,6 +26,7 @@ public enum ErrorCode {
 
     // Transportadoras
     TRANSPORTADORA_INVALIDA,
+    PREMIUM_REQUIRED,
 
     // Runner
     AUTORUN_SUCCESS,

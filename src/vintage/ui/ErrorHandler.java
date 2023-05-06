@@ -35,11 +35,18 @@ public class ErrorHandler {
             case TRANSPORTADORA_INVALIDA:
                 MessageDialog.showMessageDialog(gui, "Erro", "A transportadora introduzida é inválida.");
                 break;
+            case PREMIUM_REQUIRED:
+                MessageDialog.showMessageDialog(gui, "Erro",
+                        "Só transportadoras Premium têm acesso a esta funcionalidade.");
+                break;
             case ARTIGO_DO_COMPRADOR:
                 MessageDialog.showMessageDialog(gui, "Erro", "O artigo pertence ao comprador da encomenda.");
                 break;
             case ARTIGO_INVALIDO:
                 MessageDialog.showMessageDialog(gui, "Erro", "O artigo não pertence a esta encomenda.");
+                break;
+            case DIMENSOES_INVALIDAS:
+                MessageDialog.showMessageDialog(gui, "Erro", "A mala apresenta dimensões inválidas.");
                 break;
             case DATA_INVALIDA:
                 MessageDialog.showMessageDialog(gui, "Erro", "A data introduzida não está formatada corretamente.");

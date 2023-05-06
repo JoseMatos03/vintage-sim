@@ -3,6 +3,7 @@ package vintage.transportadoras;
 import static vintage.utils.transportadoras.Utils.IMPOSTO;
 import static vintage.utils.transportadoras.Utils.VALORBASE;
 
+import vintage.utils.ErrorCode;
 import vintage.utils.artigos.Utils;
 import vintage.utils.ui.InfoUtils;
 
@@ -24,12 +25,27 @@ public class Transportadora {
         this.premiumEstado = premiumEstado;
     }
 
+    public ErrorCode atualizarValores(String... info) {
+        try {
+            float margemLucro = Float.parseFloat(info[0]);
+            float margemExtra = Float.parseFloat(info[1]);
+
+            setMargemLucro(margemLucro);
+            setMargemExtra(margemExtra);
+            setValorExpedicao(calcularValorExpedicao());
+        } catch (Exception e) {
+            return ErrorCode.PARAMETRO_ERRADO;
+        }
+        return ErrorCode.NO_ERRORS;
+    }
+
     public void calcularEntrega(float precoArtigo) {
         lucro += Utils.calcularPercentagem(precoArtigo, valorExpedicao);
     }
 
     public float calcularValorExpedicao() {
-        return this.premiumEstado ? (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra : VALORBASE * margemLucro * (1 + IMPOSTO);
+        return this.premiumEstado ? (VALORBASE * margemLucro * (1 + IMPOSTO)) * margemExtra
+                : VALORBASE * margemLucro * (1 + IMPOSTO);
     }
 
     public float getValorExpedicao() {
@@ -83,7 +99,7 @@ public class Transportadora {
     @Override
     public String toString() {
         String premium = InfoUtils.parsePremium(this.getPremiumEstado());
-        
+
         return "Nome: " + nome + "\n" +
                 "Margem Lucro: " + Utils.arrondarCentesimas(margemLucro) + "\n" +
                 "Margem Extra: " + Utils.arrondarCentesimas(margemExtra) + "\n" +
