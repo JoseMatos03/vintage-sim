@@ -35,6 +35,9 @@ public class ErrorHandler {
             case TRANSPORTADORA_INVALIDA:
                 MessageDialog.showMessageDialog(gui, "Erro", "A transportadora introduzida é inválida.");
                 break;
+            case PREMIUM_REQUIRED:
+                MessageDialog.showMessageDialog(gui, "Erro", "Só transportadoras Premium têm acesso a esta funcionalidade.");
+                break;
             case ARTIGO_DO_COMPRADOR:
                 MessageDialog.showMessageDialog(gui, "Erro", "O artigo pertence ao comprador da encomenda.");
                 break;

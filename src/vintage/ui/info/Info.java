@@ -405,6 +405,47 @@ public class Info {
                             actionWindow.setComponent(actionPanel);
                         }
                     });
+                    // Editar valor de cálculo
+                    actionListBox.addItem("Editar...", new Runnable() {
+                        @Override
+                        public void run() {
+                            Panel actionPanel = new Panel(new GridLayout(2));
+
+                            String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
+                            Transportadora transportadora = getTransportadora(transportadoras, nome);
+                            
+                            if (!transportadora.getPremiumEstado()) {
+                                handleError(gui, ErrorCode.PREMIUM_REQUIRED);
+                                return;
+                            }
+
+                            new Label("Margem Lucro").addTo(actionPanel);
+                            final TextBox margemLucro = new TextBox()
+                                    .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                                    .addTo(actionPanel);
+
+                            new Label("Margem Extra").addTo(actionPanel);
+                            final TextBox margemExtra = new TextBox()
+                                    .setValidationPattern(Pattern.compile("^[0-9]+(?:[.][0-9]{0,2})?$"))
+                                    .addTo(actionPanel);
+
+                            new Button("Confirmar", new Runnable() {
+                                @Override
+                                public void run() {
+                                    ErrorCode error = transportadora.atualizarValores(margemLucro.getText(),
+                                            margemExtra.getText());
+
+                                    handleError(gui, error);
+                                    if (error.equals(ErrorCode.NO_ERRORS)) {
+                                        actionWindow.close();
+                                        window.close();
+                                    }
+                                }
+                            }).addTo(actionPanel);
+
+                            actionWindow.setComponent(actionPanel);
+                        }
+                    });
                     // Apagar transportadora
                     actionListBox.addItem("Apagar...", new Runnable() {
                         @Override
