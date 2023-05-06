@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import vintage.Vintage;
 import vintage.artigos.Artigo;
 import vintage.utils.ErrorCode;
 import vintage.utils.artigos.Utils;
@@ -33,14 +32,14 @@ public class Encomenda {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataEntrega;
 
-    public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda, Vintage loja) {
+    public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda, LocalDateTime dataCriacao) {
         this.codigo = codigo;
         this.codigoComprador = codigoComprador;
         this.artigos = new ArrayList<>();
         this.dimensaoEncomenda = dimensaoEncomenda;
         this.estadoEncomenda = PENDENTE;
         this.precoEncomenda = 0;
-        this.dataCriacao = loja.getTempoAtual();
+        this.dataCriacao = dataCriacao;
         this.dataEntrega = null;
     }
 

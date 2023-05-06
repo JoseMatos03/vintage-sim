@@ -195,7 +195,7 @@ public class Vintage {
             if (getUtilizador(utilizadores, codigoComprador) == null)
                 return ErrorCode.CODIGO_INVALIDO;
 
-            Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda, this);
+            Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda, tempoAtual);
             this.encomendas.add(encomenda);
         } catch (Exception e) {
             return ErrorCode.PARAMETRO_ERRADO;
