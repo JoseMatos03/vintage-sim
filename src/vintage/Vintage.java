@@ -195,7 +195,7 @@ public class Vintage {
             if (getUtilizador(utilizadores, codigoComprador) == null)
                 return ErrorCode.CODIGO_INVALIDO;
 
-            Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda);
+            Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda, tempoAtual);
             this.encomendas.add(encomenda);
         } catch (Exception e) {
             return ErrorCode.PARAMETRO_ERRADO;
@@ -239,7 +239,7 @@ public class Vintage {
             return ErrorCode.EM_EXPEDICAO;
 
         encomenda.setEstadoEncomenda(Encomenda.EXPEDIDA);
-        encomenda.setDataEntrega(LocalDateTime.now().plusDays(parseTempoExpedicao(encomenda)));
+        encomenda.setDataEntrega(tempoAtual.plusDays(parseTempoExpedicao(encomenda)));
 
         return ErrorCode.NO_ERRORS;
     }

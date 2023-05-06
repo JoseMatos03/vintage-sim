@@ -41,7 +41,7 @@ public class Sapatilhas extends Artigo {
         if (this.getEstadoUtilizacao() != 1f) {
             correcao -= this.getPrecoBase() * this.getEstadoUtilizacao();
         }
-        if (this.tamanho > 45) {
+        if (this.tamanho > 45 && this.getEstadoUtilizacao() == 1) {
             correcao -= this.getPrecoBase() * 0.25;
         }
 

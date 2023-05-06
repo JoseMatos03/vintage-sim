@@ -32,14 +32,14 @@ public class Encomenda {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataEntrega;
 
-    public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda) {
+    public Encomenda(int codigo, int codigoComprador, int dimensaoEncomenda, LocalDateTime dataCriacao) {
         this.codigo = codigo;
         this.codigoComprador = codigoComprador;
         this.artigos = new ArrayList<>();
         this.dimensaoEncomenda = dimensaoEncomenda;
         this.estadoEncomenda = PENDENTE;
         this.precoEncomenda = 0;
-        this.dataCriacao = LocalDateTime.now();
+        this.dataCriacao = dataCriacao;
         this.dataEntrega = null;
     }
 
