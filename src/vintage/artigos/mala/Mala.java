@@ -18,7 +18,9 @@ public class Mala extends Artigo {
     public static final int LARGURA = 1;
     public static final int ALTURA = 2;
 
-    private final float CONSTANTECORRECAO = this.getPrecoBase() * 50; // Controla a correção dada relativa à dimensão
+    // Controla a correção dada relativa à dimensão
+    public static final int CONSTANTE_CORRECAO = 50;
+    public static final int MARGEM_ERRO = 25;
 
     private float[] dimensao; // [c, l, a]
     private int material;
@@ -26,8 +28,10 @@ public class Mala extends Artigo {
 
     public Mala(int tipo, float estadoUtilizacao, int numDonos, String descricao, String marca, int codigo,
             float precoBase,
-            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora, boolean premiumEstado) {
-        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora, premiumEstado);
+            float[] dimensao, int material, int anoColecao, int codigoVendedor, Transportadora transportadora,
+            boolean premiumEstado) {
+        super(tipo, estadoUtilizacao, numDonos, descricao, marca, codigo, precoBase, codigoVendedor, transportadora,
+                premiumEstado);
 
         this.dimensao = dimensao;
         this.material = material;
@@ -36,28 +40,28 @@ public class Mala extends Artigo {
 
     @Override
     public float calcularPreco() {
-        float precoFinal = this.getPrecoBase() + this.calcularCorrecaoPremium(this.getAnoColecao()) + this.calcularCorrecao();
+        float precoFinal = this.getPrecoBase() + this.calcularCorrecaoPremium(this.getAnoColecao())
+                + this.calcularCorrecao();
         return precoFinal;
     }
 
     @Override
     public float calcularCorrecao() {
-        float dimensao = this.calcularDimensao();
+        float comprimento = this.getDimensao()[COMPRIMENTO];
+        float largura = this.getDimensao()[LARGURA];
+        float altura = this.getDimensao()[ALTURA];
+        float dimensao = calcularDimensao(comprimento, largura, altura);
+
         float correcao = 0;
 
         correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
-        correcao -= (1f / dimensao) * CONSTANTECORRECAO;
+        correcao -= (1f / dimensao) * this.getPrecoBase() * CONSTANTE_CORRECAO;
 
         return correcao;
     }
 
-    public float calcularDimensao() {
-        float comprimento = this.getDimensao()[COMPRIMENTO];
-        float largura = this.getDimensao()[LARGURA];
-        float altura = this.getDimensao()[ALTURA];
-
-        float dimensao = comprimento * largura * altura;
-        return dimensao;
+    public static float calcularDimensao(float c, float l, float a) {
+        return c * l * a;
     }
 
     public float[] getDimensao() {

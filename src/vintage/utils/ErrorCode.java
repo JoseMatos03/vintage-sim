@@ -9,6 +9,7 @@ public enum ErrorCode {
 
     // Artigos
     ARTIGO_EXPEDIDO,
+    DIMENSOES_INVALIDAS,
 
     // Utilizadores,
     EMAIL_INVALIDO,
