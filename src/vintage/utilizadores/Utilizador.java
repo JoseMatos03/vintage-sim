@@ -68,8 +68,8 @@ public class Utilizador {
         if (this.atividade == INATIVA)
             return;
 
+        removerListagem(artigo);
         this.vendidos.add(artigo);
-        this.listados.remove(Integer.valueOf(codigo));
         this.valorEmVendas += artigo.calcularPreco()
                 - Utils.calcularPercentagem(artigo.getPrecoBase(), artigo.getTransportadora().getValorExpedicao());
     }
