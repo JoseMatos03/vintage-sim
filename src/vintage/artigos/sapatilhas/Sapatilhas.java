@@ -39,7 +39,7 @@ public class Sapatilhas extends Artigo {
 
         correcao += Utils.calcularPercentagem(this.getPrecoBase(), this.getTransportadora().getValorExpedicao());
         if (this.getEstadoUtilizacao() != 1f) {
-            correcao -= this.getPrecoBase() * this.getEstadoUtilizacao();
+            correcao -= this.getPrecoBase() * (1 - this.getEstadoUtilizacao());
         }
         if (this.tamanho > 45 && this.getEstadoUtilizacao() == 1) {
             correcao -= this.getPrecoBase() * 0.25;
