@@ -233,6 +233,9 @@ public class Vintage {
             int codigoArtigo = Integer.parseInt(info[1]);
             Encomenda encomenda = getEncomenda(encomendas, codigoEncomenda);
 
+            if (tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
+                return ErrorCode.SEM_REEMBOLSO;
+
             error = encomenda.removerArtigo(artigos, codigoArtigo);
         } catch (Exception e) {
             return ErrorCode.CODIGO_INVALIDO;
