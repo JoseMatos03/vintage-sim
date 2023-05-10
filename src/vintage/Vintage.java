@@ -75,6 +75,9 @@ public class Vintage {
             if (getUtilizador(utilizadores, codigoVendedor) == null)
                 return ErrorCode.CODIGO_INVALIDO;
 
+            if(getUtilizador(utilizadores, codigoVendedor).getAtividade() == Utilizador.INATIVA)
+                return ErrorCode.UTILIZADOR_INATIVO;
+
             if (transportadora == null)
                 return ErrorCode.TRANSPORTADORA_INVALIDA;
 
@@ -197,6 +200,9 @@ public class Vintage {
 
             if (getUtilizador(utilizadores, codigoComprador) == null)
                 return ErrorCode.CODIGO_INVALIDO;
+
+            if(getUtilizador(utilizadores, codigoComprador).getAtividade() == Utilizador.INATIVA)
+                return ErrorCode.UTILIZADOR_INATIVO;
 
             Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda, tempoAtual);
             this.encomendas.add(encomenda);
