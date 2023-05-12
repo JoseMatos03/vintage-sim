@@ -65,6 +65,8 @@ public class ErrorHandler {
                 break;
             case UTILIZADOR_INATIVO:
                 MessageDialog.showMessageDialog(gui, "Erro", "Esse utilizador já não existe");
+            case DATA_PASSADA:
+                MessageDialog.showMessageDialog(gui, "Erro", "Essa data já passou");
             case NO_ERRORS:
                 break;
             default:

@@ -365,6 +365,8 @@ public class Vintage {
 
     public ErrorCode timeTravel(String info) {
         try {
+            if(LocalDateTime.parse(info,FORMATTER).isBefore(this.getTempoAtual()))
+                return ErrorCode.DATA_PASSADA;
             this.setTempoAtual(LocalDateTime.parse(info, FORMATTER));
         } catch (DateTimeParseException e) {
             return ErrorCode.DATA_INVALIDA;

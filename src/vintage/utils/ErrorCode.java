@@ -32,5 +32,7 @@ public enum ErrorCode {
     AUTORUN_SUCCESS,
     AUTORUN_ERROR,
 
-    UTILIZADOR_INATIVO
+    UTILIZADOR_INATIVO,
+
+    DATA_PASSADA
 }
