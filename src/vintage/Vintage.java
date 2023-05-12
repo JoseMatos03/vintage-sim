@@ -178,12 +178,15 @@ public class Vintage {
     public ErrorCode removeArtigo(String info) {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
+        Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas,artigo));
 
         if (isArtigoInEncomendaExpedida(encomendas, artigo))
             return ErrorCode.ARTIGO_EXPEDIDO;
 
+        if (tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
+            return ErrorCode.SEM_REEMBOLSO;
+
         if (getEncomendaOfArtigo(encomendas, artigo) != -1) {
-            Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas, artigo));
             encomenda.removerArtigo(artigos, codigo);
         }
         getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
