@@ -24,6 +24,7 @@ public class Clock {
             @Override
             public void run() {
                 data.setText(loja.getTempoAtual().format(FORMATTER));
+                loja.entregarEncomendas();
             }
         }, 0, 1000);
     }

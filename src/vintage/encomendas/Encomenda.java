@@ -87,16 +87,6 @@ public class Encomenda {
         return ErrorCode.NO_ERRORS;
     }
 
-    public float calcularPrecoFinal(List<Artigo> artigos) {
-        float precoEncomenda = 0;
-
-        for (Integer codigoArtigo : this.artigos) {
-            precoEncomenda += getArtigo(artigos, codigoArtigo).calcularPreco();
-        }
-
-        return precoEncomenda;
-    }
-
     public List<Integer> getArtigos() {
         return artigos;
     }

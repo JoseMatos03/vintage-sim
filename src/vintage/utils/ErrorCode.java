@@ -30,5 +30,9 @@ public enum ErrorCode {
 
     // Runner
     AUTORUN_SUCCESS,
-    AUTORUN_ERROR
+    AUTORUN_ERROR,
+
+    UTILIZADOR_INATIVO,
+
+    DATA_PASSADA
 }

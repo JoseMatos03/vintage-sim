@@ -75,6 +75,9 @@ public class Vintage {
             if (getUtilizador(utilizadores, codigoVendedor) == null)
                 return ErrorCode.CODIGO_INVALIDO;
 
+            if(getUtilizador(utilizadores, codigoVendedor).getAtividade() == Utilizador.INATIVA)
+                return ErrorCode.UTILIZADOR_INATIVO;
+
             if (transportadora == null)
                 return ErrorCode.TRANSPORTADORA_INVALIDA;
 
@@ -175,12 +178,15 @@ public class Vintage {
     public ErrorCode removeArtigo(String info) {
         int codigo = Integer.parseInt(info);
         Artigo artigo = getArtigo(artigos, codigo);
+        Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas,artigo));
 
         if (isArtigoInEncomendaExpedida(encomendas, artigo))
             return ErrorCode.ARTIGO_EXPEDIDO;
 
+        if (tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
+            return ErrorCode.SEM_REEMBOLSO;
+
         if (getEncomendaOfArtigo(encomendas, artigo) != -1) {
-            Encomenda encomenda = getEncomenda(encomendas, getEncomendaOfArtigo(encomendas, artigo));
             encomenda.removerArtigo(artigos, codigo);
         }
         getUtilizador(utilizadores, artigo.getCodigoVendedor()).removerListagem(artigo);
@@ -197,6 +203,9 @@ public class Vintage {
 
             if (getUtilizador(utilizadores, codigoComprador) == null)
                 return ErrorCode.CODIGO_INVALIDO;
+
+            if(getUtilizador(utilizadores, codigoComprador).getAtividade() == Utilizador.INATIVA)
+                return ErrorCode.UTILIZADOR_INATIVO;
 
             Encomenda encomenda = new Encomenda(codigo, codigoComprador, dimensaoEncomenda, tempoAtual);
             this.encomendas.add(encomenda);
@@ -226,6 +235,9 @@ public class Vintage {
             int codigoEncomenda = Integer.parseInt(info[0]);
             int codigoArtigo = Integer.parseInt(info[1]);
             Encomenda encomenda = getEncomenda(encomendas, codigoEncomenda);
+
+            if (tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
+                return ErrorCode.SEM_REEMBOLSO;
 
             error = encomenda.removerArtigo(artigos, codigoArtigo);
         } catch (Exception e) {
@@ -356,6 +368,8 @@ public class Vintage {
 
     public ErrorCode timeTravel(String info) {
         try {
+            if(LocalDateTime.parse(info,FORMATTER).isBefore(this.getTempoAtual()))
+                return ErrorCode.DATA_PASSADA;
             this.setTempoAtual(LocalDateTime.parse(info, FORMATTER));
         } catch (DateTimeParseException e) {
             return ErrorCode.DATA_INVALIDA;
