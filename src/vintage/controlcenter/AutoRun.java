@@ -31,6 +31,7 @@ public class AutoRun {
     // criaTransportadora,NOME,LUCRO,EXTRA(só em PREMIUM),PREMIUM
     // apagaTransportadora,NOME
     // travelTo,DATAHORA
+    // wipeout
 
     public static final String RUNNER_FILEPATH = System.getProperty("user.dir") + File.separator + "runner"
             + File.separator
@@ -102,6 +103,7 @@ public class AutoRun {
             opCodeMap.put("criaTransportadora", Vintage.class.getMethod("criaTransportadora", String[].class));
             opCodeMap.put("apagaTransportadora", Vintage.class.getMethod("apagaTransportadora", String.class));
             opCodeMap.put("travelTo", Vintage.class.getMethod("timeTravel", String.class));
+            opCodeMap.put("wipeout", Vintage.class.getMethod("wipeAll"));
         } catch (NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }
