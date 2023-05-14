@@ -183,7 +183,7 @@ public class Vintage {
         if (isArtigoInEncomendaExpedida(encomendas, artigo))
             return ErrorCode.ARTIGO_EXPEDIDO;
 
-        if (tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
+        if (encomenda != null && tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
             return ErrorCode.SEM_REEMBOLSO;
 
         if (getEncomendaOfArtigo(encomendas, artigo) != -1) {
