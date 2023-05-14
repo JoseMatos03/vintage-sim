@@ -333,7 +333,8 @@ public class Vintage {
         utilizador.setNumeroFiscal(0);
         for (int codigoArtigo : utilizador.getListados()) {
             Artigo artigo = getArtigo(artigos, codigoArtigo);
-            if (isArtigoInEncomendaExpedida(encomendas, artigo))
+            Encomenda encomenda = getEncomenda(encomendas, codigo);
+            if (isArtigoInEncomendaExpedida(encomendas, artigo) || tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
                 continue;
             this.artigos.remove(artigo);
         }
