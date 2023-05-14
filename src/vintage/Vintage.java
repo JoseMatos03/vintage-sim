@@ -272,7 +272,11 @@ public class Vintage {
                 comprador.comprarArtigo(utilizadores, artigo);
                 totalFaturado += artigo.calcularPreco();
                 ++numVendas;
-
+                if(getTransportadora(transportadoras, artigo.getTransportadora().getNome()) == null)
+                {
+                    artigos.remove(artigo);
+                    continue;
+                }
                 getTransportadora(transportadoras, artigo.getTransportadora().getNome())
                         .calcularEntrega(artigo.getPrecoBase());
                 artigos.remove(artigo);
