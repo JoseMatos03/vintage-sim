@@ -6,12 +6,14 @@ public enum ErrorCode {
     PARAMETRO_ERRADO,
     CODIGO_INVALIDO,
     DATA_INVALIDA,
+    DATA_PASSADA,
 
     // Artigos
     ARTIGO_EXPEDIDO,
     DIMENSOES_INVALIDAS,
 
     // Utilizadores,
+    UTILIZADOR_INATIVO,
     EMAIL_INVALIDO,
     NIF_INVALIDO,
 
@@ -26,13 +28,11 @@ public enum ErrorCode {
 
     // Transportadoras
     TRANSPORTADORA_INVALIDA,
+    TRANSPORTADORA_NAO_PREMIUM,
     PREMIUM_REQUIRED,
+    TRANSPORTADORA_EM_USO,
 
     // Runner
     AUTORUN_SUCCESS,
     AUTORUN_ERROR,
-
-    UTILIZADOR_INATIVO,
-
-    DATA_PASSADA
 }

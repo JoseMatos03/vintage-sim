@@ -28,10 +28,10 @@ public class TimeTravel {
         panel.setLayoutManager(new GridLayout(2));
 
         new Label("Data").addTo(panel);
-        final TextBox data = new TextBox(new TerminalSize(20, 1)).addTo(panel);
+        final TextBox data = new TextBox(new TerminalSize(20, 1)).setText("dd-MM-yyyy").addTo(panel);
 
         new Label("Hora").addTo(panel);
-        final TextBox hora = new TextBox(new TerminalSize(20, 1)).addTo(panel);
+        final TextBox hora = new TextBox(new TerminalSize(20, 1)).setText("HH:mm:ss").addTo(panel);
 
         new Button("Confirmar", new Runnable() {
             @Override

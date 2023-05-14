@@ -67,7 +67,9 @@ public class Vintage {
             float estadoUtilizacao = Float.parseFloat(info[2]);
             int numDonos = Integer.parseInt(info[3]);
             String descricao = info[4];
+            if(descricao == "") descricao = "Sem descrição dada";
             String marca = info[5];
+            if(marca == "") marca = "Marca Branca";
             int codigo = this.codigoProximoArtigo++;
             float precoBase = Float.parseFloat(info[6]);
             Transportadora transportadora = getTransportadora(transportadoras, info[7]);
@@ -92,7 +94,7 @@ public class Vintage {
                     boolean premiumMala = Boolean.parseBoolean(info[13]);
 
                     if (premiumMala && !transportadora.getPremiumEstado())
-                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+                        return ErrorCode.TRANSPORTADORA_NAO_PREMIUM;
 
                     if (Mala.calcularDimensao(comprimento, largura, altura) <= Mala.CONSTANTE_CORRECAO - Mala.MARGEM_ERRO)
                         return ErrorCode.DIMENSOES_INVALIDAS;
@@ -124,7 +126,7 @@ public class Vintage {
                     boolean premiumSapatilha = Boolean.parseBoolean(info[12]);
 
                     if (premiumSapatilha && !transportadora.getPremiumEstado())
-                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+                        return ErrorCode.TRANSPORTADORA_NAO_PREMIUM;
 
                     Artigo sapatilhas = new Sapatilhas(
                             tipo,
@@ -183,7 +185,7 @@ public class Vintage {
         if (isArtigoInEncomendaExpedida(encomendas, artigo))
             return ErrorCode.ARTIGO_EXPEDIDO;
 
-        if (tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
+        if (encomenda != null && tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
             return ErrorCode.SEM_REEMBOLSO;
 
         if (getEncomendaOfArtigo(encomendas, artigo) != -1) {
@@ -272,7 +274,6 @@ public class Vintage {
                 comprador.comprarArtigo(utilizadores, artigo);
                 totalFaturado += artigo.calcularPreco();
                 ++numVendas;
-
                 getTransportadora(transportadoras, artigo.getTransportadora().getNome())
                         .calcularEntrega(artigo.getPrecoBase());
                 artigos.remove(artigo);
@@ -333,7 +334,8 @@ public class Vintage {
         utilizador.setNumeroFiscal(0);
         for (int codigoArtigo : utilizador.getListados()) {
             Artigo artigo = getArtigo(artigos, codigoArtigo);
-            if (isArtigoInEncomendaExpedida(encomendas, artigo))
+            Encomenda encomenda = getEncomenda(encomendas, codigo);
+            if (isArtigoInEncomendaExpedida(encomendas, artigo) || tempoAtual.isAfter(encomenda.getDataCriacao().plusDays(Encomenda.DIAS_REEMBOLSO)))
                 continue;
             this.artigos.remove(artigo);
         }
@@ -361,9 +363,14 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
-    public void apagaTransportadora(String nome) {
+    public ErrorCode apagaTransportadora(String nome) {
         Transportadora transportadora = getTransportadora(transportadoras, nome);
+        for(Artigo artigo : artigos)
+        {
+            if(artigo.getTransportadora().getNome().equals(nome)) return ErrorCode.TRANSPORTADORA_EM_USO;
+        }
         this.transportadoras.remove(transportadora);
+        return ErrorCode.NO_ERRORS;
     }
 
     public ErrorCode timeTravel(String info) {
