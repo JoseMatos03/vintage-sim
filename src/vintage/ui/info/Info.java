@@ -451,9 +451,12 @@ public class Info {
                         @Override
                         public void run() {
                             String nome = table.getTableModel().getRow(table.getSelectedRow()).get(0);
-                            loja.apagaTransportadora(nome);
-                            actionWindow.close();
-                            window.close();
+                            ErrorCode error = loja.apagaTransportadora(nome);
+                            handleError(gui, error);
+                            if (error.equals(ErrorCode.NO_ERRORS)) {
+                                actionWindow.close();
+                                window.close();
+                            }
                         }
                     });
 

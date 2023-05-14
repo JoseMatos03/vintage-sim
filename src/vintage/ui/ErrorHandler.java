@@ -72,6 +72,9 @@ public class ErrorHandler {
             case DATA_PASSADA:
                 MessageDialog.showMessageDialog(gui, "Erro", "Essa data já passou");
                 break;
+            case TRANSPORTADORA_EM_USO:
+                MessageDialog.showMessageDialog(gui, "Erro", "A transportadora está a ser utilizada");
+                break;
             case NO_ERRORS:
                 break;
             default:

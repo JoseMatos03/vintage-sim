@@ -274,11 +274,6 @@ public class Vintage {
                 comprador.comprarArtigo(utilizadores, artigo);
                 totalFaturado += artigo.calcularPreco();
                 ++numVendas;
-                if(getTransportadora(transportadoras, artigo.getTransportadora().getNome()) == null)
-                {
-                    artigos.remove(artigo);
-                    continue;
-                }
                 getTransportadora(transportadoras, artigo.getTransportadora().getNome())
                         .calcularEntrega(artigo.getPrecoBase());
                 artigos.remove(artigo);
@@ -368,9 +363,14 @@ public class Vintage {
         return ErrorCode.NO_ERRORS;
     }
 
-    public void apagaTransportadora(String nome) {
+    public ErrorCode apagaTransportadora(String nome) {
         Transportadora transportadora = getTransportadora(transportadoras, nome);
+        for(Artigo artigo : artigos)
+        {
+            if(artigo.getTransportadora().getNome().equals(nome)) return ErrorCode.TRANSPORTADORA_EM_USO;
+        }
         this.transportadoras.remove(transportadora);
+        return ErrorCode.NO_ERRORS;
     }
 
     public ErrorCode timeTravel(String info) {
