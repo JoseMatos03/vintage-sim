@@ -67,7 +67,9 @@ public class Vintage {
             float estadoUtilizacao = Float.parseFloat(info[2]);
             int numDonos = Integer.parseInt(info[3]);
             String descricao = info[4];
+            if(descricao == "") descricao = "Sem descrição dada";
             String marca = info[5];
+            if(marca == "") marca = "Marca Branca";
             int codigo = this.codigoProximoArtigo++;
             float precoBase = Float.parseFloat(info[6]);
             Transportadora transportadora = getTransportadora(transportadoras, info[7]);
