@@ -39,6 +39,9 @@ public class ErrorHandler {
                 MessageDialog.showMessageDialog(gui, "Erro",
                         "Só transportadoras Premium têm acesso a esta funcionalidade.");
                 break;
+            case TRANSPORTADORA_NAO_PREMIUM:
+                MessageDialog.showMessageDialog(gui,"Erro", "Artigos Premium têm de ser transportados por Transportadoras Premium");
+                break;
             case ARTIGO_DO_COMPRADOR:
                 MessageDialog.showMessageDialog(gui, "Erro", "O artigo pertence ao comprador da encomenda.");
                 break;

@@ -92,7 +92,7 @@ public class Vintage {
                     boolean premiumMala = Boolean.parseBoolean(info[13]);
 
                     if (premiumMala && !transportadora.getPremiumEstado())
-                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+                        return ErrorCode.TRANSPORTADORA_NAO_PREMIUM;
 
                     if (Mala.calcularDimensao(comprimento, largura, altura) <= Mala.CONSTANTE_CORRECAO - Mala.MARGEM_ERRO)
                         return ErrorCode.DIMENSOES_INVALIDAS;
@@ -124,7 +124,7 @@ public class Vintage {
                     boolean premiumSapatilha = Boolean.parseBoolean(info[12]);
 
                     if (premiumSapatilha && !transportadora.getPremiumEstado())
-                        return ErrorCode.TRANSPORTADORA_INVALIDA;
+                        return ErrorCode.TRANSPORTADORA_NAO_PREMIUM;
 
                     Artigo sapatilhas = new Sapatilhas(
                             tipo,

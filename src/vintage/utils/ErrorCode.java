@@ -26,6 +26,7 @@ public enum ErrorCode {
 
     // Transportadoras
     TRANSPORTADORA_INVALIDA,
+    TRANSPORTADORA_NAO_PREMIUM,
     PREMIUM_REQUIRED,
 
     // Runner
